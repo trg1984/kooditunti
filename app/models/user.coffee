@@ -1,7 +1,4 @@
-
-#!
 # * Module dependencies
-# 
 mongoose = require("mongoose")
 userPlugin = require("mongoose-user")
 Schema = mongoose.Schema

@@ -1,0 +1,97 @@
+{% extends "./skeleton.html" %}
+
+{% block pageID %}{% endblock %}
+{% block css %}<link rel="stylesheet" type="text/css" href="/css/exercises/common.css" />{% endblock %}
+{% block js %}
+<script type="text/javascript" src="/js/exercises/common.js"></script>
+<script type="text/javascript" src="/js/exercises/stage.js"></script>
+<script type="text/javascript" src="/vendor/physicsjs-0.6.0/physicsjs-full-0.6.0.min.js"></script>
+<script type="text/javascript" src="/vendor/blockly/blockly.min.js"></script>
+<script type="text/javascript" src="/vendor/blockly/blocks.min.js"></script>
+<script type="text/javascript" src="/vendor/blockly/javascript.min.js"></script>
+<script type="text/javascript" src="/vendor/blockly/fi.js"></script>
+<script type="text/javascript" src="/vendor/blockly/storage.js"></script>
+<script type="text/javascript" src="/vendor/js-interpreter/acorn_interpreter.js"></script>
+<script type="text/javascript" src="/blockly/custom_blocks/{{ exerciseName }}.js"></script>
+<script>
+$.get('/blockly/toolboxes/{{ exerciseName }}.xml',function(response){
+  Exercises.currentExercise = Maze;
+  blocklyToolboxElem = response.getElementById('toolbox');
+  Exercises.initBlockly();
+  Stage.init();
+  Exercises.currentExercise.init();
+  setTimeout(function(){ Stage.drawCoordinateGrid(); },100);
+  //Stage._createPreview();
+  //setTimeout(function(){ Maze.moveLeft(); },2000);
+  //setTimeout(function(){ Maze.moveDown(); },3000);
+  //setTimeout(function(){ Maze.moveRight(); },4000);
+  //setTimeout(function(){ Maze.moveUp(); },5000);
+});
+$(function(){
+  // FOR PREVIEW
+  windowWidth = $(window).width()
+  $(".overlay-resize").css({width: windowWidth-650});
+  $("#execute-btn a").click(function(){
+    //Exercises.resizeCodeArea();
+    Exercises.runCode();
+  });
+  $(window).resize(_.debounce(function(){
+     Exercises.resizeCodeArea();
+   }, 500));
+  $('.overlay-resize').jqResize('.resize-handle');
+});
+</script>
+<style>
+.resize-handle {
+  width: 5px;
+  height: 20px;
+  position: absolute;
+  top: 280px;
+  right: 0;
+  cursor: e-resize;
+  background-color: #ddd;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+
+  {% block header %}
+    <header class="header">
+      <div class="content row">
+        {% block nav %}
+        {% endblock %}
+      </div>
+    </header>
+  {% endblock %}
+
+  {% block page_content %}
+    <div class="row full-width">
+      <div style="font-family: Boogaloo; width: 0px; height: 0px;">-</div>
+      <br />
+      <div class="large-12 columns">
+        <div id="exercise-area">
+          <!-- these floating on top of each other -->
+          <div id="code-area" class="overlay-resize">
+            <div id="blockly" class="overlay-resize"></div>
+            <div id="execute-btn"><a class="button">Suorita koodi</a></div>
+            <div class="resize-handle"></div>
+          </div>
+          <div id="mask-between" class="overlay-resize"></div>
+          <!-- these floating on top of each other -->
+          <div id="output-stage">
+            <canvas id="gridcanvas" width="601" height="601" style="position: absolute; z-index: 1;"></canvas>
+            <div id="stage-coordinates-offset">
+              <canvas id="viewport" width="601" height="601" style="position: absolute; z-index: 1;"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+
+  <footer class="content">
+    <hr class="small">
+  </footer>
+
+{% endblock %}

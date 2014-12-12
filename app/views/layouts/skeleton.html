@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  {% block prefetch %}{% endblock %}
+  <!--[if IE]>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <![endif]-->
+  <title>Kooditunti{% if title %} - {{ title }}{% endif %}</title>
+  {% block meta %}{% endblock %}
+  {#
+  Allow css and js to be loaded in seperate files
+  during development, but compress / minify everything
+  to single file on production and test. Remember to keep
+  namespaces clear to avoid conflicts.
+  MAYBE: Also use CDN on production (and tests).
+  #}
+  {% if app.dev || true %}
+  {% block css %}{% endblock %}
+  <!--<script src="/js/master.js"></script>-->
+  <link href='http://fonts.googleapis.com/css?family=Boogaloo' rel='stylesheet' type='text/css'>
+  <!-- http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js -->
+  <script src="/vendor/jquery-2.1.1/jquery.min.js"></script>
+  <!-- http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js -->
+  <script src="/vendor/underscore-1.7.0/underscore.min.js"></script>
+  <script src="/vendor/jqdrnr/jqDnR.js"></script>
+  <link rel="stylesheet" type="text/css" href="/vendor/foundation/css/foundation.min.css" />
+  <style>
+    .full-width{ width: 100%; max-width: 100%; }
+  </style>
+  {% else %}
+  {# minified version (one js and one css) would be loaded here}
+  {% endif %}
+</head>
+<body id="{{ section }}" class="{{ subsection }}">
+  {% block body %}{% endblock %}
+  {% block js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,37 @@
+#exercise-page #exercise-area {
+  position: relative;
+  clear: both;
+  height: 600px; }
+#exercise-page #code-area, #exercise-page #output-stage, #exercise-page #mask-between, #exercise-page #blockly {
+  position: absolute;
+  width: 100%;
+  height: 600px;
+  top: 0; }
+#exercise-page #execute-btn {
+  position: absolute;
+  z-index: 3;
+  right: 10px;
+  bottom: 10px; }
+#exercise-page #execute-btn a {
+  margin: 0; }
+#exercise-page #code-area {
+  background-color: transparent;
+  z-index: 2;
+  border: 1px solid #ccc; }
+#exercise-page #code-area .blocklySvg {
+  background-color: transparent;
+  border: none; }
+#exercise-page #code-area .blocklyToolboxDiv {
+  height: 598px !important; }
+#exercise-page #code-area .blocklyScrollbarBackground, #exercise-page #code-area .blocklyScrollbarKnob {
+  display: none; }
+#exercise-page #mask-between {
+  opacity: 0.8;
+  background-color: #fff;
+  z-index: 1; }
+#exercise-page #output-stage {
+  z-index: 0;
+  right: 0;
+  width: 600px; }
+#exercise-page #output-stage #stage-coordinates-offset {
+  padding: 40px 0px 0px 40px; }

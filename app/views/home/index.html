@@ -1,15 +1,66 @@
 {% extends '../layouts/default.html' %}
 
-{% block main %}
-  <h2>{{ title }}</h2>
+{% block css %}
+<link rel="stylesheet" type="text/css" href="css/index.css"></link>
+{% parent %}
 {% endblock %}
 
 {% block content %}
-  <ol>
-    <li>Awesome! Now add some routes, models, views and controllers.</li>
+<br />
+<div class="panel">
+  <h1>Kooditunti.fi projektisivusto</h2>
+  <p>Projektin etenemisen seuraamiseen</p>
+</div>
+<div class="large-12 columns">
+  <h3>Uutta</h3>
+  <ul>
+    <li>2014-11-28 - Sivusto luotu. Lisätty lista harjoitteista selitteineen + esimerkkeineen ja osittain toimiva vapaa kenttä</li>
+  </ul>
+  <hr>
+</div>
+<div class="large-6 columns">
+  <h3>Harjoitteet</h3>
+
+  <a href="#" class="incomplete"><strong>Blockly perusteet</strong></a>
+  <p>Tehtävän tarkoituksena opettaa perusteet Blockly-ympäristön käytöstä
+  (esim. <a target="_blank" href="https://blockly-games.appspot.com/puzzle">Blockly-games Puzzle</a>).</p>
+
+  <a href="/variables.html"><strong>Muuttujat ja säätimet</strong></a>
+  <p>Tehtäväpaketin tarkoituksena auttaa opiskelijoita ymmärtämään muuttujia.
+  Toteutetaan antamalla mahdollisuus luoda säätimiä joilla pystyy muokkaamaan
+  muuttujien arvoja ohjelman ajon aikana.</p>
+
+  <a href="#" class="incomplete"><strong>Ehtolauseet ja koordinaatisto</strong></a>
+  <p>Opastus ehtolauseiden käyttöön. Esim.
+  <a target="_blank" href="https://blockly-games.appspot.com/bird">Blockly-games Bird</a>.</p>
+
+  <a href="#" class="incomplete"><strong>Toistolauseet ja piirtäminen</strong></a>
+  <p>Klassisia Turtle-harjoitteita ehkä hieman mielekkäämmin toteutettuna.
+  Esim. <a target="_blank" href="http://studio.code.org/s/artist/stage/1/puzzle/1">Code.org artist</a></p>
+
+  <a href="#" class="incomplete"><strong>Tapahtumat</strong></a>
+  <p>Kun klikataan hiirellä, kun painetaan näppäintä yms.</p>
+</div>
+<div class="large-6 columns">
+  <h3>Projekti</h3>
+  <a href="/playground.html"><strong>Vapaa kenttä</strong></a>
+  <p>Annetaan käyttöön kaikki harjoitteissa opetetut palikat ja annetaan
+  opiskelijoille vapaat kädet luoda mitä tahansa. Mahdollisesti myös
+  esimerkkejä toteutuksista inspiroimaan ja avustamaan.</p>
+</div>
+<div class="large-12 columns">
+  <hr />
+  <h3>TODO</h3>
+  <ul>
+    <li>Infosivusto opettajille (oppitunnin eteneminen yms.)</li>
+    <li>Värikäs, yksinkertainen, ikäryhmälle sopiva etusivu</li>
     <li>
-      Change the content of
-      <code>app/views/home/index.html</code>
+    Tehtävien käyttöliittymä kuten Tynker-apissa (<a href="https://www.youtube.com/watch?v=QNXCB4UfYxY">Youtube</a>).
+    Käytännössä tilan maksimointi näyttämällä koodatessa koodialue suoritusalueen päällä, ja suoritettessa koodialue piiloon.
     </li>
-  </ol>
-{% endblock %}
+    <li>Tehtäväpakettien askeleittainen eteneminen</li>
+    <li>Automaattinen tarkistus. Mieti myös vaihtoehtoja! (esim. Khan Academy <a href="https://www.khanacademy.org/computing/computer-programming/programming/coloring/p/project-wild-animal">I'm ready for evaluation</a> -tyylinen ratkaisu)</li>
+    <li>Tehtäväpakettien sisältö</li>
+  </ul>
+  <p><a href="/harjoitukset">harjoitukset</a></p>
+  {% endblock %}
