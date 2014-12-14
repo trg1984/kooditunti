@@ -2,12 +2,19 @@
 mongoose = require("mongoose")
 home = require("home")
 exercises = require("exercises")
+surveys = require("surveys")
 
 # Expose
 module.exports = (app, passport) ->
   app.get "/", home.index
+
+  # exercises
   app.get "/harjoitukset", exercises.index
   app.get "/harjoitukset/maze", exercises.maze
+
+  # surveys
+  app.get "/alkukysely", surveys.beginning
+  app.get "/loppukysely", surveys.ending
 
   # Error handling
   app.use (err, req, res, next) ->

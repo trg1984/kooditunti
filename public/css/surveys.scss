@@ -1,0 +1,14 @@
+#survey-page {
+  #steps-wrapper { position: relative; overflow: hidden; height: 100%; }
+  .step { position: absolute; top: 0; left: -1000px; transition: 0.5s; width: 50%; }
+  .step.next { left: 1000px; }
+  .step.current { left: 25%; }
+
+  label { font-size: 18px; }
+  input { margin-right: 10px; }
+  .question { margin-bottom: 25px; }
+
+  a.prev { position: absolute; bottom: 0; font-size: 12px; }
+  button.next { float: right; margin: 0; }
+  .thanks { text-align: center; font-size: 45px; }
+}

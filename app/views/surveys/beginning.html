@@ -1,0 +1,69 @@
+{% extends "../layouts/surveys.html" %}
+{% block js %}
+{% parent %}
+<script>$(function(){ Survey.init("beginning"); });</script>
+{% endblock %}
+
+{% block steps %}
+<div class="step current step1" data-key="q1">
+  <div class="question">
+    <h4>Mitä on ohjelmointi?</h4>
+  </div>
+  <label class="val" data-value="opt1">
+    <input type="radio" name="q1"> Tietokoneen suorittamaa toimintaa
+  </label>
+  <label class="val" data-value="opt2">
+    <input type="radio" name="q1"> Tietokoneen ohjaamista erilaisin käskyin
+  </label>
+  <label class="val" data-value="opt3">
+    <input type="radio" name="q1"> En tiedä
+  </label>
+  <div class="actions" style="display:none">
+    <hr />
+    <button class="next">Seuraava</button>
+  </div>
+</div>
+<div class="step step2" data-key="q2">
+  <div class="question">
+    <h4>Kuka voi olla ohjelmoija?</h4>
+    <p>Valitse kaikki vaihtoehdot jotka ovat mielestäsi oikein.</p>
+  </div>
+  <label class="val" data-value="opt1">
+    <input type="checkbox"> Erityisen fiksu henkilö
+  </label>
+  <label class="val" data-value="opt2">
+    <input type="checkbox"> Toinen tietokone
+  </label>
+  <label class="val" data-value="opt3">
+    <input type="checkbox"> Kuka tahansa
+  </label>
+  <div class="actions" style="display:none">
+    <hr />
+    <a class="prev">edellinen</a>
+    <button class="next">Seuraava</button>
+  </div>
+</div>
+<div class="step step3" data-key="q3">
+  <div class="question">
+    <h4>Onko ohjelmointi vaikeaa?</h4>
+  </div>
+  <label class="val" data-value="opt1">
+    <input type="radio" name="q3"> Ei
+  </label>
+  <label class="val" data-value="opt2">
+    <input type="radio" name="q3"> Kyllä
+  </label>
+  <label class="val" data-value="opt3">
+    <input type="radio" name="q3"> Toisinaan
+  </label>
+  <div class="actions" style="display:none">
+    <hr />
+    <a class="prev">edellinen</a>
+    <button class="next">Lähetä vastaukset</button>
+  </div>
+</div>
+<div class="step step4">
+  <br /><br />
+  <div class="thanks">Kiitos vastauksista!</div>
+</div>
+{% endblock %}
