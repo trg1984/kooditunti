@@ -1,16 +1,19 @@
 # Module dependencies
 fs = require("fs")
 express = require("express")
+redirect = require("express-redirect");
 mongoose = require("mongoose")
 passport = require("passport")
 config = require("config")
 coffeeMiddleware = require('coffee-middleware')
 sassMiddleware = require('node-sass-middleware')
+bourbon = require('node-bourbon')
 app = express()
+redirect(app)
 
 # coffeescript & sass
 app.use coffeeMiddleware({src: __dirname + "/public"})
-app.use sassMiddleware({src: __dirname + "/public"})
+app.use sassMiddleware({src: __dirname + "/public", includePaths: bourbon.includePaths})
 
 # connect to mongodb
 connectToDB = ->

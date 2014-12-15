@@ -83,10 +83,16 @@
     worldInitiated = true
 
   reset: ->
-    @world.destroy() if @world.getBodies().length > 0
-    @world = Physics()
-    @world.add(@renderer)
-    @initWorld()
+    if Stage.world.getBodies().length > 0
+      _.each Stage.world.getBodies(), (d) ->
+        Stage.world.removeBody d
+      # there is also a world.destroy in physicsjs
+      # but there seems to be something wrong with it..
+      #@world.destroy()
+
+    #@world = Physics()
+    #@world.add(@renderer)
+    #@initWorld()
 
   drawCoordinateGrid: (context) ->
     canvas = $("#gridcanvas").get(0)

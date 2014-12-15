@@ -14,12 +14,12 @@
 <script type="text/javascript" src="/vendor/js-interpreter/acorn_interpreter.js"></script>
 <script type="text/javascript" src="/blockly/custom_blocks/{{ exerciseName }}.js"></script>
 <script>
-$.get('/blockly/toolboxes/{{ exerciseName }}.xml',function(response){
+$.get('/blockly/toolboxes/{{ exerciseName }}_level{{ level }}.xml',function(response){
   Exercises.currentExercise = Maze;
   blocklyToolboxElem = response.getElementById('toolbox');
   Exercises.initBlockly();
   Stage.init();
-  Exercises.currentExercise.init();
+  Exercises.currentExercise.init({{level}});
   setTimeout(function(){ Stage.drawCoordinateGrid(); },100);
   //Stage._createPreview();
   //setTimeout(function(){ Maze.moveLeft(); },2000);
@@ -62,13 +62,15 @@ $(function(){
         {% block nav %}
         {% endblock %}
       </div>
+      <div id="steps" class="content row">
+        {% block steps %}
+        {% endblock %}
+      </div>
     </header>
   {% endblock %}
 
   {% block page_content %}
     <div class="row full-width">
-      <div style="font-family: Boogaloo; width: 0px; height: 0px;">-</div>
-      <br />
       <div class="large-12 columns">
         <div id="exercise-area">
           <!-- these floating on top of each other -->

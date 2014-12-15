@@ -3,7 +3,6 @@ exports.index = (req, res) ->
     title: "Harjoitukset",
     section: "exercise-page"
     subsection: ""
-  return
 
 exports.maze = (req, res) ->
   res.render "exercises/maze/index",
@@ -11,4 +10,4 @@ exports.maze = (req, res) ->
     section: "exercise-page"
     subsection: "exercise-maze"
     exerciseName: "maze"
-  return
+    level: req.params.level

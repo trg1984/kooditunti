@@ -5,6 +5,10 @@
 {% parent %}
 {% endblock %}
 
-{% block content %}
-<p>some content</p>
+{% block steps %}
+<ul>
+<li{% if level == 1 %} class="active"{% endif %}><a href="/harjoitukset/maze/1">1</a></li>
+<li{% if level == 2 %} class="active"{% endif %}><a href="/harjoitukset/maze/2">2</a></li>
+<li{% if level == 3 %} class="active"{% endif %}><a href="/harjoitukset/maze/3">3</a></li>
+</ul>
 {% endblock %}

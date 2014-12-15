@@ -3,20 +3,19 @@
 @Maze =
   walkerOnGoal: false
 
-  init: ->
+  init: (level) ->
+    @level = level
     @levelSetup()
 
   levelSetup: ->
     @walkerOnGoal = false
     # set level somehow (address or view)
-    level = 1
-    switch level
+    switch @level
       when 1
         Maze.walker = Stage.createElement('walker',[6,8]);
         Maze.goal = Stage.createElement('goal',[10,6], { type: 'goal' });
         for x in [0..Stage.horizontalBlocks]
           for y in [0..Stage.verticalBlocks]
-            #continue if x is  5 and y is  8
             continue if x is  6 and y is  8
             continue if x is  7 and y is  8
             continue if x is  8 and y is  8
@@ -25,15 +24,54 @@
             continue if x is  9 and y is  6
             continue if x is 10 and y is  6
             Stage.createElement 'obstacle', [x,y], { type: 'obstacle' }
-      when 2 then
-      when 3 then
+      when 2
+        route = [
+          [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+          [ 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 ],
+          [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 ],
+          [ 0, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 ],
+          [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+          [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+          [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+          [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+          [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+          [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+          [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+          [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+          [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+          [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+        ]
+      when 3
+        routeX = [
+          [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+          [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0 ],
+          [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0 ],
+          [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0 ],
+          [ 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0 ],
+          [ 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0 ],
+          [ 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0 ],
+          [ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0 ],
+          [ 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 ],
+          [ 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+          [ 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+          [ 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+          [ 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+          [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+        ]
       when 4 then
+
+    if route
+      for x in [1..Stage.horizontalBlocks]
+        for y in [1..Stage.verticalBlocks]
+          block = route[y-1][x-1]
+          Stage.createElement 'obstacle', [x,y], { type: 'obstacle' } if block is 0
+          Maze.walker = Stage.createElement('walker',[x,y]) if block is 2
+          Maze.goal = Stage.createElement('goal',[x,y], { type: 'goal' }) if block is 3
 
   evaluate: ->
     # set level somehow (address or view)
     # determine the evaluation basis
-    level = 1
-    switch level
+    switch @level
       when 1
         return true if @walkerOnGoal
         # some complex logic on the grid to check whether or not we are
@@ -45,7 +83,7 @@
   nudgeAction: (direction) ->
     delay = (ms, func) -> setTimeout func, ms
     mw = Maze.walker
-    np =switch direction
+    np = switch direction
       when 'left' then [mw.state.pos.x-2, mw.state.pos.y]
       when 'right' then [mw.state.pos.x+2, mw.state.pos.y]
       when 'up' then [mw.state.pos.x, mw.state.pos.y-2]
