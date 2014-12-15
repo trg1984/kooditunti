@@ -11,4 +11,11 @@
   a.prev { position: absolute; bottom: 0; font-size: 12px; }
   button.next { float: right; margin: 0; }
   .thanks { text-align: center; font-size: 45px; }
+
+  .range {
+    & { margin-bottom: 20px; overflow: hidden; }
+    .slider { width: auto; }
+    .texts .lou { float: left; }
+    .texts .hai { float: right; }
+  }
 }

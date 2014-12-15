@@ -22,6 +22,11 @@
         setTimeout (-> stepE.show()), 500
     $(".step .val").change ->
       Survey.saveValues $(@)
+    # TEMPTEMPTEMPTEMP
+    $(".step .range").click ->
+      $(@).addClass("set") unless $(@).hasClass("set")
+      Survey.saveValues $(@)
+    # TEMPTEMPTEMPTEMP
     $(".step a.prev").click ->
       Survey.stepBackward()
     $(".step button.next").click ->
@@ -66,6 +71,9 @@
 
   toggleStepInitiator: (stepElem) ->
     hasSelected = true if stepElem.find('input:checked').length > 0
+    # TEMPTEMPTEMPTEMP
+    hasSelected = true if stepElem.find('.range.set').length > 0
+    # TEMPTEMPTEMPTEMP
     if hasSelected
     then stepElem.find('.actions').fadeIn('fast')
     else stepElem.find('.actions').fadeOut('fast')

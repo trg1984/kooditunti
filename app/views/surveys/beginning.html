@@ -45,17 +45,26 @@
 </div>
 <div class="step step3" data-key="q3">
   <div class="question">
-    <h4>Onko ohjelmointi vaikeaa?</h4>
+    <h4>Kuinka vaikeaa ohjelmointi mielestäsi on?</h4>
   </div>
-  <label class="val" data-value="opt1">
-    <input type="radio" name="q3"> Ei
+  <label class="val" data-value="range">
+    <div class="range">
+      <input type="text" data-slider="true">
+      <div class="texts">
+        <div class="lou">ei kovinkaan vaikeaa</div>
+        <div class="hai">erittäin vaikeaa</div>
+      </div>
+    </div>
   </label>
-  <label class="val" data-value="opt2">
-    <input type="radio" name="q3"> Kyllä
-  </label>
-  <label class="val" data-value="opt3">
-    <input type="radio" name="q3"> Toisinaan
-  </label>
+  <!--<label class="val" data-value="opt1">-->
+    <!--<input type="radio" name="q3"> Ei-->
+  <!--</label>-->
+  <!--<label class="val" data-value="opt2">-->
+    <!--<input type="radio" name="q3"> Kyllä-->
+  <!--</label>-->
+  <!--<label class="val" data-value="opt3">-->
+    <!--<input type="radio" name="q3"> Toisinaan-->
+  <!--</label>-->
   <div class="actions" style="display:none">
     <hr />
     <a class="prev">edellinen</a>
@@ -65,5 +74,6 @@
 <div class="step step4">
   <br /><br />
   <div class="thanks">Kiitos vastauksista!</div>
+  <div style="text-align:center"><a href="/harjoitukset">Siirry harjoituksiin</a></div>
 </div>
 {% endblock %}
