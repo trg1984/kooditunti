@@ -1,0 +1,39 @@
+<xml id="toolbox" style="display: none">
+  <category name="Muuttujat">
+    <!--<block type="create_slider"></block>-->
+    <block type="variables_set"></block>
+    <block type="variables_get"></block>
+  </category>
+  <category name="Elementit">
+    <block type="circle_element">
+      <value name="name">
+        <block type="text">
+          <field name="TEXT">pallo</field>
+        </block>
+      </value>
+    </block>
+    <block type="text_element">
+      <value name="text">
+      </value>
+    </block>
+    <block type="when">
+      <value name="event">
+        <block type="event_click"></block>
+      </value>
+    </block>
+  </category>
+  <category name="Teksti">
+    <block type="text">
+    </block>
+    <block type="text_join">
+      <value name="ADD0">
+      </value>
+    </block>
+  </category>
+  <category name="Luvut">
+    <block type="math_arithmetic"></block>
+    <block type="math_number">
+      <field name="NUM">10</field>
+    </block>
+  </category>
+</xml>

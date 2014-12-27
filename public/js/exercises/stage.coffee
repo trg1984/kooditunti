@@ -11,6 +11,7 @@
   verticalBlocks: null
   horizontalBlocks: null
   elements: {}
+  textElements: []
   init: ->
     @horizontalBlocks = (Stage.width-Stage.coordsLeftSize)/Stage.blockWidth
     @verticalBlocks = (Stage.height-Stage.coordsTopSize)/Stage.blockHeight
@@ -35,16 +36,18 @@
     worldInitiated = false
     Stage.initWorld()
 
+  setGravity: (type) ->
+    Stage.gravity.setAcceleration({ x: 0, y: 0.0006 })
+
   initWorld: ->
     # add the renderer
     Stage.world.add Stage.renderer
     # render on each step
     Stage.world.on "step", ->
       Stage.world.render()
-      Stage.renderer.drawLine 100, 100, { color: "#000000" }
 
     # bounds of the window
-    viewportBounds = Physics.aabb(0, 0, Stage.width, Stage.height)
+    viewportBounds = Physics.aabb(0, 0, Stage.width-Stage.coordsLeftSize, Stage.height-Stage.coordsTopSize)
 
     # constrain objects to these bounds
     Stage.world.add Physics.behavior("edge-collision-detection",
@@ -79,6 +82,12 @@
     #Stage.world.on "render", (data) ->
       #data.renderer.ctx.font = "20px Georgia";
       #data.renderer.ctx.fillText("Hello World!",10,50);
+    Stage.world.on "render", (data) ->
+      $.each Stage.textElements, ->
+        if @alive
+          data.renderer.ctx.textAlign = 'center';
+          data.renderer.ctx.font = "40px Boogaloo";
+          data.renderer.ctx.fillText(@text,280,318);
 
     worldInitiated = true
 
@@ -86,9 +95,11 @@
     if Stage.world.getBodies().length > 0
       _.each Stage.world.getBodies(), (d) ->
         Stage.world.removeBody d
-      # there is also a world.destroy in physicsjs
-      # but there seems to be something wrong with it..
-      #@world.destroy()
+    Stage.textElements = []
+    # there is also a world.destroy in physicsjs
+    # but there seems to be something wrong with it
+    # (does not remove elements from canvas)
+    #@world.destroy()
 
     #@world = Physics()
     #@world.add(@renderer)
@@ -150,44 +161,58 @@
         yNum++
         continue unless xNum is pos[0] and yNum is pos[1]
         type = if props and props['type'] then props['type'] else 'default'
-        elem = switch type
-          when 'default' then Physics.body 'circle',
-            x: (posX+Stage.blockWidth/2)+1 # x-coordinate
-            y: (posY+Stage.blockHeight/2)+1 # y-coordinate
-            vx: 0 # velocity in x-direction
-            vy: 0 # velocity in y-direction
-            #width: Stage.blockWidth-1
-            #height: Stage.blockHeight-1
-            radius: (Stage.blockWidth/2)-2
-          when 'obstacle' then Physics.body 'rectangle',
-            x: (posX+Stage.blockWidth/2)+1 # x-coordinate
-            y: (posY+Stage.blockHeight/2)+1 # y-coordinate
-            vx: 0 # velocity in x-direction
-            vy: 0 # velocity in y-direction
-            width: Stage.blockWidth-1
-            height: Stage.blockHeight-1
-          when 'goal' then Physics.body "convex-polygon",
-            x: (posX+Stage.blockWidth/2)+1 # x-coordinate
-            y: (posY+Stage.blockHeight/2)+1 # y-coordinate
-            vertices: [
-              { x: 8, y: -14 },
-              { x: -8, y: -14 },
-              { x: -16, y: 0 },
-              { x: -8, y: 14 },
-              { x: 8, y: 14 },
-              { x: 16, y: 0 }
-            ]
-
+        elem = Exercises.currentExercise.stageElement(type,posX,posY,props)
         elem.name = name
         elem.properties = props if props
-        elem.treatment = 'static'
         Stage.elements[name] = elem
         Stage.world.add(elem)
         return elem
 
+  draw: true
+  drawText: (textElement) ->
+    #canvas = $("#gridcanvas").get(0)
+    #context = canvas.getContext("2d")
+    #bw = Stage.width-40
+    #bh = Stage.height-40
+    #p = 40; x = 0; y = 0
+    #context.textAlign = 'center';
+    #context.font = "40px Boogaloo";
+    #context.fillStyle = '#000';
+    #context.fillText(text,320,318);
+    #context.restore()
+
   editElement: (name,prop) ->
     if elem = Stage.elements[name]
-      console.log elem
       elem.state.pos.set(41,41);
       #elem.state.pos.x = 100
       #elem.state.pos.y = 100
+      #
+
+  settableElements: []
+  getSettableElements: ->
+    blocks = window.Blockly.mainWorkspace.getAllBlocks()
+    Stage.settableElements = []
+    $.each blocks, ->
+      if $.inArray(@type, ['circle_element']) != -1
+        nameBlock = @childBlocks_[0]
+        name = nameBlock.getFieldValue("TEXT")
+        Stage.settableElements.push name
+
+  settableElementsDropdownValues: ->
+    Stage.getSettableElements()
+    dropdownValues = $.map(Stage.settableElements, ((n) -> [[n, n]]) )
+    dropdownValues = [["x", "x"]] if dropdownValues.length is 0
+    dropdownValues
+
+  findClickTarget: (canvas, event, name) ->
+    # checking canvas coordinates for the mouse click
+    offset = $(canvas).offset()
+    px = event.pageX - offset.left
+    py = event.pageY - offset.top
+    # mouse position to Physicsjs vector
+    mousePos = Physics.vector()
+    mousePos.set px, py
+    # finding a body under mouse position
+    body = Stage.world.findOne($at: mousePos)
+    return body if body.name is name
+    return false

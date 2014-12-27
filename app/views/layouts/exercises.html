@@ -14,26 +14,35 @@
 <script type="text/javascript" src="/vendor/js-interpreter/acorn_interpreter.js"></script>
 <script type="text/javascript" src="/blockly/custom_blocks/{{ exerciseName }}.js"></script>
 <script>
-$.get('/blockly/toolboxes/{{ exerciseName }}_level{{ level }}.xml',function(response){
-  Exercises.currentExercise = Maze;
+Exercises.filenameFormat = '{{ exerciseName }}_level{{ level }}';
+$.get('/blockly/toolboxes/'+Exercises.filenameFormat+'.xml',function(response){
   blocklyToolboxElem = response.getElementById('toolbox');
-  Exercises.initBlockly();
   Stage.init();
   Exercises.currentExercise.init({{level}});
+  Exercises.initBlockly();
   setTimeout(function(){ Stage.drawCoordinateGrid(); },100);
-  //Stage._createPreview();
-  //setTimeout(function(){ Maze.moveLeft(); },2000);
-  //setTimeout(function(){ Maze.moveDown(); },3000);
-  //setTimeout(function(){ Maze.moveRight(); },4000);
-  //setTimeout(function(){ Maze.moveUp(); },5000);
 });
 $(function(){
-  // FOR PREVIEW
+  $(document).foundation({
+    joyride: {
+      post_step_callback: function(i,step){
+        JediMaster.hideModal(step)
+      }
+    }
+  })
+  // use some condition to start the joyride
+  // (not shown yet for example)
+  // and also allow it to be started from a button
+  //$(document).foundation('joyride', 'start');
   windowWidth = $(window).width()
   $(".overlay-resize").css({width: windowWidth-650});
-  $("#execute-btn a").click(function(){
+  $("#start-execution-btn a").click(function(){
     //Exercises.resizeCodeArea();
     Exercises.runCode();
+  });
+  $("#end-execution-btn a").click(function(){
+    //Exercises.resizeCodeArea();
+    Exercises.endExecution();
   });
   $(window).resize(_.debounce(function(){
      Exercises.resizeCodeArea();
@@ -76,7 +85,8 @@ $(function(){
           <!-- these floating on top of each other -->
           <div id="code-area" class="overlay-resize">
             <div id="blockly" class="overlay-resize"></div>
-            <div id="execute-btn"><a class="button">Suorita koodi</a></div>
+            <div id="start-execution-btn"><a class="button">Suorita koodi</a></div>
+            <div id="end-execution-btn" style="display:none;"><a class="button">Keskeytä suoritus</a></div>
             <div class="resize-handle"></div>
           </div>
           <div id="mask-between" class="overlay-resize"></div>

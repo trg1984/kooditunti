@@ -2,6 +2,9 @@
   currentExercise: null
   isExecuting: false
   resizeCodeAreaUp: true
+  filenameFormat: null
+  preloadBlocklyBlocks: false
+  activeBlock: null
 
   initBlockly: ->
     Blockly.inject document.getElementById("blockly"),
@@ -12,30 +15,38 @@
       trashcan: false
 
     url = window.location.href.split("#")[0]
-    if "localStorage" of window and not window.localStorage[url]
-      if defaultBlocklyArrangement?
-        window.localStorage[url] = defaultBlocklyArrangement
-    #window.setTimeout BlocklyStorage.restoreBlocks, 0
-    #BlocklyStorage.backupOnUnload()
-    return
+    # needs logic for reseting the default blocks
+    hasLocalStorage = "localStorage" of window
+    if hasLocalStorage and window.localStorage[url]
+      window.setTimeout BlocklyStorage.restoreBlocks, 0
+    else
+      # load the default blocks if we haven't done anything yet
+      # (no local storage)
+      @preloadBlocks() if @preloadBlocklyBlocks
+    BlocklyStorage.backupOnUnload()
+
+  preloadBlocks: ->
+    $.get("/blockly/codeareas/"+@filenameFormat+".xml", (response) ->
+      xml = Blockly.Xml.textToDom(response);
+      Blockly.Xml.domToWorkspace(Blockly.getMainWorkspace(), xml);
+    , "text")
 
   resizeCodeArea: ->
     windowWidth = $(window).width()
-    console.log windowWidth
     newWidth = switch
       when Exercises.isExecuting or windowWidth > 1450 then windowWidth-650
       else 800 if Exercises.resizeCodeAreaUp
     $(".overlay-resize").animate(width: newWidth);
 
   endExecution: ->
-    $("#execute-btn a").text("Suorita koodi")
+    $("#end-execution-btn").hide()
+    $("#start-execution-btn").show()
     Exercises.isExecuting = false
     Exercises.resizeCodeArea()
     if Exercises.currentExercise.evaluate()
       # woohoo we have passed the level
       # get info for prompts on DOM
       # and move on or something...
-      alert("DONE!")
     else
       # no luck, try again? (dialog texts from DOM)
       #alert("Yritä uudelleen")
@@ -43,7 +54,8 @@
       Exercises.currentExercise.levelSetup()
 
   runCode: ->
-    $("#execute-btn a").text("Keskeytä suoritus")
+    $("#end-execution-btn").show()
+    $("#start-execution-btn").hide()
     Exercises.isExecuting = true
     Exercises.resizeCodeArea()
     Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
@@ -52,24 +64,29 @@
     Blockly.mainWorkspace.highlightBlock(null);
     code = Blockly.JavaScript.workspaceToCode()
     console.log(code)
-    intrp = new Interpreter(code, Maze.interpreterApi)
+    intrp = new Interpreter(code, @currentExercise.interpreterApi)
+    #intrp.initGlobalScope()
     nextStep = ->
       #BlocklyInterface.highlight(action[1]);
       if intrp.step()
         window.setTimeout nextStep, 20
       else
-        setTimeout (-> Exercises.endExecution()), 500
+        # the execution state should be emphasized, since we won't
+        # stop it automatically anymore
+        #setTimeout (-> Exercises.endExecution()), 500
     nextStep()
 
-  interpreterApi: (interpreter, scope ) ->
-    #wrapper = (text) ->
-      #text = (if text then text.toString() else "")
-      #interpreter.createPrimitive Maze
+  commonInterpreterApi: (interpreter, scope) ->
+    wrapper = (id) ->
+      console.log(id)
+    interpreter.setProperty scope, "notify", interpreter.createNativeFunction(wrapper)
 
-    interpreter.setProperty scope, "Maze", interpreter.createPrimitive(Maze)
-    interpreter.setProperty scope, "moveLeft", interpreter.createPrimitive(Maze.moveLeft())
-    #interpreter.setProperty scope, "alert", interpreter.createNativeFunction(wrapper)
-    return
+    wrapper = (id) ->
+      id = (if id then id.toString() else "")
+      Exercises.activeBlock = Blockly.mainWorkspace.getBlockById(id)
+      interpreter.createPrimitive Blockly.mainWorkspace.highlightBlock(id)
+    interpreter.setProperty scope, "highlightBlock", interpreter.createNativeFunction(wrapper)
+
 
   # taking stuff from jqdnr plugin
   # continue if this seems to be the way to do it...

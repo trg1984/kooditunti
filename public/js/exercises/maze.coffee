@@ -60,7 +60,7 @@
         ]
       when 4 then
 
-    if route
+    if route?
       for x in [1..Stage.horizontalBlocks]
         for y in [1..Stage.verticalBlocks]
           block = route[y-1][x-1]
@@ -125,6 +125,37 @@
     return unless Maze.walker
     mw = Maze.walker
     @moveAction(mw.state.pos.x,mw.state.pos.y+Stage.blockHeight,'down')
+
+  stageElement: (type,posX,posY) ->
+    elem = switch type
+      when 'default' then Physics.body 'circle',
+        x: (posX+Stage.blockWidth/2)+1 # x-coordinate
+        y: (posY+Stage.blockHeight/2)+1 # y-coordinate
+        vx: 0 # velocity in x-direction
+        vy: 0 # velocity in y-direction
+        #width: Stage.blockWidth-1
+        #height: Stage.blockHeight-1
+        radius: (Stage.blockWidth/2)-2
+      when 'obstacle' then Physics.body 'rectangle',
+        x: (posX+Stage.blockWidth/2)+1 # x-coordinate
+        y: (posY+Stage.blockHeight/2)+1 # y-coordinate
+        vx: 0 # velocity in x-direction
+        vy: 0 # velocity in y-direction
+        width: Stage.blockWidth-1
+        height: Stage.blockHeight-1
+      when 'goal' then Physics.body "convex-polygon",
+        x: (posX+Stage.blockWidth/2)+1 # x-coordinate
+        y: (posY+Stage.blockHeight/2)+1 # y-coordinate
+        vertices: [
+          { x: 8, y: -14 },
+          { x: -8, y: -14 },
+          { x: -16, y: 0 },
+          { x: -8, y: 14 },
+          { x: 8, y: 14 },
+          { x: 16, y: 0 }
+        ]
+      elem.treatment = 'static'
+      return elem
 
   interpreterApi: (interpreter, scope) ->
     wrapper = (id) ->

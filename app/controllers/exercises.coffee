@@ -11,3 +11,11 @@ exports.maze = (req, res) ->
     subsection: "exercise-maze"
     exerciseName: "maze"
     level: req.params.level
+
+exports.vars = (req, res) ->
+  res.render "exercises/vars/index",
+    title: "Muuttujat"
+    section: "exercise-page"
+    subsection: "exercise-vars"
+    exerciseName: "vars"
+    level: req.params.level

@@ -10,8 +10,12 @@ module.exports = (app, passport) ->
 
   # exercises
   app.get "/harjoitukset", exercises.index
+
   app.get "/harjoitukset/maze/:level", exercises.maze
   app.redirect "/harjoitukset/maze", "/harjoitukset/maze/1";
+
+  app.get "/harjoitukset/vars/:level", exercises.vars
+  app.redirect "/harjoitukset/vars", "/harjoitukset/vars/1";
 
   # surveys
   app.get "/alkukysely", surveys.beginning

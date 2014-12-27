@@ -54,9 +54,10 @@ module.exports = (app, passport) ->
     next()
     return
 
-
   # bodyParser should be above methodOverride
-  app.use bodyParser()
+  app.use bodyParser.urlencoded({ extended: true })
+  app.use bodyParser.json()
+
   app.use methodOverride((req, res) ->
     if req.body and typeof req.body is "object" and "_method" of req.body
 
@@ -72,6 +73,8 @@ module.exports = (app, passport) ->
   app.use cookieSession(secret: "secret")
   app.use session(
     secret: pkg.name
+    saveUninitialized: true
+    resave: true
     store: new mongoStore(
       url: config.db
       collection: "sessions"
