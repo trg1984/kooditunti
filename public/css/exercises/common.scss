@@ -1,28 +1,69 @@
 // why do i need this?
 @import 'bourbon';
 
+%vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+$basics-color:#9f005d;
+$vars-color:#c2272d;
+$ifs-color:#1c7563;
+$loops-color:#067195;
+$events-color:#f36c00;
+
+$font: 'Boogaloo';
+
+#exercise-links-page { margin: 0px auto; max-width: 600px; }
+#exercise-links {
+  & { text-align: center; margin-top: 50px; width: 100%; }
+  a { display: inline-block; width: 150px; height: 150px; vertical-align: middle; }
+  a { margin: 10px; border-radius: 40%; text-align: center; color: #fff; }
+  a { font-family: $font; font-size: 22px; line-height: 22px; }
+  a div { @extend %vertical-align; padding: 15px; }
+  a.basics { background-color: $basics-color }
+  a.vars { background-color: $vars-color }
+  a.ifs { background-color: $ifs-color }
+  a.loops { background-color: $loops-color }
+  a.events { background-color: $events-color }
+}
+
 #exercise-page {
+  & { min-width: 870px; }
+  #back-btn, #help-btn { background-color: #ccc; width: 40px; height: 35px; text-align: center; float: left; }
+  #back-btn { border-radius: 0 0 40% 0; float: left; }
+  #help-btn { border-radius: 0 0 40% 40%; float: left; margin-left: 10px; }
+  #back-btn a, #help-btn a { font-family: $font; font-size: 22px; color: #fff; width: 100%; height: 100%; display: block; }
   #steps {
     & { text-align: center; }
     ul { margin: 10px 0 20px 0; }
-    li { list-style-type: none; display: inline-block; width: 45px; height: 45px; }
-    li { border-radius: 40%; background-color: #1c7563; }
+    li { list-style-type: none; display: inline-block; width: 45px; height: 45px; position: relative; }
+    li { border-radius: 40%; }
     li { border: 4px #fff solid; }
     li.active { border-color: #daaa02; }
-    li a { font-family: Boogaloo; font-size: 22px; color: #fff; width: 100%; height: 100%; display: block; }
+    li a { font-family: $font; font-size: 22px; color: #fff; width: 100%; height: 100%; display: block; }
+    li .completed-star { width: 20px; top: -10px; left: -7px; position: absolute; }
   }
-  .joyride-tip-guide p {
-    font-family: Boogaloo; font-size: 18px;
-  }
+  &.exercise-basics #steps li { background-color: $basics-color; }
+  &.exercise-vars #steps li { background-color: $vars-color; }
+  &.exercise-ifs #steps li { background-color: $ifs-color; }
+  &.exercise-loops #steps li { background-color: $loops-color; }
+  &.exercise-events #steps li { background-color: $events-color; }
 
   $common-height: 600px;
-  #exercise-area { position: relative; clear: both; height: $common-height; }
+  $code-area-height: $common-height+57;
+  #exercise-area { position: relative; clear: both; height: $code-area-height; }
   #code-area, #output-stage, #mask-between, #blockly
     { position: absolute; width: 100%; height: $common-height; top: 0; }
+  #reset-code-btn { position: absolute; z-index: 3; left: 10px; bottom: 10px; font-size: 11px; }
   #start-execution-btn, #end-execution-btn { position: absolute; z-index: 3; right: 10px; bottom: 10px; }
-  #start-execution-btn a, #end-execution-btn a { margin: 0; }
   #code-area {
-    & { background-color: transparent; z-index: 2; border: 1px solid #ccc; }
+    & { background-color: transparent; z-index: 2; height: $code-area-height; }
+    #code-area-borders { border: 1px solid #ccc; height: $common-height; position: relative; }
+    #code-area-actions { position: absolute; z-index: 3; right: 10px; bottom: 10px; }
     .blocklySvg { background-color: transparent; border: none; }
     .blocklyToolboxDiv { height: $common-height - 2 !important; }
     .blocklyScrollbarBackground, .blocklyScrollbarKnob { display: none; }
@@ -33,3 +74,9 @@
     #stage-coordinates-offset { padding: 40px 0px 0px 40px; } // same as Stage.coords...Size
   }
 }
+
+.button { font-family: $font !important; border-radius: 1000px !important; }
+.button:hover { text-decoration: none !important; }
+.button.small { font-size: 18px !important; }
+.button.tiny { font-size: 14px !important; }
+.custom-btn { margin: 0 !important; }

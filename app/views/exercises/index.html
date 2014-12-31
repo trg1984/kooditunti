@@ -1,10 +1,25 @@
 {% extends "../layouts/default.html" %}
 
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/css/exercises/common.css" />
+{% endblock %}
+
 {% block content %}
-<br />
-<a href="/harjoitukset/basics" class="incomplete"><strong>Blockly perusteet</strong></a><br />
-<a href="/harjoitukset/variables"><strong>Muuttujat ja säätimet</strong></a><br />
-<a href="/harjoitukset/ifs" class="incomplete"><strong>Ehtolauseet ja koordinaatisto</strong></a><br />
-<a href="/harjoitukset/maze" class="incomplete"><strong>Toistolauseet ja piirtäminen</strong></a><br />
-<a href="/harjoitukset/events" class="incomplete"><strong>Tapahtumat</strong></a>
+<div id="exercise-links">
+  <a href="/harjoitukset/basics" class="basics incomplete">
+    <div>Opastus</div>
+  </a>
+  <a href="/harjoitukset/vars" class="vars">
+    <div>Muuttujat ja säätimet</div>
+  </a>
+  <a href="/harjoitukset/ifs" class="ifs incomplete">
+    <div>Ehtolauseet ja koordinaatisto</div>
+  </a>
+  <a href="/harjoitukset/loops" class="loops">
+    <div>Toistolauseet</div>
+  </a>
+  <a href="/harjoitukset/events" class="events incomplete">
+    <div>Tapahtumat</div>
+  </a>
+</div>
 {% endblock %}

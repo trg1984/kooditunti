@@ -1,6 +1,5 @@
-# requires Stage
-# element named walker is our target
-@Maze =
+@Loops =
+  levelCount: 3
   walkerOnGoal: false
 
   init: (level) ->
@@ -12,8 +11,8 @@
     # set level somehow (address or view)
     switch @level
       when 1
-        Maze.walker = Stage.createElement('walker',[6,8]);
-        Maze.goal = Stage.createElement('goal',[10,6], { type: 'goal' });
+        Loops.walker = Stage.createElement('walker',[6,8]);
+        Loops.goal = Stage.createElement('goal',[10,6], { type: 'goal' });
         for x in [0..Stage.horizontalBlocks]
           for y in [0..Stage.verticalBlocks]
             continue if x is  6 and y is  8
@@ -65,24 +64,22 @@
         for y in [1..Stage.verticalBlocks]
           block = route[y-1][x-1]
           Stage.createElement 'obstacle', [x,y], { type: 'obstacle' } if block is 0
-          Maze.walker = Stage.createElement('walker',[x,y]) if block is 2
-          Maze.goal = Stage.createElement('goal',[x,y], { type: 'goal' }) if block is 3
+          Loops.walker = Stage.createElement('walker',[x,y]) if block is 2
+          Loops.goal = Stage.createElement('goal',[x,y], { type: 'goal' }) if block is 3
 
   evaluate: ->
     # set level somehow (address or view)
     # determine the evaluation basis
     switch @level
-      when 1
+      when 1, 2, 3
+        console.log @walkerOnGoal
         return true if @walkerOnGoal
         # some complex logic on the grid to check whether or not we are
         # done
-      when 2 then
-      when 3 then
-      when 4 then
 
   nudgeAction: (direction) ->
     delay = (ms, func) -> setTimeout func, ms
-    mw = Maze.walker
+    mw = Loops.walker
     np = switch direction
       when 'left' then [mw.state.pos.x-2, mw.state.pos.y]
       when 'right' then [mw.state.pos.x+2, mw.state.pos.y]
@@ -103,27 +100,27 @@
       doNudge = true if nextElem.properties and nextElem.properties.type is 'obstacle'
       @walkerOnGoal = true if nextElem.properties and nextElem.properties.type is 'goal'
     if doNudge
-    then Maze.nudgeAction(direction)
-    else Maze.walker.state.pos.set(x,y)
+    then Loops.nudgeAction(direction)
+    else Loops.walker.state.pos.set(x,y)
 
   moveLeft: ->
-    return unless Maze.walker
-    mw = Maze.walker
+    return unless Loops.walker
+    mw = Loops.walker
     @moveAction(mw.state.pos.x-Stage.blockWidth, mw.state.pos.y, 'left');
 
   moveRight: ->
-    return unless Maze.walker
-    mw = Maze.walker
+    return unless Loops.walker
+    mw = Loops.walker
     @moveAction(mw.state.pos.x+Stage.blockWidth,mw.state.pos.y, 'right')
 
   moveUp: ->
-    return unless Maze.walker
-    mw = Maze.walker
+    return unless Loops.walker
+    mw = Loops.walker
     @moveAction(mw.state.pos.x,mw.state.pos.y-Stage.blockHeight,'up')
 
   moveDown: ->
-    return unless Maze.walker
-    mw = Maze.walker
+    return unless Loops.walker
+    mw = Loops.walker
     @moveAction(mw.state.pos.x,mw.state.pos.y+Stage.blockHeight,'down')
 
   stageElement: (type,posX,posY) ->
@@ -154,43 +151,40 @@
           { x: 8, y: 14 },
           { x: 16, y: 0 }
         ]
-      elem.treatment = 'static'
-      return elem
+    elem.treatment = 'static'
+    return elem
 
   interpreterApi: (interpreter, scope) ->
     wrapper = (id) ->
-      Maze.moveUp()
+      Loops.moveUp()
     interpreter.setProperty scope, "moveUp", interpreter.createNativeFunction(wrapper)
 
     wrapper = (id) ->
-      Maze.moveDown()
+      Loops.moveDown()
     interpreter.setProperty scope, "moveDown", interpreter.createNativeFunction(wrapper)
 
     wrapper = (id) ->
-      Maze.moveLeft()
+      Loops.moveLeft()
     interpreter.setProperty scope, "moveLeft", interpreter.createNativeFunction(wrapper)
 
     wrapper = (id) ->
-      Maze.moveRight()
+      Loops.moveRight()
     interpreter.setProperty scope, "moveRight", interpreter.createNativeFunction(wrapper)
 
     wrapper = (id) ->
-      interpreter.createPrimitive Maze.isPath(0, id.toString())
+      interpreter.createPrimitive Loops.isPath(0, id.toString())
     interpreter.setProperty scope, "isPathForward", interpreter.createNativeFunction(wrapper)
 
     wrapper = (id) ->
-      interpreter.createPrimitive Maze.isPath(1, id.toString())
+      interpreter.createPrimitive Loops.isPath(1, id.toString())
     interpreter.setProperty scope, "isPathRight", interpreter.createNativeFunction(wrapper)
 
     wrapper = (id) ->
-      interpreter.createPrimitive Maze.isPath(2, id.toString())
+      interpreter.createPrimitive Loops.isPath(2, id.toString())
     interpreter.setProperty scope, "isPathBackward", interpreter.createNativeFunction(wrapper)
 
     wrapper = (id) ->
-      interpreter.createPrimitive Maze.isPath(3, id.toString())
+      interpreter.createPrimitive Loops.isPath(3, id.toString())
     interpreter.setProperty scope, "isPathLeft", interpreter.createNativeFunction(wrapper)
 
-    wrapper = (id) ->
-      id = (if id then id.toString() else "")
-      interpreter.createPrimitive Blockly.mainWorkspace.highlightBlock(id)
-    interpreter.setProperty scope, "highlightBlock", interpreter.createNativeFunction(wrapper)
+    Exercises.commonInterpreterApi(interpreter,scope)

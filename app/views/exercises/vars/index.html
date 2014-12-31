@@ -4,25 +4,27 @@
 {% parent %}
 <script src="/js/exercises/vars.js"></script>
 <script>Exercises.currentExercise = Vars;</script>
+<script>Exercises.init();</script>
 {% endblock %}
 
 {% block steps %}
 <ul>
-<li{% if level == 1 %} class="active"{% endif %}><a href="/harjoitukset/vars/1">1</a></li>
-<li{% if level == 2 %} class="active"{% endif %}><a href="/harjoitukset/vars/2">2</a></li>
-<li{% if level == 3 %} class="active"{% endif %}><a href="/harjoitukset/vars/3">3</a></li>
+  <li id="vars_level1_link" {% if level == 1 %} class="active"{% endif %}><a href="/harjoitukset/vars/1">1</a></li>
+  <li id="vars_level2_link" {% if level == 2 %} class="active"{% endif %}><a href="/harjoitukset/vars/2">2</a></li>
+  <li id="vars_level3_link" {% if level == 3 %} class="active"{% endif %}><a href="/harjoitukset/vars/3">3</a></li>
 </ul>
+{% endblock %}
 
+{% block exercise_tips %}
 {% if level == 1 %}
-<div id="tip1" class="tip-placement" style="top:70px;left:20px;">
-<div id="tip2" class="tip-placement" style="top:130px;left:20px;">
+<div id="tip1" class="exercise-tip-placement" style="top:10px;left:20px;"></div>
+<div id="tip2" class="exercise-tip-placement" style="top:70px;left:20px;"></div>
 <ol class="joyride-list" data-joyride>
   <li data-button="Seuraava" class="wide hide-modal-next" data-options="prev_button: false; modal: true">
-    <p>Muuttujiin varastoidaan arvoja. Varastoituja arvoja voidaan kutsua ohjelmassa viittaamalla muuttujaan.
-    Tässä harjoituksessa tehtävänä on saada luotua kentälle pallo joka saa halkaisijan arvon muuttujalta.</p>
-
-    <p>Ohjelmakoodi ei kuitenkaan vielä toimi, koska muuttujaa nimeltään pallon_halkaisija ei ole määritelty.
-    Määrittele muuttuja ja anna sille jokin arvo.</p>
+    <p>Tässä tehtävässä osa ohjelmakoodista on jo valmiina, mutta se ei kuitenkaan vielä toimi, koska muuttujaa nimeltään
+    <i>pallon_halkaisija</i> ei ole määritelty.</p>
+    <!--<p>Muuttujiin varastoidaan arvoja. Varastoituja arvoja voidaan kutsua ohjelmassa viittaamalla muuttujaan.</p>-->
+    <p>Tehtävänäsi on määritellä tämä puuttuva muuttuja ja antaa sille jokin arvo.</p>
 
     <!--<p>Muuttujan nimen voi määrittää vapaasti, ja siihen tallennettu arvo on käytettävissä-->
     <!--niin kauan kuin se on tallessa. Muuttujan arvo voi myös muuttua matkan varrella.</p>-->
@@ -31,44 +33,60 @@
     <p>Tällä palikalla pystyt luomaan uusia muuttujia. Pudotusvalikosta pystyt määrittämään muuttujan nimen,
     ja tyhjään kohtaan asetetaan muuttujan uusi arvo.</p>
   </li>
-  <li data-id="tip2" data-button="Sulje" data-options="tip_location: left; prev_button: false; modal: true">
-    <p>Tämä palikka palauttaa valitun muuttujan arvon.</p>
-  </li>
-</ol>
-{% endif %}
-
-{% if level == 3 %}
-<div id="tip1" class="tip-placement" style="top:180px;left:20px;">
-<ol class="joyride-list" data-joyride>
-  <li data-button="Seuraava" class="wide hide-modal-next" data-options="prev_button: false;">
-    <p></p>
-    <p>Tehtävänä on piirtää kentälle kolmen juhlapyhän nimet vierekkäin.</p>
-  </li>
-  <li data-id="tip1" data-button="Seuraava" data-options="tip_location: left; prev_button: false;">
-    <p>Tällä palikalla pystyy luomaan uutta tekstiä.</p>
+  <li data-id="tip2" data-button="Sulje ohje" data-options="tip_location: left; prev_button: false; modal: true">
+    <p>Tämä palikka palauttaa pudotusvalikosta valitun muuttujan arvon.</p>
   </li>
 </ol>
 {% endif %}
 
 {% if level == 2 %}
-<div id="tip1" class="tip-placement" style="top:180px;left:20px;">
-<div id="tip2" class="tip-placement" style="top:230px;left:20px;">
-<div id="tip3" class="tip-placement" style="top:310px;left:20px;">
+<div id="tip1" class="exercise-tip-placement" style="top:120px;left:20px;"></div>
+<div id="tip1-5" class="exercise-tip-placement" style="top:180px;left:20px;"></div>
+<div id="tip2" class="exercise-tip-placement" style="top:245px;left:20px;"></div>
+<div id="tip3" class="exercise-tip-placement" style="top:5px;left:20px;"></div>
+<div id="tip4" class="exercise-tip-placement" style="top:124px;left:400px;"></div>
 <ol class="joyride-list" data-joyride>
-  <li data-button="Seuraava" class="wide hide-modal" data-options="prev_button: false;">
-    <p>Edellisillä tasoilla opit luomaan muuttujia ja tekstiä.</p>
-    <p>Otetaan opitut asiat käyttöön ja luodaan kentälle muuttuvaa tekstiä!</p>
+  <li data-button="Seuraava" class="wide hide-modal-next" data-options="prev_button: false;">
+    <h2>Tekstiä kentälle</h2>
+    <p>Tässä tehtävässä tutustutaan tekstin piirtämiseen kentälle. Voit vapaasti käyttää esiteltyjä palikoita tekstin piirtämiseen kentälle.</p>
+    <p>Pystyt myös luomaan useampia tekstinpätkiä jotka näytetään peräkkäin.</p>
   </li>
-  <li data-id="tip1" data-button="Seuraava" data-options="tip_location: left; prev_button: false;">
-    <p>Tällä palikalla pystyy luomaan uutta tekstiä.</p>
+  <li data-id="tip1" data-button="Seuraava" data-options="tip_location: right; prev_button: false;">
+    <p>Tällä palikalla pystyt luomaan uutta tekstiä.</p>
   </li>
-  <li data-id="tip2" data-button="Seuraava" data-options="tip_location: left; prev_button: false">
+  <li data-id="tip1-5" data-button="Seuraava" data-options="tip_location: left; prev_button: false">
     <p>Kun yhdistät tähän palikkaan kaksi muuta palikkaa, niiden teksti yhdistetään toisiinsa. Voit käyttää myös muuttujia tekstin lähteenä.</p>
   </li>
-  <li data-id="tip3" data-button="Sulje" data-options="tip_location: left; prev_button: false">
-    <p>Tähän palikkaan yhdistetty teksti piirretään kentälle.</p>
+  <li data-id="tip2" data-button="Seuraava" data-options="tip_location: right; prev_button: false;">
+    <p>Tarvitset tätä palikkaa siihen että teksti piirtyy kentälle.</p>
+  </li>
+  <li data-id="tip3" data-button="Seuraava" data-options="tip_location: right; prev_button: false;">
+    <p>Pystyt myös käyttämään edellisellä tasolla opittuja muuttujia tekstin kanssa.</p>
+  </li>
+  <li data-id="tip4" data-button="Sulje ohje" data-options="tip_location: right; prev_button: false;">
+    <p>Tämä on vain esimerkki. Käytä vapaasti mielikuvitustasi ja kirjoita jotain omaa!</p>
   </li>
 </ol>
+<div id="evaluation-selects">
+  <div>Sain kentälle piirrettyä omaa tekstiäni</div>
+  <div>Testasin useamman tekstinpätkän lisäämistä peräkkäin</div>
+  <div>Onnistuin käyttämään muuttujia tekstin säilömiseen</div>
+</div>
+{% endif %}
+
+{% if level == 3 %}
+<ol class="joyride-list" data-joyride>
+  <li data-button="Aloita" class="wide hide-modal" data-options="prev_button: false;">
+    <h2>Muuttuva muuttuja</h2>
+    <p>Edellisillä tasoilla opit luomaan muuttujia ja tekstiä. Otetaan siis opitut asiat käyttöön ja luodaan kentälle muuttuvaa tekstiä!</p>
+    <p>Pystytkö luomaan kentälle pallon, jota klikatessa kentälle ilmestyy teksti, joka kertoo kuinka monta kertaa palloa on klikattu?</p>
+  </li>
+</ol>
+<div id="evaluation-selects">
+  <div>Sain kentälle luotua pallon</div>
+  <div>Sain piirrettyä kentälle tekstiä</div>
+  <div>Kun pallosta klikataan, tekstin arvo muuttuu.</div>
+</div>
 {% endif %}
 
 {% endblock %}

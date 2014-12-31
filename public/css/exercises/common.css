@@ -1,3 +1,67 @@
+#exercise-links a div {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+#exercise-links-page {
+  margin: 0px auto;
+  max-width: 600px; }
+
+#exercise-links {
+  text-align: center;
+  margin-top: 50px;
+  width: 100%; }
+#exercise-links a {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  vertical-align: middle; }
+#exercise-links a {
+  margin: 10px;
+  border-radius: 40%;
+  text-align: center;
+  color: #fff; }
+#exercise-links a {
+  font-family: 'Boogaloo';
+  font-size: 22px;
+  line-height: 22px; }
+#exercise-links a div {
+  padding: 15px; }
+#exercise-links a.basics {
+  background-color: #9f005d; }
+#exercise-links a.vars {
+  background-color: #c2272d; }
+#exercise-links a.ifs {
+  background-color: #1c7563; }
+#exercise-links a.loops {
+  background-color: #067195; }
+#exercise-links a.events {
+  background-color: #f36c00; }
+
+#exercise-page {
+  min-width: 870px; }
+#exercise-page #back-btn, #exercise-page #help-btn {
+  background-color: #ccc;
+  width: 40px;
+  height: 35px;
+  text-align: center;
+  float: left; }
+#exercise-page #back-btn {
+  border-radius: 0 0 40% 0;
+  float: left; }
+#exercise-page #help-btn {
+  border-radius: 0 0 40% 40%;
+  float: left;
+  margin-left: 10px; }
+#exercise-page #back-btn a, #exercise-page #help-btn a {
+  font-family: 'Boogaloo';
+  font-size: 22px;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  display: block; }
 #exercise-page #steps {
   text-align: center; }
 #exercise-page #steps ul {
@@ -6,44 +70,69 @@
   list-style-type: none;
   display: inline-block;
   width: 45px;
-  height: 45px; }
+  height: 45px;
+  position: relative; }
 #exercise-page #steps li {
-  border-radius: 40%;
-  background-color: #1c7563; }
+  border-radius: 40%; }
 #exercise-page #steps li {
   border: 4px #fff solid; }
 #exercise-page #steps li.active {
   border-color: #daaa02; }
 #exercise-page #steps li a {
-  font-family: Boogaloo;
+  font-family: 'Boogaloo';
   font-size: 22px;
   color: #fff;
   width: 100%;
   height: 100%;
   display: block; }
-#exercise-page .joyride-tip-guide p {
-  font-family: Boogaloo;
-  font-size: 18px; }
+#exercise-page #steps li .completed-star {
+  width: 20px;
+  top: -10px;
+  left: -7px;
+  position: absolute; }
+#exercise-page.exercise-basics #steps li {
+  background-color: #9f005d; }
+#exercise-page.exercise-vars #steps li {
+  background-color: #c2272d; }
+#exercise-page.exercise-ifs #steps li {
+  background-color: #1c7563; }
+#exercise-page.exercise-loops #steps li {
+  background-color: #067195; }
+#exercise-page.exercise-events #steps li {
+  background-color: #f36c00; }
 #exercise-page #exercise-area {
   position: relative;
   clear: both;
-  height: 600px; }
+  height: 657px; }
 #exercise-page #code-area, #exercise-page #output-stage, #exercise-page #mask-between, #exercise-page #blockly {
   position: absolute;
   width: 100%;
   height: 600px;
   top: 0; }
+#exercise-page #reset-code-btn {
+  position: absolute;
+  z-index: 3;
+  left: 10px;
+  bottom: 10px;
+  font-size: 11px; }
 #exercise-page #start-execution-btn, #exercise-page #end-execution-btn {
   position: absolute;
   z-index: 3;
   right: 10px;
   bottom: 10px; }
-#exercise-page #start-execution-btn a, #exercise-page #end-execution-btn a {
-  margin: 0; }
 #exercise-page #code-area {
   background-color: transparent;
   z-index: 2;
-  border: 1px solid #ccc; }
+  height: 657px; }
+#exercise-page #code-area #code-area-borders {
+  border: 1px solid #ccc;
+  height: 600px;
+  position: relative; }
+#exercise-page #code-area #code-area-actions {
+  position: absolute;
+  z-index: 3;
+  right: 10px;
+  bottom: 10px; }
 #exercise-page #code-area .blocklySvg {
   background-color: transparent;
   border: none; }
@@ -61,3 +150,19 @@
   width: 600px; }
 #exercise-page #output-stage #stage-coordinates-offset {
   padding: 40px 0px 0px 40px; }
+
+.button {
+  font-family: 'Boogaloo' !important;
+  border-radius: 1000px !important; }
+
+.button:hover {
+  text-decoration: none !important; }
+
+.button.small {
+  font-size: 18px !important; }
+
+.button.tiny {
+  font-size: 14px !important; }
+
+.custom-btn {
+  margin: 0 !important; }

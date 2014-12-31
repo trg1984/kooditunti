@@ -1,0 +1,35 @@
+{% extends "../../layouts/exercises.html" %}
+
+{% block js %}
+{% parent %}
+<script src="/js/exercises/loops.js"></script>
+<script>Exercises.currentExercise = Loops;</script>
+<script>Exercises.init();</script>
+{% endblock %}
+
+{% block steps %}
+<ul>
+  <li id="loops_level1_link"{% if level == 1 %} class="active"{% endif %}><a href="/harjoitukset/loops/1">1</a></li>
+  <li id="loops_level2_link"{% if level == 2 %} class="active"{% endif %}><a href="/harjoitukset/loops/2">2</a></li>
+  <li id="loops_level3_link"{% if level == 3 %} class="active"{% endif %}><a href="/harjoitukset/loops/3">3</a></li>
+</ul>
+{% endblock %}
+
+{% block exercise_tips %}
+{% if level == 1 %}
+<ol class="joyride-list" data-joyride>
+  <li data-button="Aloita" class="wide hide-modal-next" data-options="prev_button: false; modal: true">
+    <h2>Yksinkertainen labyrintti</h2>
+    <p>Tehtävänäsi on ohjata pallo maaliin ohjelmakoodiin syötettävien komentojen avulla.</p>
+  </li>
+</ol>
+{% endif %}
+{% if level == 2 %}
+<ol class="joyride-list" data-joyride>
+  <li data-button="Aloita" class="wide hide-modal-next" data-options="prev_button: false; modal: true">
+    <h2>Toistolauseet</h2>
+    <p>Tehtävä on sama kuin viime tasolla, mutta nyt pystyt käyttämään toistolausetta jotta jokaista askelta ei tarvitse lisätä erikseen.</p>
+  </li>
+</ol>
+{% endif %}
+{% endblock %}

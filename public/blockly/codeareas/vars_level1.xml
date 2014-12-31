@@ -1,1 +1,14 @@
-<xml><block type="variables_set" id="7" inline="true" x="265" y="140"><field name="VAR">pallon_halkaisija</field><value name="VALUE"><block type="math_number" id="8"><field name="NUM">10</field></block></value></block><block type="circle_element" id="4" inline="false" x="168" y="258"><value name="name"><block type="text" id="5"><field name="TEXT">pallo</field></block></value><value name="radius"><block type="variables_get" id="6"><field name="VAR">pallon_halkaisija</field></block></value></block></xml>
+<xml>
+  <block type="circle_element" id="6" inline="false" x="168" y="258">
+    <value name="name">
+      <block type="text" id="7">
+        <field name="TEXT">pallo</field>
+      </block>
+    </value>
+    <value name="radius">
+      <block type="variables_get" id="8">
+        <field name="VAR">pallon_halkaisija</field>
+      </block>
+    </value>
+  </block>
+</xml>

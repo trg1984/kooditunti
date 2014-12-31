@@ -1,15 +1,15 @@
 exports.index = (req, res) ->
   res.render "exercises/index",
     title: "Harjoitukset",
-    section: "exercise-page"
+    section: "exercise-links-page"
     subsection: ""
 
-exports.maze = (req, res) ->
-  res.render "exercises/maze/index",
+exports.loops = (req, res) ->
+  res.render "exercises/loops/index",
     title: "Labyrintti"
     section: "exercise-page"
-    subsection: "exercise-maze"
-    exerciseName: "maze"
+    subsection: "exercise-loops"
+    exerciseName: "loops"
     level: req.params.level
 
 exports.vars = (req, res) ->

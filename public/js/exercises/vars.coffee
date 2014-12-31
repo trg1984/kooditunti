@@ -1,6 +1,5 @@
-# requires Stage
 @Vars =
-  walkerOnGoal: false
+  levelCount: 3
 
   init: (level) ->
     @level = level
@@ -9,12 +8,17 @@
   levelSetup: ->
     switch @level
       when 1
+        Exercises.automaticallyEndExecution = false
         Stage.setGravity('earth');
         Exercises.preloadBlocklyBlocks = true
       when 2
+        Exercises.automaticallyEndExecution = false
         Stage.setGravity('earth');
+        Exercises.manualEvaluation = true
         Exercises.preloadBlocklyBlocks = true
       when 3
+        Exercises.automaticallyEndExecution = false
+        Exercises.manualEvaluation = true
         Stage.setGravity('earth');
 
     if route?
@@ -28,9 +32,8 @@
   evaluate: ->
     switch @level
       when 1
-        return true if @walkerOnGoal
-        # some complex logic on the grid to check whether or not we are
-        # done
+        stageHasBall = Stage.world.getBodies().length is 1
+        return true if stageHasBall
       when 2 then
       when 3 then
       when 4 then
@@ -63,12 +66,13 @@
 
   interpreterApi: (interpreter, scope) ->
     wrapper = (name,size) ->
-      if typeof size.data isnt "undefined"
+      if typeof size.data isnt "undefined" and size.data isnt 0
         Vars.createBall(name.data,size.data)
       else
         msg = 'En tiedä pallon halkaisijaa. Olethan asettanut sille jonkin arvon?'
         modalPos = JediMaster.calculatePositionByBlock(Exercises.activeBlock)
         JediMaster.pointModalWithGuidance(msg, modalPos)
+        Exercises.endExecution("nodialog")
     interpreter.setProperty scope, "createBall", interpreter.createNativeFunction(wrapper)
 
     wrapper = (text) ->

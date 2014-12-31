@@ -1,7 +1,33 @@
+$font: 'Boogaloo';
+
+.joyride-content-wrapper { overflow: hidden; }
+.joyride-close-tip-custom { position: absolute; right: 12px; top: 10px; color: #777 !important; text-decoration: none; font-size: 24px; font-weight: normal; line-height: .5 !important; }
 .joyride-tip-guide.wide { width: 500px; }
-.tip-placement {
-  position: fixed;
+
+.joyride-tip-guide {
+  h1,h2,p { font-family: $font; margin-bottom: 0.6rem;  }
+  p { font-size: 18px; }
+  .button { margin-top: 10px; float: right; }
+  &.success-dialog {
+    .button { float: none; }
+  }
+}
+
+.exercise-tip-placement {
+  display: none;
+  position: absolute;
   z-index: 1000;
   width: 250px;
   height: 40px;
+}
+
+#evaluation-selects { display: none; }
+
+.evaluation-dialog {
+  .joyride-content-wrapper { text-align: left; }
+  .evaluation-row { margin-top: 10px; }
+  .evaluation-row span { color: #666; }
+  .evaluation-row select { display: none; }
+  .evaluation-row.active span { color: #fff; }
+  .evaluation-row.active select { display: block; }
 }
