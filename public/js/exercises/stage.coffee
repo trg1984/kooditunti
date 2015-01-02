@@ -201,7 +201,7 @@
   settableElementsDropdownValues: ->
     Stage.getSettableElements()
     dropdownValues = $.map(Stage.settableElements, ((n) -> [[n, n]]) )
-    dropdownValues = [["x", "x"]] if dropdownValues.length is 0
+    dropdownValues = [["[valitse]", "x"]] if dropdownValues.length is 0
     dropdownValues
 
   findClickTarget: (canvas, event, name) ->

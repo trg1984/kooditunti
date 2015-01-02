@@ -65,14 +65,16 @@ $font: 'Boogaloo';
     #code-area-borders { border: 1px solid #ccc; height: $common-height; position: relative; }
     #code-area-actions { position: absolute; z-index: 3; right: 10px; bottom: 10px; }
     .blocklySvg { background-color: transparent; border: none; }
-    .blocklyToolboxDiv { height: $common-height - 2 !important; }
+    .blocklyToolboxDiv { min-width: 130px; height: $common-height - 150 !important; } /* make room for trashcan... */
     .blocklyScrollbarBackground, .blocklyScrollbarKnob { display: none; }
+    #toolbox-filler { height: 150px; position: absolute; background-color: #ddd; z-index: -1; }
   }
   #mask-between { opacity: 0.8; background-color: #fff; z-index: 1; }
   #output-stage {
     & { z-index: 0; right: 0; width: 600px; }
     #stage-coordinates-offset { padding: 40px 0px 0px 40px; } // same as Stage.coords...Size
   }
+  .task-overview { display: none; }
 }
 
 .button { font-family: $font !important; border-radius: 1000px !important; }

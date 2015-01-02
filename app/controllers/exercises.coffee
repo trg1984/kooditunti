@@ -4,6 +4,14 @@ exports.index = (req, res) ->
     section: "exercise-links-page"
     subsection: ""
 
+exports.basics = (req, res) ->
+  res.render "exercises/basics/index",
+    title: "Ohjeistus"
+    section: "exercise-page"
+    subsection: "exercise-basics"
+    exerciseName: "basics"
+    level: req.params.level
+
 exports.loops = (req, res) ->
   res.render "exercises/loops/index",
     title: "Labyrintti"

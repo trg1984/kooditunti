@@ -11,6 +11,9 @@ module.exports = (app, passport) ->
   # exercises
   app.get "/harjoitukset", exercises.index
 
+  app.get "/harjoitukset/basics/:level", exercises.basics
+  app.redirect "/harjoitukset/basics", "/harjoitukset/basics/1";
+
   app.get "/harjoitukset/loops/:level", exercises.loops
   app.redirect "/harjoitukset/loops", "/harjoitukset/loops/1";
 

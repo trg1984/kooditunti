@@ -53,7 +53,8 @@
         expose        : '<div class="joyride-expose-wrapper"></div>',
         expose_cover  : '<div class="joyride-expose-cover"></div>'
       },
-      expose_add_class : '' // One or more space-separated class names to be added to exposed element
+      expose_add_class : '', // One or more space-separated class names to be added to exposed element
+      default_prev_button_text : 'Previous'
     },
 
     init : function (scope, method, options) {
@@ -252,7 +253,7 @@
 
     prev_button_text : function (txt, idx) {
       if (this.settings.tip_settings.prev_button) {
-        txt = $.trim(txt) || 'Previous';
+        txt = $.trim(txt) || this.settings.default_prev_button_text;
 
         // Add the disabled class to the button if it's the first element
         if (idx == 0)
@@ -611,7 +612,7 @@
       this.center();
       $nub.hide();
 
-      this.show_modal();
+      if(this.settings.modal) this.show_modal();
     },
 
     show_modal : function () {

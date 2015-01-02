@@ -38,7 +38,11 @@
       then $(".overlay-resize").css width: 750
       else $(".overlay-resize").css width: windowWidth - 650
       $("#help-btn a").click ->
-        JediMaster.startTour()
+        if $("#exercise-help:visible").length is 0
+        then JediMaster.exerciseHelpPopoverShow(@)
+        else JediMaster.exerciseHelpPopoverHide(@)
+      #$("#help-btn a").mouseout ->
+        #setTimeout (-> JediMaster.exerciseHelpPopoverHide(@)), 500
       $("#reset-code-btn a").click ->
         Exercises.resetCodeArea()
       $("#start-execution-btn a").click ->
@@ -74,7 +78,7 @@
       toolbox: blocklyToolboxElem
       scrollbars: true
       sounds: false
-      trashcan: false
+      trashcan: true
 
     url = window.location.href.split("#")[0]
     # needs logic for reseting the default blocks
@@ -88,6 +92,11 @@
     else
       @preloadBlocks() if @preloadBlocklyBlocks
     BlocklyStorage.backupOnUnload()
+
+    btb = $(".blocklyToolboxDiv")
+    tbf = $("<div id='toolbox-filler' />")
+    tbf.css("top",btb.height()).css("width",btb.width())
+    $("#blockly").append(tbf)
 
   preloadBlocks: ->
     $.get("/blockly/codeareas/"+@currentID+".xml", (response) ->
@@ -151,12 +160,13 @@
           return if Exercises.completedLevel and not Exercises.automaticallyEndExecution
           if Exercises.currentExercise.evaluate()
             JediMaster.successDialog()
-            Exercises.endExecution("nodialog")
+            $(".joyride-close-tip").one 'click', ->
+              Exercises.endExecution("nodialog")
             Exercises.markCompleted()
           else
             if Exercises.automaticallyEndExecution
               Exercises.endExecution()
-        , 500
+        , 1000
         # the execution state should be emphasized, since we won't
         # stop it automatically anymore
         #setTimeout (-> Exercises.endExecution()), 500
@@ -183,6 +193,11 @@
     wrapper = (id) ->
       console.log(id)
     interpreter.setProperty scope, "notify", interpreter.createNativeFunction(wrapper)
+
+    wrapper = (text) ->
+      #console.log text
+      Api.createText(text.data)
+    interpreter.setProperty scope, "createText", interpreter.createNativeFunction(wrapper)
 
     wrapper = (id) ->
       id = (if id then id.toString() else "")

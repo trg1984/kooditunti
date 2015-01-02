@@ -1,0 +1,106 @@
+{% extends "../../layouts/exercises.html" %}
+
+{% block js %}
+{% parent %}
+<script src="/js/exercises/basics.js"></script>
+<script>Exercises.currentExercise = Basics;</script>
+<script>Exercises.init();</script>
+{% endblock %}
+
+{% block steps %}
+<ul>
+  <li id="basics_level1_link"{% if level == 1 %} class="active"{% endif %}><a href="/harjoitukset/basics/1">1</a></li>
+  <li id="basics_level2_link"{% if level == 2 %} class="active"{% endif %}><a href="/harjoitukset/basics/2">2</a></li>
+</ul>
+{% endblock %}
+
+{% block full_page_tips %}
+{% if level == 1 %}
+<div class="task-overview">
+  <h2>Tehtävä</h2>
+  <p>Toteuta ensimmäinen ohjelmasi piirtämällä tekstiä kentälle.</p>
+</div>
+<div id="tip-navi" class="exercise-tip-placement" style="top:20px;left:10px;"></div>
+<div id="tip-levels" class="exercise-tip-placement" style="top:70px;left:45%;"></div>
+<div id="tip-blocks" class="exercise-tip-placement" style="top:130px;left:0px;"></div>
+<ol class="joyride-list" data-joyride>
+  <li data-button="Aloita" class="wide hide-modal-next" data-options="prev_button: false">
+    <h2>Kooditunti.fi perusteet</h2>
+    <p>Tässä harjoituksessa tutustutaan siihen miten Kooditunti-sivusto toimii.</p>
+  </li>
+  <li data-id="tip-navi" data-button="Seuraava" data-options="tip_location: top; prev_button: true">
+    <p>Nuolesta pääset navigoimaan takaisin harjoitusvalikkoon.</p>
+    <p>Kysymysmerkkiä klikkaamalla näet mikä oli tehtävä ja pystyt myös näyttämään tämän ohjeistuksen uudelleen.</p>
+  </li>
+  <li data-id="tip-levels" data-button="Seuraava" data-options="tip_location: top; prev_button: true">
+    <p>Näitä numeroita klikkaamalla pystyt vaihtamaan tasoa.</p>
+    <p>Valittu taso erottuu joukosta, ja jos olet päässyt tason läpi, ilmestyy sen kylkeen tähti.</p>
+  </li>
+  <li data-id="code-area" data-button="Seuraava" data-options="tip_location: right; prev_button: true">
+    <p>Sivun tärkeimpiä elementtejä ovat vasemman puolen koodialue...</p>
+  </li>
+  <li data-id="output-stage" data-button="Seuraava" data-options="tip_location: left; prev_button: true">
+    <p>...ja oikealla puolella oleva kenttä.</p>
+    <p>Koodialueelle syötetty koodi suoritetaan kentällä.</p>
+  </li>
+  <li data-id="tip-blocks" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true">
+    <p>Tästä löydät käytettävissä olevat koodipalikat.</p>
+    <p>Palikat vaihtuvat tason mukaan, ja uusista palikoista annetaan tarvittaessa ohjeistusta.</p>
+  </li>
+  <li data-id="tip-blocks" class="wide pause-after" data-button="OK!" data-options="tip_location: right; prev_button: true; modal: true;">
+    <p>Palikat toimivat kuin palapelin palat ja yhdistyvät toisiinsa.</p>
+    <p>Kokeile palikoiden siirtämistä koodialueelle ja niiden yhdistämistä toisiinsa. Palikat siirtyvät hiirellä raahamalla.</p>
+  </li>
+  <li data-button="Seuraava" class="wide" data-options="prev_button: true; modal: false;">
+    <p>Loistavaa, sait ensimmäisen ohjelmasi valmiiksi!</p>
+  </li>
+  <li data-id="start-execution-btn" class="wide" data-options="tip_location: top; next_button: false; prev_button: true; modal: false;">
+    <p>Tästä klikkaamalla pystyt testaamaan miten ohjelmasi toimii. Kokeile sitä seuraavaksi.</p>
+  </li>
+</ol>
+{% endif %}
+{% if level == 2 %}
+<div class="task-overview">
+  <h2>Tehtävä</h2>
+  <p>Yritä piirtää kentälle jonkin laskutoimituksen tulos (esim 1 + 1).</p>
+</div>
+<div id="tip-categories" class="exercise-tip-placement" style="top:130px;left:0px;width:165px;"></div>
+<div id="tip-categories-open" class="exercise-tip-placement" style="top:115px;left:55px;"></div>
+<div id="tip-arith" class="exercise-tip-placement" style="top:165px;left:55px;"></div>
+<div id="tip-trash" class="exercise-tip-placement" style="top:605px;left:0px;width:110px;"></div>
+<div id="tip-reset" class="exercise-tip-placement" style="top:660px;left:0px;width:150px;"></div>
+<div id="tip-evaluate" class="exercise-tip-placement" style="top:707px;left:640px;"></div>
+<ol class="joyride-list" data-joyride>
+  <li data-button="Seuraava" class="wide hide-modal-next" data-options="prev_button: false;">
+    <h2>Lisävinkkejä</h2>
+    <p>Nyt osaat perusteet. Käydään vielä pikaisesti läpi muutama juttu joihin saatat matkan varrella törmätä.</p>
+  </li>
+  <li data-id="tip-categories" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true;">
+    <div class="after-step-method" style="display:none" data-after-step="Basics.openLastCategory()"></div>
+    <p>Joissain tehtävissä palikoita on sen verran paljon, että ne on jaettu kategorioihin. Kategorian nimeä klikkaamalla näet sen alla olevat palikat.</p>
+  </li>
+  <li data-id="tip-categories-open" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true;">
+    <p><strong>Uusi palikka:</strong> tällä pystyy määrittelemään lukuja.</p>
+  </li>
+  <li data-id="tip-arith" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true;">
+    <p><strong>Uusi palikka:</strong> tämä pystyy suorittamaan laskutoimituksia kun siihen yhdistää kaksi lukupalikkaa (yllä).</p>
+  </li>
+  <li data-id="tip-trash" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true;">
+    <p>Jos haluat joistain palikoista eroon, raahaa ne roskakoriin.</p>
+  </li>
+  <li data-id="tip-reset" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true;">
+    <p>Tästä linkistä pystyt poistamaan kaikki lisäämäsi palikat nopeasti.</p>
+  </li>
+  <li data-button="OK!" class="wide pause-after" data-options="tip_location: right; prev_button: true;">
+    <p><strong>Tehtävä:</strong> Yritä piirtää kentälle jonkin laskutoimituksen tulos <br />(esim 1 + 1).</p>
+  </li>
+  <li data-id="tip-evaluate" class="wide" data-options="tip_location: left; next_button: false; prev_button: true;">
+    <p>Joissain tehtävissä voi olla vaikea automaattisesti määritellä onko tehtävä suoritettu. Näissä tapauksissa pystyt itse arvoimaan suorituksen tästä klikkaamalla.</p>
+  </li>
+</ol>
+<div id="evaluation-selects">
+  <div>Sain piirrettyä kentälle tekstiä</div>
+  <div>Teksti oli vastaus johonkin laskutoimitukseen</div>
+</div>
+{% endif %}
+{% endblock %}

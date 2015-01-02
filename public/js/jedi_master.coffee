@@ -1,26 +1,78 @@
-# leverages HopScotch (or Intro.js) or joyride
 @JediMaster =
+  onTour: false
   initDone: false
   init: ->
     initDone = true
     $(document).foundation joyride:
+      modal: false
+      default_prev_button_text: 'palaa edelliseen'
+      pre_step_callback: (i, step) ->
+        # show modal on first step
+        if i is 0
+          Foundation.libs.joyride.show_modal()
+          $(".joyride-modal-bg").show()
+        else
+          $(".joyride-modal-bg").hide()
+
+        # keep previous button working even if we have a pause defined
+        step.find('.joyride-prev-tip').click ->
+          JediMaster.tourGoingBack = true
+          setTimeout (-> JediMaster.tourGoingBack = false), 100
       post_step_callback: (i, step) ->
-        JediMaster.hideModal step
-        return
+        $(".joyride-modal-bg").hide() if step.hasClass('hide-modal-next')
+        unless JediMaster.tourGoingBack
+          JediMaster.pauseTour() if step.hasClass('pause-after')
+          if step.find('.after-step-method').length == 1
+            eval(step.find('.after-step-method').data('after-step'))
       post_ride_callback: ->
         $(".exercise-tip-placement").hide()
+        JediMaster.onTour = false
+      template:
+        prev_button : '<a href="#" class="action joyride-prev-tip"></a>'
 
+  tourGoingBack: false
   startTour: ->
     @init() unless @initDone
+    JediMaster.onTour = true
+    JediMaster.disableLinks()
     $(".exercise-tip-placement").show()
-    $(document).foundation('joyride', 'start');
+    unless Foundation.libs.joyride.settings.paused
+      $(document).foundation('joyride', 'start');
+      $('.joyride-close-tip').mouseup (-> JediMaster.onTour = false)
+    else
+      JediMaster.resumeTour()
+
+  pauseTour: ->
+    Foundation.libs.joyride.settings.paused = true
+    $(".joyride-tip-guide:visible").removeClass("pause-after")
+    $(".exercise-tip-placement").hide()
+
+  resumeTour: (cb) ->
+    $(".exercise-tip-placement").show()
+    Foundation.libs.joyride.settings.paused = false
+    Foundation.libs.joyride.go_next()
+    $(".joyride-modal-bg").hide()
+    cb()
+
+  closeModalDialog: ->
+    $("#guide-modal").remove()
+    $(".joyride-modal-bg").remove()
+
+  linksDisabled: false
+  disableLinks: ->
+    return if JediMaster.linksDisabled
+    JediMaster.linksDisabled = true
+    $("a").not('.joyride-next-tip, .joyride-prev-tip, .joyride-close-tip').click (e) ->
+      if JediMaster.onTour
+        e.preventDefault()
+        $(".joyride-next-tip").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
 
   pointModalWithGuidance: (msg,pos) ->
     #$(document).foundation('joyride', 'start');
     jrtg = '<div id="guide-modal" class="joyride-tip-guide"'
     jrtg+= 'data-index="0" style="visibility: visible; display: block;'
     jrtg+= 'top: '+pos[1]+'px; left: '+pos[0]+'px;">'
-    jrtg+= '<span class="joyride-nub left"></span><div class="joyride-content-wrapper">'
+    jrtg+= '<span class="joyride-nub left"></span><div class="joyride-content-wrapper normal-padding">'
     jrtg+= '<p>'+msg+'</p>'
     jrtg+= '<a href="#" class="small button joyride-next-tip-custom close-btn">Sulje</a><a href="#close" class="joyride-close-tip close-btn">×</a></div></div>'
     $('body').append(jrtg)
@@ -40,13 +92,12 @@
     gm.css("left",($(window).width()/2)-(gm.width()/2))
     gm.css("top",($(window).height()/2)-(gm.height()/2))
     $("#guide-modal .close-btn").click ->
-      $("#guide-modal").remove()
-      $(".joyride-modal-bg").remove()
+      JediMaster.endTour()
       cb()
 
   successDialog: ->
     jrtg = '<div id="guide-modal" class="success-dialog joyride-tip-guide" data-index="0" style="visibility: visible; display: block; width: 375px;">'
-    jrtg+= '<div class="joyride-content-wrapper" style="text-align: center;">'
+    jrtg+= '<div class="joyride-content-wrapper normal-padding" style="text-align: center;">'
     jrtg+= '<div style="width: 165px;overflow: hidden; margin: 0px auto;">'
     jrtg+= '<div class="animated tada" style="width:30%;float:left;margin-top:15px;"><img src="http://www.webweaver.nu/clipart/img/nature/planets/3d-yellow-star.png"></div>'
     jrtg+= '<div class="animated tada" style="width:40%;float:left;"><img src="http://www.webweaver.nu/clipart/img/nature/planets/3d-yellow-star.png"></div>'
@@ -71,7 +122,7 @@
 
   evaluateDialog: ->
     jrtg = '<div id="guide-modal" class="joyride-tip-guide evaluation-dialog" data-index="0" style="visibility: visible; display: block; width: 375px;">'
-    jrtg+= '<div class="joyride-content-wrapper">'
+    jrtg+= '<div class="joyride-content-wrapper normal-padding">'
     jrtg+= '<div class="evaluation-selects-wrapper"></div>'
     jrtg+= '<a href="#close" class="joyride-close-tip-custom close-btn">×</a></div></div>'
     jrtg+= '<div class="joyride-modal-bg" style="display: block;"></div>'
@@ -98,7 +149,7 @@
     changeAction = (e) ->
       isComplete = checkForCompletion()
       isNo = e.value is "no"
-      JediMaster.closeDialog() if isNo or isComplete
+      JediMaster.closeModalDialog() if isNo or isComplete
       if isComplete
         JediMaster.successDialog()
         Exercises.markCompleted()
@@ -111,20 +162,44 @@
     gm.css("left",($(window).width()/2)-(gm.width()/2))
     gm.css("top",($(window).height()/2)-(gm.height()/2))
     $("#guide-modal .close-btn").click ->
-      JediMaster.closeDialog()
+      JediMaster.closeModalDialog()
 
-  closeDialog: ->
-    $("#guide-modal").remove()
-    $(".joyride-modal-bg").remove()
+  exerciseHelpPopoverShow: (trigger,content) ->
+    return if JediMaster.onTour
+    $("#exercise-help").show()
+    return if $("#exercise-help").length isnt 0
+    trigger = $(trigger)
+    pos = trigger.position()
+    left = pos.left - 10
+    top = pos.top + trigger.height() + 20
+    jrtg = '<div id="exercise-help" class="joyride-tip-guide wide" style="display: block; top: '+top+'px; left: '+left+'px;">'
+    jrtg+= '  <span class="joyride-nub top"></span>'
+    jrtg+= '  <div class="joyride-content-wrapper normal-padding">'
+    jrtg+= $(".task-overview").html()
+    jrtg+= '<a class="action restart-joyride">näytä koko ohjeistus uudelleen</a>'
+    jrtg+= '  </div>'
+    jrtg+= '</div>'
+    $('body').append(jrtg)
+    $("#exercise-help .restart-joyride").click ->
+      $("#exercise-help").remove()
+      JediMaster.startTour()
+    #$("#exercise-help").mouseover ->
+      #console.log "mouseover"
+      #JediMaster.exerciseHelpPopoverAllowHide = false
+      #setTimeout (-> JediMaster.exerciseHelpPopoverAllowHide = true), 1000
+    #$("#exercise-help").mouseout ->
+      #console.log "mouseout"
+      #setTimeout (-> JediMaster.exerciseHelpPopoverHide(@)), 500
+
+  #exerciseHelpPopoverAllowHide: true
+  exerciseHelpPopoverHide: (trigger,content) ->
+    $("#exercise-help").hide()# if JediMaster.exerciseHelpPopoverAllowHide
 
   calculatePositionByBlock: (block) ->
     blockBB = block.svg_.svgGroup_.getBoundingClientRect()
     modalX = blockBB.left + blockBB.width + 20
     modalY = blockBB.top
     return [modalX, modalY]
-
-  hideModal: (step) ->
-    $(".joyride-modal-bg").hide() if step.hasClass('hide-modal-next')
 
     #de = $("<div id='"+id+"' class='dummy' />")
     #de.css('width',100)

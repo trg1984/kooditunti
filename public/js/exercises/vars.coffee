@@ -20,6 +20,9 @@
         Exercises.automaticallyEndExecution = false
         Exercises.manualEvaluation = true
         Stage.setGravity('earth');
+        @openFirstCategory = ->
+          e = Blockly.Toolbox.tree_.firstChild_
+          e.onMouseDown() unless e.isSelected()
 
     if route?
       for x in [1..Stage.horizontalBlocks]
@@ -40,11 +43,6 @@
 
   createBall: (name,radius) ->
     Stage.createElement(name,[7,7],{type: 'circle', radius: radius, settable: true})
-
-  textElement: {}
-  createText: (text) ->
-    Stage.textElements[0] = { text: text, alive: true }
-    #Stage.drawText(@textElement)
 
   onClick: (elem, callback, intrp, scope) ->
     $('#viewport').on 'click', (event) ->
@@ -77,7 +75,7 @@
 
     wrapper = (text) ->
       if typeof text.data isnt "undefined"
-        Vars.createText(text.data)
+        Api.createText(text.data)
       else
         msg = 'En tiedä pallon halkaisijaa. Olethan asettanut sille jonkin arvon?'
         modalPos = JediMaster.calculatePositionByBlock(Exercises.activeBlock)
