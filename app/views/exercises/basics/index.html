@@ -11,6 +11,7 @@
 <ul>
   <li id="basics_level1_link"{% if level == 1 %} class="active"{% endif %}><a href="/harjoitukset/basics/1">1</a></li>
   <li id="basics_level2_link"{% if level == 2 %} class="active"{% endif %}><a href="/harjoitukset/basics/2">2</a></li>
+  <li id="basics_level3_link"{% if level == 3 %} class="active"{% endif %}><a href="/harjoitukset/basics/3">3</a></li>
 </ul>
 {% endblock %}
 
@@ -62,19 +63,55 @@
 {% if level == 2 %}
 <div class="task-overview">
   <h2>Tehtävä</h2>
+  <p>Toteuta ensimmäinen ohjelmasi piirtämällä tekstiä kentälle.</p>
+</div>
+<div id="tip-code" class="exercise-tip-placement" style="top:223px;left:400px;"></div>
+<div id="tip-statement" class="exercise-tip-placement" style="top:273px;left:350px;"></div>
+<div id="tip-lonely-block" class="exercise-tip-placement" style="top:355px;left:400px;"></div>
+<ol class="joyride-list" data-joyride>
+  <li data-button="Aloita" class="wide" data-options="prev_button: false">
+    <h2>Ohjelmoinnin perusteita</h2>
+    <p>Käydään pikaisesti läpi sitä miten näiden palikoiden kanssa ohjelmointi toimii.</p>
+  </li>
+  <li data-id="tip-code" data-button="Seuraava" data-options="tip_location: right; prev_button: true">
+    <p>Ohjelmakoodia suoritetaan ylhäältä alas.</p>
+    <p>Jotkin palikat kiinnittyvät toisiinsa myös ylä ja alapuolelta.</p>
+  </li>
+  <li data-id="tip-statement" data-button="Seuraava" data-options="tip_location: right; prev_button: true">
+    <p>Tämänkaltaisissa palikoissa koodia lisätään palikan sisään.</p>
+    <p>Tässä tapauksessa luodaan siis kolme palloa (palikan sisällä oleva koodi suoritetaan kolme kertaa).</p>
+  </li>
+  <li data-id="tip-lonely-block" data-button="Seuraava" data-options="tip_location: right; prev_button: true">
+    <p>Huomaa palikoiden erot: Toiset palikat ottavat muita palikoita vastaan, ja toiset vain kiinnittyvät muihin.</p>
+    <p>Esimerkiksi tämä tekstipalikka ei tee mitään ilman että se on kiinnitettynä johonkin toiseen palikkaan.</p>
+  </li>
+  <li class="wide" data-button="Seuraava" data-options="tip_location: right; prev_button: true">
+    <p>Muista että voit ohjelmoidessasi missä tahansa vaiheessa testata ohjelmasi toimintaa.</p>
+    <p>Vaikeammissa tehtävissä on siis helpompi yrittää pilkkoa ongelmia pienempiin osiin ja ratkaista
+    ne yksi kerrallaan, sen sijaan että yrittäisi saada koko tehtävää ratkeamaan kerralla.</p>
+    <div class="after-step-method" style="display:none" data-after-step="Basics.endOnLastSlide()"></div>
+  </li>
+  <li class="wide" data-button="OK!" data-options="tip_location: right; prev_button: true">
+    <p>Klikkaa nyt vain "Suorita koodi" -nappia niin pääset seuraavalle tasolle.</p>
+  </li>
+</ol>
+{% endif %}
+{% if level == 3 %}
+<div class="task-overview">
+  <h2>Tehtävä</h2>
   <p>Yritä piirtää kentälle jonkin laskutoimituksen tulos (esim 1 + 1).</p>
 </div>
 <div id="tip-categories" class="exercise-tip-placement" style="top:130px;left:0px;width:165px;"></div>
 <div id="tip-categories-open" class="exercise-tip-placement" style="top:115px;left:55px;"></div>
 <div id="tip-arith" class="exercise-tip-placement" style="top:165px;left:55px;"></div>
-<div id="tip-last" class="exercise-tip-placement" style="top:115px;left:95px;"></div>
+<div id="tip-text" class="exercise-tip-placement" style="top:115px;left:55px;"></div>
 <div id="tip-trash" class="exercise-tip-placement" style="top:605px;left:0px;width:110px;"></div>
 <div id="tip-reset" class="exercise-tip-placement" style="top:660px;left:0px;width:150px;"></div>
 <div id="tip-evaluate" class="exercise-tip-placement" style="top:707px;left:640px;"></div>
 <ol class="joyride-list" data-joyride>
   <li data-button="Seuraava" class="wide hide-modal-next" data-options="prev_button: false;">
     <h2>Lisävinkkejä</h2>
-    <p>Nyt osaat perusteet. Käydään vielä pikaisesti läpi muutama juttu joihin saatat matkan varrella törmätä.</p>
+    <p>Nyt osaat perusteet. Käydään vielä pikaisesti läpi muutama juttu jotka helpottavat sinua matkan varrella.</p>
   </li>
   <li data-id="tip-categories" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true;">
     <div class="after-step-method" style="display:none" data-after-step="Exercises.openLastCategory()"></div>
@@ -87,8 +124,8 @@
     <p><strong>Uusi palikka:</strong> tämä pystyy suorittamaan laskutoimituksia kun siihen yhdistää kaksi lukupalikkaa (yllä).</p>
     <div class="after-step-method" style="display:none" data-after-step="Exercises.openFirstCategory()"></div>
   </li>
-  <li data-id="tip-last" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true;">
-    <p>Viime kentässä käytetyt palikat löytyvät täältä. "Piirrä teksti" -palikkaa pystyy käyttämään myös lukujen tulostamiseen.</p>
+  <li data-id="tip-text" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true;">
+    <p>"Piirrä teksti" -palikkaa pystyy käyttämään myös lukujen tulostamiseen.</p>
   </li>
   <li data-id="tip-trash" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true;">
     <p>Jos haluat joistain palikoista eroon, raahaa ne roskakoriin.</p>

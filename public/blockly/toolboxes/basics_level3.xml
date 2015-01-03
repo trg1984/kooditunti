@@ -1,0 +1,15 @@
+<xml id="toolbox" style="display: none">
+  <category name="Elementit">
+    <block type="text_element"></block>
+    <block type="circle_element_simple"></block>
+    <!--<block type="text">-->
+      <!--<field name="TEXT">Hei maailma!</field>-->
+    <!--</block>-->
+  </category>
+  <category name="Luvut">
+    <block type="math_number">
+      <field name="NUM">50</field>
+    </block>
+    <block type="math_arithmetic"></block>
+  </category>
+</xml>

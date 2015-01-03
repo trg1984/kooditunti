@@ -3,6 +3,7 @@
   currentLevel: null
   currentName: null
   currentID: null
+  hasSolution: false
   isLastLevel: false
   manualEvaluation: false
   isExecuting: false

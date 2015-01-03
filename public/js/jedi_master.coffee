@@ -27,6 +27,9 @@
       post_ride_callback: ->
         $(".exercise-tip-placement").hide()
         JediMaster.onTour = false
+      close_callback: ->
+        $(".exercise-tip-placement").hide()
+        JediMaster.onTour = false
       template:
         prev_button : '<a href="#" class="action joyride-prev-tip"></a>'
 
@@ -81,10 +84,9 @@
 
   retryDialog: (cb) ->
     jrtg = '<div id="guide-modal" class="joyride-tip-guide" data-index="0" style="visibility: visible; display: block; width: 375px;">'
-    jrtg+= '<div class="joyride-content-wrapper" style="text-align: center;">'
-    jrtg+= '<div style="width: 165px;overflow: hidden; margin: 0px auto;">'
-    jrtg+= '</div><p style="font-size:25px;">Harmi, tehtävä ei mennyt läpi.</p>'
-    jrtg+= '<a href="#" style="margin-right:5px" class="small button joyride-next-tip close-btn">Jatka yrittämistä</a>'
+    jrtg+= '<div class="joyride-content-wrapper normal-padding" style="text-align: center;">'
+    jrtg+= '<p style="font-size:25px;">Harmi, tehtävä ei mennyt läpi.</p>'
+    jrtg+= '<a href="#" class="small button close-btn">Jatka yrittämistä</a>'
     jrtg+= '<a href="#close" class="joyride-close-tip-custom close-btn">×</a></div></div>'
     jrtg+= '<div class="joyride-modal-bg" style="display: block;"></div>'
     $('body').append(jrtg)
@@ -92,8 +94,26 @@
     gm.css("left",($(window).width()/2)-(gm.width()/2))
     gm.css("top",($(window).height()/2)-(gm.height()/2))
     $("#guide-modal .close-btn").click ->
-      JediMaster.endTour()
+      JediMaster.closeModalDialog()
       cb()
+
+  solutionViewer: () ->
+    jrtg = '<div id="guide-modal" class="joyride-tip-guide" data-index="0" style="visibility: visible; display: block; width: 475px;">'
+    jrtg+= '<div class="joyride-content-wrapper normal-padding" style="text-align: center;">'
+    jrtg+= '<img id="solution-image" src="/blockly/solutions/'+Exercises.currentID+'.png" />'
+    jrtg+= '<a href="#" class="small button close-btn">Sulje</a>'
+    jrtg+= '<a href="#close" class="joyride-close-tip-custom close-btn">×</a></div></div>'
+    jrtg+= '<div class="joyride-modal-bg" style="display: block;"></div>'
+    $('body').append(jrtg)
+    gm = $("#guide-modal")
+    gm.css("left",($(window).width()/2)-(gm.width()/2))
+    gm.find("#solution-image").one("load", ->
+      # vertical center when image loaded
+      gm.css("top",($(window).height()/2)-(gm.height()/2))
+    ).each (-> $(@).load() if @complete)
+
+    $("#guide-modal .close-btn").click ->
+      JediMaster.closeModalDialog()
 
   successDialog: ->
     jrtg = '<div id="guide-modal" class="success-dialog joyride-tip-guide" data-index="0" style="visibility: visible; display: block; width: 375px;">'
@@ -176,13 +196,18 @@
     jrtg+= '  <span class="joyride-nub top"></span>'
     jrtg+= '  <div class="joyride-content-wrapper normal-padding">'
     jrtg+= $(".task-overview").html()
-    jrtg+= '<a class="action restart-joyride">näytä koko ohjeistus uudelleen</a>'
+    jrtg+= '<a class="action restart-joyride right">näytä koko ohjeistus uudelleen</a>'
+    jrtg+= '<a class="action solution-viewer right">vilkaise ratkaisua</a>' if Exercises.hasSolution
     jrtg+= '  </div>'
     jrtg+= '</div>'
     $('body').append(jrtg)
     $("#exercise-help .restart-joyride").click ->
       $("#exercise-help").remove()
       JediMaster.startTour()
+    $("#exercise-help .solution-viewer").click ->
+      $("#exercise-help").remove()
+      message = "Tämän olisi syytä olla aivan viimeinen keino jos et pääse eteenpäin. Oletko varma ettet saa tehtävää ratkaistua itse tai avun kanssa?"
+      JediMaster.solutionViewer() if confirm message
     #$("#exercise-help").mouseover ->
       #console.log "mouseover"
       #JediMaster.exerciseHelpPopoverAllowHide = false
@@ -196,7 +221,7 @@
     $("#exercise-help").hide()# if JediMaster.exerciseHelpPopoverAllowHide
 
   calculatePositionByBlock: (block) ->
-    blockBB = block.svg_.svgGroup_.getBoundingClientRect()
+    blockBB = block.svgGroup_.getBoundingClientRect()
     modalX = blockBB.left + blockBB.width + 20
     modalY = blockBB.top
     return [modalX, modalY]

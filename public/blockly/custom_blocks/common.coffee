@@ -1,5 +1,5 @@
 Blockly.Blocks["text_element"] = init: ->
-  @setColour 105
+  @setColour 200
   @appendValueInput("text").setAlign(Blockly.ALIGN_RIGHT).appendField "Piirrä teksti"
   #@appendValueInput("position").setAlign(Blockly.ALIGN_RIGHT).appendField "sijainti"
   @setPreviousStatement true

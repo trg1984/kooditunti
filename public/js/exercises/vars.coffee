@@ -9,6 +9,7 @@
     switch @level
       when 1
         Exercises.automaticallyEndExecution = false
+        Exercises.hasSolution = true
         Stage.setGravity('earth');
         Exercises.preloadBlocklyBlocks = true
       when 2

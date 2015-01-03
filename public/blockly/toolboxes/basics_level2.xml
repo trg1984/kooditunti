@@ -1,14 +1,14 @@
 <xml id="toolbox" style="display: none">
-  <category name="Teksti">
-    <block type="text_element"></block>
-    <block type="text">
-      <field name="TEXT">Hei maailma!</field>
-    </block>
-  </category>
-  <category name="Luvut">
-    <block type="math_number">
-      <field name="NUM">50</field>
-    </block>
-    <block type="math_arithmetic"></block>
-  </category>
+  <block type="text_element"></block>
+  <block type="text">
+    <field name="TEXT">Hei maailma!</field>
+  </block>
+  <block type="controls_repeat_ext">
+    <value name="TIMES">
+      <block type="math_number">
+        <field name="NUM">3</field>
+      </block>
+    </value>
+  </block>
+  <block type="circle_element_simple"></block>
 </xml>

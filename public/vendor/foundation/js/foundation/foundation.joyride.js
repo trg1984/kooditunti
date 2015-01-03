@@ -42,6 +42,7 @@
       pre_step_callback      : function (){},    // A method to call before each step
       pre_ride_callback      : function (){},    // A method to call before the tour starts (passed index, tip, and cloned exposed element)
       post_expose_callback   : function (){},    // A method to call after an element has been exposed
+      close_callback         : function (){},    // A method to call after close (always)
       template : { // HTML segments for tip layout
         link          : '<a href="#close" class="joyride-close-tip">&times;</a>',
         timer         : '<div class="joyride-timer-indicator-wrap"><span class="joyride-timer-indicator"></span></div>',
@@ -900,6 +901,7 @@
         this.settings.post_step_callback(this.settings.$li.index(), this.settings.$current_tip);
         this.settings.post_ride_callback(this.settings.$li.index(), this.settings.$current_tip);
       }
+      this.settings.close_callback(this.settings.$li.index(), this.settings.$current_tip);
 
       $('.joyride-tip-guide').remove();
     },

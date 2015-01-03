@@ -16,8 +16,10 @@ $font: 'Boogaloo';
 .joyride-content-wrapper {
   & { padding-bottom: 65px !important; }
   &.normal-padding { padding-bottom: 1.125rem !important }
-  a.action { font-size: 12px; color: #ccc; text-decoration: underline; }
-  a.restart-joyride { float: right }
+  a.action { font-size: 12px; color: #ccc; }
+  a.action:hover { text-decoration: underline; }
+  a.restart-joyride { clear:both; }
+  a.solution-viewer { clear:both; font-size: 11px; }
   p { font-size: 18px; }
   .joyride-next-tip {
     position: absolute;

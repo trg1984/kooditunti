@@ -32,9 +32,9 @@
 #exercise-links a.basics {
   background-color: #9f005d; }
 #exercise-links a.vars {
-  background-color: #c2272d; }
-#exercise-links a.ifs {
   background-color: #1c7563; }
+#exercise-links a.ifs {
+  background-color: #c2272d; }
 #exercise-links a.loops {
   background-color: #067195; }
 #exercise-links a.events {
@@ -93,9 +93,9 @@
 #exercise-page.exercise-basics #steps li {
   background-color: #9f005d; }
 #exercise-page.exercise-vars #steps li {
-  background-color: #c2272d; }
-#exercise-page.exercise-ifs #steps li {
   background-color: #1c7563; }
+#exercise-page.exercise-ifs #steps li {
+  background-color: #c2272d; }
 #exercise-page.exercise-loops #steps li {
   background-color: #067195; }
 #exercise-page.exercise-events #steps li {

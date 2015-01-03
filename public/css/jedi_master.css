@@ -33,10 +33,14 @@
   padding-bottom: 1.125rem !important; }
 .joyride-content-wrapper a.action {
   font-size: 12px;
-  color: #ccc;
+  color: #ccc; }
+.joyride-content-wrapper a.action:hover {
   text-decoration: underline; }
 .joyride-content-wrapper a.restart-joyride {
-  float: right; }
+  clear: both; }
+.joyride-content-wrapper a.solution-viewer {
+  clear: both;
+  font-size: 11px; }
 .joyride-content-wrapper p {
   font-size: 18px; }
 .joyride-content-wrapper .joyride-next-tip {
