@@ -67,6 +67,7 @@
 <div id="tip-categories" class="exercise-tip-placement" style="top:130px;left:0px;width:165px;"></div>
 <div id="tip-categories-open" class="exercise-tip-placement" style="top:115px;left:55px;"></div>
 <div id="tip-arith" class="exercise-tip-placement" style="top:165px;left:55px;"></div>
+<div id="tip-last" class="exercise-tip-placement" style="top:115px;left:95px;"></div>
 <div id="tip-trash" class="exercise-tip-placement" style="top:605px;left:0px;width:110px;"></div>
 <div id="tip-reset" class="exercise-tip-placement" style="top:660px;left:0px;width:150px;"></div>
 <div id="tip-evaluate" class="exercise-tip-placement" style="top:707px;left:640px;"></div>
@@ -76,7 +77,7 @@
     <p>Nyt osaat perusteet. Käydään vielä pikaisesti läpi muutama juttu joihin saatat matkan varrella törmätä.</p>
   </li>
   <li data-id="tip-categories" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true;">
-    <div class="after-step-method" style="display:none" data-after-step="Basics.openLastCategory()"></div>
+    <div class="after-step-method" style="display:none" data-after-step="Exercises.openLastCategory()"></div>
     <p>Joissain tehtävissä palikoita on sen verran paljon, että ne on jaettu kategorioihin. Kategorian nimeä klikkaamalla näet sen alla olevat palikat.</p>
   </li>
   <li data-id="tip-categories-open" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true;">
@@ -84,6 +85,10 @@
   </li>
   <li data-id="tip-arith" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true;">
     <p><strong>Uusi palikka:</strong> tämä pystyy suorittamaan laskutoimituksia kun siihen yhdistää kaksi lukupalikkaa (yllä).</p>
+    <div class="after-step-method" style="display:none" data-after-step="Exercises.openFirstCategory()"></div>
+  </li>
+  <li data-id="tip-last" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true;">
+    <p>Viime kentässä käytetyt palikat löytyvät täältä. "Piirrä teksti" -palikkaa pystyy käyttämään myös lukujen tulostamiseen.</p>
   </li>
   <li data-id="tip-trash" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true;">
     <p>Jos haluat joistain palikoista eroon, raahaa ne roskakoriin.</p>

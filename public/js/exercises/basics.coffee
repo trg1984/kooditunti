@@ -15,9 +15,6 @@
       when 2
         Exercises.automaticallyEndExecution = false
         Exercises.manualEvaluation = true
-        @openLastCategory = ->
-          e = Blockly.Toolbox.tree_.lastChild_
-          e.onMouseDown() unless e.isSelected()
         $("#start-execution-btn").click ->
           JediMaster.resumeTour ->
             $(".tooltip").addClass("disabled")

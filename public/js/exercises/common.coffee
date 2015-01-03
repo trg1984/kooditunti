@@ -37,12 +37,13 @@
       if windowWidth < 750 + 650
       then $(".overlay-resize").css width: 750
       else $(".overlay-resize").css width: windowWidth - 650
-      $("#help-btn a").click ->
+      $("#help-btn a").click (e) ->
         if $("#exercise-help:visible").length is 0
         then JediMaster.exerciseHelpPopoverShow(@)
         else JediMaster.exerciseHelpPopoverHide(@)
-      #$("#help-btn a").mouseout ->
-        #setTimeout (-> JediMaster.exerciseHelpPopoverHide(@)), 500
+        e.stopPropagation()
+      $("body").click ->
+        JediMaster.exerciseHelpPopoverHide(@)
       $("#reset-code-btn a").click ->
         Exercises.resetCodeArea()
       $("#start-execution-btn a").click ->
@@ -186,6 +187,14 @@
       $("#"+k+"_link").append(completedStar)
       Exercises.completedLevel = true if Exercises.currentID is k
 
+   openLastCategory: ->
+    e = Blockly.mainWorkspace.toolbox_.tree_.lastChild_
+    e.onMouseDown() unless e.isSelected()
+
+   openFirstCategory: ->
+    e = Blockly.mainWorkspace.toolbox_.tree_.firstChild_
+    e.onMouseDown() unless e.isSelected()
+
   nextLevelPath: ->
     return "/harjoitukset/"+@currentName+"/"+(@currentLevel+1)
 
@@ -194,9 +203,10 @@
       console.log(id)
     interpreter.setProperty scope, "notify", interpreter.createNativeFunction(wrapper)
 
-    wrapper = (text) ->
+    wrapper = (textobject) ->
       #console.log text
-      Api.createText(text.data)
+      text = if textobject? and textobject.data? then textobject.data else ""
+      Api.createText(text)
     interpreter.setProperty scope, "createText", interpreter.createNativeFunction(wrapper)
 
     wrapper = (id) ->

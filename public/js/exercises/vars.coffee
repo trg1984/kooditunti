@@ -20,9 +20,6 @@
         Exercises.automaticallyEndExecution = false
         Exercises.manualEvaluation = true
         Stage.setGravity('earth');
-        @openFirstCategory = ->
-          e = Blockly.Toolbox.tree_.firstChild_
-          e.onMouseDown() unless e.isSelected()
 
     if route?
       for x in [1..Stage.horizontalBlocks]

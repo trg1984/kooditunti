@@ -6,6 +6,11 @@
           <field name="TEXT">pallo</field>
         </block>
       </value>
+      <value name="radius">
+        <block type="math_number">
+          <field name="NUM">50</field>
+        </block>
+      </value>
     </block>
     <block type="text_element">
       <value name="text">
