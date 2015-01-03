@@ -1,0 +1,62 @@
+{% extends "../../layouts/exercises.html" %}
+
+{% block js %}
+{% parent %}
+<script src="/js/exercises/ifs.js"></script>
+<script>Exercises.currentExercise = Ifs;</script>
+<script>Exercises.init();</script>
+{% endblock %}
+
+{% block steps %}
+<ul>
+  <li id="ifs_level1_link"{% if level == 1 %} class="active"{% endif %}><a href="/harjoitukset/ifs/1">1</a></li>
+  <li id="ifs_level2_link"{% if level == 2 %} class="active"{% endif %}><a href="/harjoitukset/ifs/2">2</a></li>
+  <li id="ifs_level3_link"{% if level == 3 %} class="active"{% endif %}><a href="/harjoitukset/ifs/3">3</a></li>
+</ul>
+{% endblock %}
+
+{% block full_page_tips %}
+{% if level == 1 %}
+<div class="task-overview">
+  <h2>Tehtävä</h2>
+  <p></p>
+</div>
+<div id="tip1" class="exercise-tip-placement" style="top:223px;left:400px;"></div>
+<ol class="joyride-list" data-joyride>
+  <li data-button="Aloita" class="wide" data-options="prev_button: false">
+    <h2>Otsikko</h2>
+    <p></p>
+  </li>
+</ol>
+{% endif %}
+{% if level == 2 %}
+<div class="task-overview">
+  <h2>Tehtävä</h2>
+  <p></p>
+</div>
+<div id="tip1" class="exercise-tip-placement" style="top:223px;left:400px;"></div>
+<ol class="joyride-list" data-joyride>
+  <li data-button="Aloita" class="wide" data-options="prev_button: false">
+    <h2>Otsikko</h2>
+    <p></p>
+  </li>
+</ol>
+{% endif %}
+{% if level == 3 %}
+<div class="task-overview">
+  <h2>Tehtävä</h2>
+  <p></p>
+</div>
+<div id="tip1" class="exercise-tip-placement" style="top:223px;left:400px;"></div>
+<ol class="joyride-list" data-joyride>
+  <li data-button="Aloita" class="wide" data-options="prev_button: false">
+    <h2>Otsikko</h2>
+    <p></p>
+  </li>
+</ol>
+<div id="evaluation-selects">
+  <div>Sain piirrettyä kentälle tekstiä</div>
+  <div>Teksti oli vastaus johonkin laskutoimitukseen</div>
+</div>
+{% endif %}
+{% endblock %}

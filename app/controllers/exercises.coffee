@@ -27,3 +27,11 @@ exports.vars = (req, res) ->
     subsection: "exercise-vars"
     exerciseName: "vars"
     level: req.params.level
+
+exports.ifs = (req, res) ->
+  res.render "exercises/ifs/index",
+    title: "Ehtolauseet"
+    section: "exercise-page"
+    subsection: "exercise-ifs"
+    exerciseName: "ifs"
+    level: req.params.level

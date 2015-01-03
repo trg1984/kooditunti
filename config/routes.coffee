@@ -20,6 +20,9 @@ module.exports = (app, passport) ->
   app.get "/harjoitukset/vars/:level", exercises.vars
   app.redirect "/harjoitukset/vars", "/harjoitukset/vars/1";
 
+  app.get "/harjoitukset/ifs/:level", exercises.ifs
+  app.redirect "/harjoitukset/ifs", "/harjoitukset/ifs/1";
+
   # surveys
   app.get "/alkukysely", surveys.beginning
   app.get "/loppukysely", surveys.ending
