@@ -86,7 +86,9 @@
     # needs logic for reseting the default blocks
     hasLocalStorage = "localStorage" of window
     if hasLocalStorage and window.localStorage[url]
-      savedBlocklyElementCount = $($.parseXML(window.localStorage[url])).children().children().length
+      blocklyXML = window.localStorage[url]
+      try savedBlocklyElementCount = $($.parseXML(blocklyXML)).children().children().length
+      catch e then savedBlocklyElementCount = 0
       if savedBlocklyElementCount > 0
         window.setTimeout BlocklyStorage.restoreBlocks, 0
       else
@@ -140,8 +142,8 @@
     Blockly.mainWorkspace.traceOn(true);
     Blockly.mainWorkspace.highlightBlock(null);
     code = Blockly.JavaScript.workspaceToCode()
-    #console.log(code)
     Exercises.interpreter = new Interpreter(code, @currentExercise.interpreterApi)
+    Exercises.interpreter.initGlobalScope(Exercises.interpreter.getScope());
     nextStep = ->
       return unless Exercises.isExecuting
       #BlocklyInterface.highlight(action[1]);
@@ -204,11 +206,27 @@
       console.log(id)
     interpreter.setProperty scope, "notify", interpreter.createNativeFunction(wrapper)
 
-    wrapper = (textobject) ->
-      #console.log text
+    wrapper = (textobject,props) ->
       text = if textobject? and textobject.data? then textobject.data else ""
-      Api.createText(text)
+      props = if props? and props.data then $.parseJSON props.data else {}
+      Api.createText(text,props)
     interpreter.setProperty scope, "createText", interpreter.createNativeFunction(wrapper)
+
+    wrapper = (name,props) ->
+      # json string of properties
+      props = if props? and props.data then $.parseJSON props.data else {}
+      Api.createBall(name.data, props)
+      # we could check for errors here...
+      #else
+        #msg = 'En tiedä pallon halkaisijaa. Olethan asettanut sille jonkin arvon?'
+        #modalPos = JediMaster.calculatePositionByBlock(Exercises.activeBlock)
+        #JediMaster.pointModalWithGuidance(msg, modalPos)
+        #Exercises.endExecution("nodialog")
+    interpreter.setProperty scope, "createBall", interpreter.createNativeFunction(wrapper)
+
+    wrapper = (elem,callback) ->
+      Api.onClick(elem.data,callback,interpreter,scope)
+    interpreter.setProperty scope, "onClick", interpreter.createNativeFunction(wrapper)
 
     wrapper = (id) ->
       id = (if id then id.toString() else "")

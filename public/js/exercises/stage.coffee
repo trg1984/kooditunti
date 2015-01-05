@@ -78,16 +78,12 @@
     Physics.util.ticker.start()
     Stage.world.on "render", (data) ->
 
-    # text can be easily added like this
-    #Stage.world.on "render", (data) ->
-      #data.renderer.ctx.font = "20px Georgia";
-      #data.renderer.ctx.fillText("Hello World!",10,50);
     Stage.world.on "render", (data) ->
       $.each Stage.textElements, ->
         if @alive
-          data.renderer.ctx.textAlign = 'center';
+          data.renderer.ctx.textAlign = 'left';
           data.renderer.ctx.font = "40px Boogaloo";
-          data.renderer.ctx.fillText(@text,280,318);
+          data.renderer.ctx.fillText(@text,@pos[0],@pos[1]+Stage.blockHeight);
 
     worldInitiated = true
 
@@ -150,7 +146,16 @@
     Stage.elements['preview'] = preview
 
   createElement: (name,pos,props) ->
-    # to allow modifiable grid
+    type = if props and props['type'] then props['type'] else 'default'
+    pixPos = @coordinatesToPixels(pos)
+    elem = Exercises.currentExercise.stageElement(type,pixPos[0],pixPos[1],props)
+    elem.name = name
+    elem.properties = props if props
+    Stage.elements[name] = elem
+    Stage.world.add(elem)
+    return elem
+
+  coordinatesToPixels: (coordPos) ->
     maxWidth = Stage.width-Stage.coordsLeftSize-Stage.blockWidth
     maxHeight = Stage.height-Stage.coordsTopSize-Stage.blockHeight
     xNum = yNum = 0;
@@ -159,27 +164,10 @@
       yNum = 0
       for posY in [0..maxHeight] by Stage.blockWidth
         yNum++
-        continue unless xNum is pos[0] and yNum is pos[1]
-        type = if props and props['type'] then props['type'] else 'default'
-        elem = Exercises.currentExercise.stageElement(type,posX,posY,props)
-        elem.name = name
-        elem.properties = props if props
-        Stage.elements[name] = elem
-        Stage.world.add(elem)
-        return elem
+        continue unless xNum is coordPos[0] and yNum is coordPos[1]
+        pixPos = [posX,posY]
 
-  draw: true
-  drawText: (textElement) ->
-    #canvas = $("#gridcanvas").get(0)
-    #context = canvas.getContext("2d")
-    #bw = Stage.width-40
-    #bh = Stage.height-40
-    #p = 40; x = 0; y = 0
-    #context.textAlign = 'center';
-    #context.font = "40px Boogaloo";
-    #context.fillStyle = '#000';
-    #context.fillText(text,320,318);
-    #context.restore()
+    return pixPos
 
   editElement: (name,prop) ->
     if elem = Stage.elements[name]

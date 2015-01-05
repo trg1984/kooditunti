@@ -221,7 +221,7 @@
     $("#exercise-help").hide()# if JediMaster.exerciseHelpPopoverAllowHide
 
   calculatePositionByBlock: (block) ->
-    blockBB = block.svgGroup_.getBoundingClientRect()
+    blockBB = block.svg_.svgGroup_.getBoundingClientRect()
     modalX = blockBB.left + blockBB.width + 20
     modalY = blockBB.top
     return [modalX, modalY]
