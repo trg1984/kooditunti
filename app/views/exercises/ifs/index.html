@@ -15,17 +15,49 @@
 </ul>
 {% endblock %}
 
-{% block full_page_tips %}
+{% block exercise_tips %}
 {% if level == 1 %}
 <div class="task-overview">
   <h2>Tehtävä</h2>
-  <p></p>
+  <p>Ohjelma kysyy kysymyksen. Tehtäväsi on näyttää käyttäjälle teksti sen mukaan oliko vastaus oikein vai ei.</p>
+  <p><strong>Vinkki:</strong> jos <i>vastaus</i> <u>on yhtäkuin</u> <i>arvaus</i>...</p>
 </div>
-<div id="tip1" class="exercise-tip-placement" style="top:223px;left:400px;"></div>
+<div id="tip-answer" class="exercise-tip-placement" style="top:31px;left:240px;"></div>
+<div id="tip-quess" class="exercise-tip-placement" style="top:71px;left:425px;"></div>
+<div id="tip-if" class="exercise-tip-placement" style="top:250px;left:320px;"></div>
+<div id="tip-condition" class="exercise-tip-placement" style="top:140px;left:280px;"></div>
+<div id="tip-comparison" class="exercise-tip-placement" style="top:138px;left:425px;"></div>
+<div id="tip-true" class="exercise-tip-placement" style="top:170px;left:180px;"></div>
+<div id="tip-false" class="exercise-tip-placement" style="top:205px;left:180px;"></div>
 <ol class="joyride-list" data-joyride>
-  <li data-button="Aloita" class="wide" data-options="prev_button: false">
-    <h2>Otsikko</h2>
-    <p></p>
+  <li data-button="Seuraava" class="wide" data-options="prev_button: false">
+    <h2>Ehtolauseet</h2>
+    <p>Tässä tehtävässä on valmiina yksinkertainen ohjelma, joka asettaa kaksi muuttujaa ja määrittelee sen jälkeen ehtolauseen.</p>
+  </li>
+  <li data-id="tip-answer" data-button="Seuraava" data-options="tip_location:right;prev_button: true">
+    <p>Nämä palikat jo tunnetkin. Muuttujan <i>vastaus</i> arvoksi asetetaan 50.</p>
+  </li>
+  <li data-id="tip-quess" data-button="Seuraava" data-options="tip_location:right;prev_button: true">
+    <p>Tässä asetetaan muuttujan <i>arvaus</i> arvo kysymällä sitä suorituksen aikana (näet kohta miten se toimii).</p>
+  </li>
+  <li data-id="tip-if" data-button="Seuraava" data-options="tip_location:bottom;prev_button: true">
+    <p>Tämä on ehtolause.</p>
+  </li>
+  <li data-id="tip-condition" data-button="Seuraava" data-options="tip_location:right;prev_button: true">
+    <p>Tämä on totuusarvoinen ehto, jonka arvo määrittää sen miten lause toimii.</p>
+  </li>
+  <li data-id="tip-comparison" data-button="Seuraava" data-options="tip_location:top;prev_button: true">
+    <p>Ehdon vertailijaa pystyy vaihtamaan tarvittaessa tästä (käytössä on esimerksi <i>on yhtä kuin</i>, <i>ei ole yhtä kuin</i>, <i>on suurempi kuin</i> jne.)</p>
+  </li>
+  <li data-id="tip-true" data-button="Seuraava" data-options="tip_location:right;prev_button: true">
+    <p>Tämä osa suoritetaan jos yllä oleva ehto on tosi (esimerkiksi ehto <i>2 = 2</i> on tosi, koska kaksi on kaksi)</p>
+  </li>
+  <li data-id="tip-false" data-button="OK!" data-options="tip_location:right;prev_button: true">
+    <p>Tämä osa suoritetaan jos yllä oleva ehto on epätosi (esimerkiksi ehto <i>1 = 2</i> on epätosi, koska yksi ei ole kaksi)</p>
+  </li>
+  <li data-button="Seuraava" class="wide" data-options="tip_location:right;prev_button: true">
+    <p><strong>Tehtävä:</strong> Täydennä ohjelmaa siten, että kentällä näytetään eri teksti riippuen siitä annettiinko kysyttäessä oikea vastaus.</p>
+    <p>Suorita ensin ohjelma tälläisenaan niin näet miten vastauksen kysyminen toimii.</p>
   </li>
 </ol>
 {% endif %}

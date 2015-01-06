@@ -1,6 +1,35 @@
 <xml id="toolbox" style="display: none">
-  <block type="text_element"></block>
-  <block type="text">
-    <field name="TEXT">Hei maailma!</field>
+  <!--<block type="heading"></block>-->
+  <block type="variables_get"></block>
+  <block type="text_element">
+    <mutation properties="position"></mutation>
+    <value name="text">
+      <block type="text">
+        <field name="TEXT">Teksti</field>
+      </block>
+    </value>
+    <value name="position_mutator">
+      <block type="coordinate_array_simple"></block>
+    </value>
   </block>
+  <!--<block type="text"></block>-->
+  <block type="prompt"></block>
+  <block type="when_clicked"></block>
+  <block type="circle_element">
+    <mutation properties="radius"></mutation>
+    <value name="name">
+      <block type="text">
+        <field name="TEXT">pallo</field>
+      </block>
+    </value>
+    <value name="radius_mutator">
+      <block type="math_number">
+        <field name="NUM">50</field>
+      </block>
+    </value>
+  </block>
+  <block type="controls_if">
+    <mutation else="1"></mutation>
+  </block>
+  <block type="logic_compare"></block>
 </xml>

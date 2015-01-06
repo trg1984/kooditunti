@@ -8,12 +8,13 @@
   levelSetup: ->
     switch @level
       when 1
-        Blockly.Block.prototype.afterConnection = (connection) ->
+        Blockly.BlockSvg.afterConnectionMouseUp = (connection) ->
           JediMaster.resumeTour()
         $("#start-execution-btn").one "click", ->
           Foundation.libs.joyride.end()
       when 2
-        Stage.setGravity('earth');
+        Stage.setGravity('earth')
+        Exercises.preloadBlocklyBlocks = true
         console.log("level 2")
         @endOnLastSlide = ->
           $("#start-execution-btn").one "click", ->
@@ -38,21 +39,20 @@
       when 3
         return false
 
-
-  createBall: (name,radius) ->
-    Stage.createElement(name,[7,7],{type: 'circle', radius: radius})
+  #createBall: (name,radius) ->
+    #Stage.createElement(name,[7,7],{type: 'circle', radius: radius})
 
   stageElement: (type,posX,posY,props) ->
     return switch type
       when 'circle' then Physics.body 'circle',
-        x: (posX+Stage.blockWidth/2)+Math.random() # make them scatter just a bit...
+        x: (posX+Stage.blockWidth/2)+100+Math.random() # make them scatter just a bit...
         y: (posY+Stage.blockHeight/2)+1 # y-coordinate
         vx: 0 # velocity in x-direction
         vy: 0 # velocity in y-direction
         radius: props.radius
 
   interpreterApi: (interpreter, scope) ->
-    wrapper = () ->
-      Basics.createBall("simple",30)
-    interpreter.setProperty scope, "createBall", interpreter.createNativeFunction(wrapper)
+    #wrapper = () ->
+      #Basics.createBall("simple",30)
+    #interpreter.setProperty scope, "createBall", interpreter.createNativeFunction(wrapper)
     Exercises.commonInterpreterApi(interpreter,scope)

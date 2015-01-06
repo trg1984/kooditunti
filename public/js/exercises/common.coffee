@@ -121,7 +121,8 @@
     $("#start-execution-btn").show()
     Exercises.isExecuting = false
     Exercises.resizeCodeArea()
-    Exercises.interpreter.stateStack = []
+    Errors.collected = []
+    Exercises.interpreter.stateStack = [] if Exercises.interpreter?
     if method is "nodialog"
       Stage.reset()
       Exercises.currentExercise.levelSetup()
@@ -131,50 +132,56 @@
         Exercises.currentExercise.levelSetup()
 
   runCode: ->
-    Exercises.runBeforeExecution()
+    @runBeforeExecution()
     $("#end-execution-btn").show()
     $("#start-execution-btn").hide()
-    Exercises.isExecuting = true
-    Exercises.executionCount++
-    Exercises.resizeCodeArea()
-    Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
-    Blockly.JavaScript.addReservedWords('highlightBlock');
-    Blockly.mainWorkspace.traceOn(true);
-    Blockly.mainWorkspace.highlightBlock(null);
-    code = Blockly.JavaScript.workspaceToCode()
-    Exercises.interpreter = new Interpreter(code, @currentExercise.interpreterApi)
-    Exercises.interpreter.initGlobalScope(Exercises.interpreter.getScope());
-    nextStep = ->
-      return unless Exercises.isExecuting
-      #BlocklyInterface.highlight(action[1]);
-      if Exercises.interpreter.step()
-        # make it so only highlights delay the execution
-        # also make loops delay less
-        if Exercises.interpreter.stateStack[0]?
-        then nextNode = Exercises.interpreter.stateStack[0].node
-        else nextNode = null
-        to = 0
-        if nextNode && nextNode.name == "highlightBlock"
-          isShort = true if Exercises.activeBlock && Exercises.activeBlock.type == "controls_repeat_ext"
-          to = if isShort then 50 else 300
-        window.setTimeout nextStep, to
-        issl = Exercises.interpreter.stateStack.length
-      else
-        setTimeout ->
-          return if Exercises.completedLevel and not Exercises.automaticallyEndExecution
-          if Exercises.currentExercise.evaluate()
-            JediMaster.successDialog()
-            $(".joyride-close-tip").one 'click', ->
-              Exercises.endExecution("nodialog")
-            Exercises.markCompleted()
-          else
-            if Exercises.automaticallyEndExecution
-              Exercises.endExecution()
-        , 1000
-        # the execution state should be emphasized, since we won't
-        # stop it automatically anymore
-        #setTimeout (-> Exercises.endExecution()), 500
-    nextStep()
+    @isExecuting = true
+    @executionCount++
+    @resizeCodeArea()
+    @readableCode = Blockly.JavaScript.workspaceToCode()
+    if Errors.collected.length is 0
+      Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+      Blockly.JavaScript.addReservedWords('highlightBlock');
+      Blockly.mainWorkspace.traceOn(true);
+      Blockly.mainWorkspace.highlightBlock(null);
+      @interpretableCode = Blockly.JavaScript.workspaceToCode()
+      @interpreter = new Interpreter(@interpretableCode, @currentExercise.interpreterApi)
+      @interpreter.initGlobalScope(@interpreter.getScope());
+      #console.log @readableCode
+      nextStep = ->
+        return unless Exercises.isExecuting
+        #BlocklyInterface.highlight(action[1]);
+        if Exercises.interpreter.step()
+          # make it so only highlights delay the execution
+          # also make loops delay less
+          if Exercises.interpreter.stateStack[0]?
+          then nextNode = Exercises.interpreter.stateStack[0].node
+          else nextNode = null
+          to = 0
+          if nextNode && nextNode.name == "highlightBlock"
+            isShort = true if Exercises.activeBlock && Exercises.activeBlock.type == "controls_repeat_ext"
+            to = if isShort then 50 else 300
+          window.setTimeout nextStep, to
+          issl = Exercises.interpreter.stateStack.length
+        else
+          setTimeout ->
+            return if Exercises.completedLevel and not Exercises.automaticallyEndExecution
+            if Exercises.currentExercise.evaluate()
+              JediMaster.successDialog()
+              $(".joyride-close-tip").one 'click', ->
+                Exercises.endExecution("nodialog")
+              Exercises.markCompleted()
+            else
+              if Exercises.automaticallyEndExecution
+                Exercises.endExecution()
+          , 1000
+          # the execution state should be emphasized, since we won't
+          # stop it automatically anymore
+          #setTimeout (-> Exercises.endExecution()), 500
+      nextStep()
+    else
+      Errors.report()
+      Exercises.endExecution("nodialog")
 
   markCompleted: (id) ->
     id = @currentID unless id
@@ -201,10 +208,27 @@
   nextLevelPath: ->
     return "/harjoitukset/"+@currentName+"/"+(@currentLevel+1)
 
+  simplifyInterpreterObject: (obj) ->
+    simple = {}
+    $.each obj.properties, ((k,v) -> simple[k] = v.data)
+    return simple
+
+  commonErrors: (id,data) ->
+    err = null
+    if id is "createBall_null"
+      for k, v of data.values
+        err = "Kaikkia arvoja ei ole annettu" if v.data is null
+    return err
+
   commonInterpreterApi: (interpreter, scope) ->
     wrapper = (id) ->
       console.log(id)
     interpreter.setProperty scope, "notify", interpreter.createNativeFunction(wrapper)
+
+    wrapper = (textobject) ->
+      text = if textobject? and textobject.data? then textobject.data else ""
+      return interpreter.createPrimitive prompt(text)
+    interpreter.setProperty scope, "prompt", interpreter.createNativeFunction(wrapper)
 
     wrapper = (textobject,props) ->
       text = if textobject? and textobject.data? then textobject.data else ""
@@ -212,10 +236,15 @@
       Api.createText(text,props)
     interpreter.setProperty scope, "createText", interpreter.createNativeFunction(wrapper)
 
-    wrapper = (name,props) ->
-      # json string of properties
-      props = if props? and props.data then $.parseJSON props.data else {}
-      Api.createBall(name.data, props)
+    wrapper = (po) ->
+      Errors.collect('createBall_null', {values: po.properties, block: Exercises.activeBlock})
+      if Errors.collected.length is 0
+        Errors.collect('createBall_undefined', {values: po.properties, block: Exercises.activeBlock})
+        if Errors.collected.length is 0
+          props = Exercises.simplifyInterpreterObject(po)
+          Api.createBall(props)
+
+      Errors.report()
       # we could check for errors here...
       #else
         #msg = 'En tiedä pallon halkaisijaa. Olethan asettanut sille jonkin arvon?'

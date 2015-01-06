@@ -18,7 +18,7 @@ Blockly.JavaScript["coordinate_array_simple"] = (block) ->
 
 Blockly.Blocks["text_element"] =
   init: ->
-    @setColour 200
+    @setColour 300
     @appendValueInput("text").setAlign(Blockly.ALIGN_RIGHT).appendField "Luo teksti"
     @setPreviousStatement true
     @setNextStatement true
@@ -43,7 +43,7 @@ Blockly.JavaScript["text_element"] = (block) ->
 
 Blockly.Blocks["circle_element"] =
   init: ->
-    @setColour 105
+    @setColour 300
     @appendValueInput("name").appendField "Luo pallo"
     @setPreviousStatement true
     @setNextStatement true
@@ -60,27 +60,29 @@ Blockly.Blocks["circle_element"] =
   doHideExtras: BlocklyExtraPropertiesPatch.doHideExtras
   hideExtras: BlocklyExtraPropertiesPatch.hideExtras
 
+buildPropertiesObjectAsString = (pairs) ->
+  eo = "{"
+  keyCount = (k for own k of pairs).length
+  i = 0
+  for k, v of pairs
+    v = "null" if v? && v is ""
+    eo+= ""+k+": "+v
+    eo+= ", " if i isnt keyCount - 1
+    i++
+  eo+= "}"
+  return eo
+
 Blockly.JavaScript["circle_element"] = (block) ->
-  name = Blockly.JavaScript.valueToCode(block, "name", Blockly.JavaScript.ORDER_ATOMIC)
-  # properties as json string.
-  properties = JSON.stringify
-    # can use eval as long as using simple coordinates (has no variables)
-    position: eval Blockly.JavaScript.valueToCode(block, "position_mutator", Blockly.JavaScript.ORDER_ATOMIC)
-    radius: parseInt Blockly.JavaScript.valueToCode(block, "radius_mutator", Blockly.JavaScript.ORDER_ATOMIC)
+  inputs = {}
+  $.each block.inputList, (i,v) ->
+    inputs[v.name.replace("_mutator","")] = Blockly.JavaScript.valueToCode(block, v.name, Blockly.JavaScript.ORDER_ATOMIC)
 
-  code = "createBall("+name+",'"+properties+"');\n"
-  console.log code
+  pos = buildPropertiesObjectAsString inputs
 
-  # Allows for more control of the users errors (for example that we need a certain type of block etc...),
-  # but this needs to be implemented better.
-  ## in level 1, we want our value to come from a variable, not a number
-  #isNumberAlready = isNaN parseInt(value_radius)
-  #if isNumberAlready or Exercises.currentLevel isnt 1
-    #code = "createBall("+value_name+","+value_radius+");\n"
-  #else
-    ##code = "notify('needs_to_be_a_variable')"
-    #code = ""
-    #modalPos = JediMaster.calculatePositionByBlock(block)
-    #JediMaster.pointModalWithGuidance('Halkaisija täytyy määrittää muuttujana', modalPos)
-    #Exercises.endExecution("nodialog")
+  if inputs.radius?
+    # collects an error if we have it defined (see for example Vars.errorCollector)
+    Errors.collect('createBall_variable', {values: {radius:inputs.radius}, block: block})
+
+  code = "createBall("+pos+");\n"
+
   code

@@ -92,6 +92,7 @@
       _.each Stage.world.getBodies(), (d) ->
         Stage.world.removeBody d
     Stage.textElements = []
+    $('#viewport').unbind('click')
     # there is also a world.destroy in physicsjs
     # but there seems to be something wrong with it
     # (does not remove elements from canvas)
@@ -156,6 +157,7 @@
     return elem
 
   coordinatesToPixels: (coordPos) ->
+    return [0,0] if coordPos[0] is 0 or coordPos[1] is 0
     maxWidth = Stage.width-Stage.coordsLeftSize-Stage.blockWidth
     maxHeight = Stage.height-Stage.coordsTopSize-Stage.blockHeight
     xNum = yNum = 0;

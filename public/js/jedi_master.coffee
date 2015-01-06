@@ -55,7 +55,7 @@
     Foundation.libs.joyride.settings.paused = false
     Foundation.libs.joyride.go_next()
     $(".joyride-modal-bg").hide()
-    cb()
+    cb() if cb?
 
   closeModalDialog: ->
     $("#guide-modal").remove()
@@ -77,7 +77,7 @@
     jrtg+= 'top: '+pos[1]+'px; left: '+pos[0]+'px;">'
     jrtg+= '<span class="joyride-nub left"></span><div class="joyride-content-wrapper normal-padding">'
     jrtg+= '<p>'+msg+'</p>'
-    jrtg+= '<a href="#" class="small button joyride-next-tip-custom close-btn">Sulje</a><a href="#close" class="joyride-close-tip close-btn">×</a></div></div>'
+    jrtg+= '<a href="javascript:void(0)" class="small button joyride-next-tip-custom close-btn">Sulje</a><a href="javascript:void(0)" class="joyride-close-tip close-btn">×</a></div></div>'
     $('body').append(jrtg)
     $("#guide-modal .close-btn").click ->
       $("#guide-modal").remove()
@@ -118,10 +118,10 @@
   successDialog: ->
     jrtg = '<div id="guide-modal" class="success-dialog joyride-tip-guide" data-index="0" style="visibility: visible; display: block; width: 375px;">'
     jrtg+= '<div class="joyride-content-wrapper normal-padding" style="text-align: center;">'
-    jrtg+= '<div style="width: 165px;overflow: hidden; margin: 0px auto;">'
-    jrtg+= '<div class="animated tada" style="width:30%;float:left;margin-top:15px;"><img src="http://www.webweaver.nu/clipart/img/nature/planets/3d-yellow-star.png"></div>'
-    jrtg+= '<div class="animated tada" style="width:40%;float:left;"><img src="http://www.webweaver.nu/clipart/img/nature/planets/3d-yellow-star.png"></div>'
-    jrtg+= '<div class="animated tada" style="width:30%;float:left;margin-top:15px;"><img src="http://www.webweaver.nu/clipart/img/nature/planets/3d-yellow-star.png"></div>'
+    jrtg+= '<div style="width: 165px;overflow: hidden; margin: 0px auto 5px auto;">'
+    jrtg+= '<div class="animated tada" style="width:30%;float:left;margin-top:15px;"><img src="/img/star.png"></div>'
+    jrtg+= '<div class="animated tada" style="width:40%;float:left;"><img src="/img/star.png"></div>'
+    jrtg+= '<div class="animated tada" style="width:30%;float:left;margin-top:15px;"><img src="/img/star.png"></div>'
     jrtg+= '</div><p style="font-size:25px;">Hienoa, ratkaisit tehtävän!</p>'
     if Exercises.isLastLevel
       btnText = "Palaa harjoitusvalikkoon"
@@ -223,7 +223,7 @@
   calculatePositionByBlock: (block) ->
     blockBB = block.svg_.svgGroup_.getBoundingClientRect()
     modalX = blockBB.left + blockBB.width + 20
-    modalY = blockBB.top
+    modalY = blockBB.top + $(window).scrollTop()
     return [modalX, modalY]
 
     #de = $("<div id='"+id+"' class='dummy' />")

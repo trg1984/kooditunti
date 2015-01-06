@@ -10,6 +10,7 @@
       when 1
         #Stage.createElement(name,[3,3],{type: 'circle', radius: 20, vy: 0.00, xy: 0.00 })
         Exercises.automaticallyEndExecution = false
+        Exercises.preloadBlocklyBlocks = true
       when 2 then
       when 3 then
 

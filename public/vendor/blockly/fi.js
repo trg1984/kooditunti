@@ -357,8 +357,8 @@ Blockly.Msg.VARIABLES_GET_TITLE = "";  // untranslated
 Blockly.Msg.VARIABLES_GET_TOOLTIP = "Palauttaa muuttujan arvon.";
 Blockly.Msg.VARIABLES_SET_CREATE_GET = "Luo 'hae %1'";
 Blockly.Msg.VARIABLES_SET_HELPURL = "https://github.com/google/blockly/wiki/Variables#set";  // untranslated
-Blockly.Msg.VARIABLES_SET_TAIL = "arvoksi";
-Blockly.Msg.VARIABLES_SET_TITLE = "aseta";
+Blockly.Msg.VARIABLES_SET_TAIL = "="; // arvoksi
+Blockly.Msg.VARIABLES_SET_TITLE = ""; // aseta
 Blockly.Msg.VARIABLES_SET_TOOLTIP = "Asettaa muutujan arvoksi annetun syötteen.";
 Blockly.Msg.PROCEDURES_DEFRETURN_TITLE = Blockly.Msg.PROCEDURES_DEFNORETURN_TITLE;
 Blockly.Msg.LISTS_GET_SUBLIST_INPUT_IN_LIST = Blockly.Msg.LISTS_INLIST;
