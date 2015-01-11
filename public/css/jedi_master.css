@@ -18,6 +18,8 @@
 .joyride-tip-guide.wide {
   width: 500px; }
 
+.joyride-tip-guide {
+  border-radius: 10px; }
 .joyride-tip-guide h1, .joyride-tip-guide h2, .joyride-tip-guide p {
   font-family: 'Boogaloo';
   margin-bottom: 0.6rem; }

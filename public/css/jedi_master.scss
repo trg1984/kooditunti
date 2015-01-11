@@ -6,6 +6,7 @@ $font: 'Boogaloo';
 .joyride-tip-guide.wide { width: 500px; }
 
 .joyride-tip-guide {
+  & { border-radius: 10px; }
   h1,h2,p { font-family: $font; margin-bottom: 0.6rem;  }
   .button { margin-top: 10px; float: right; }
   &.success-dialog {
