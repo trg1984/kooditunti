@@ -11,11 +11,15 @@
         textEdited = true
     Stage.textElements.push newTextElem unless textEdited
 
-  createBall: (props) ->
+  createElement: (props) ->
     # validate or set defaults here
     radius =  if props.radius? then Helpers.epValidate('radius', props.radius) else 50
+    width =  if props.width? then Helpers.epValidate('width', props.width) else 100
+    height =  if props.height? then Helpers.epValidate('height', props.height) else 100
     position = if props.position? then Helpers.epValidate('position', props.position) else [1,1]
-    Stage.createElement(props.name,position,{type: 'circle', radius: radius, settable: true})
+    type = if props.type? and props.type in ['circle','rectangle'] then props.type else 'circle'
+    # REFACTOR: toooo much repetition...
+    Stage.createElement(props.name,position,{type:type,height:height,width:width,radius:radius,settable:true})
 
   onClick: (elem, callback, intrp, scope) ->
     $('#viewport').on 'click', (event) ->

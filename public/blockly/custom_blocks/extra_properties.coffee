@@ -13,6 +13,22 @@ Blockly.Blocks["radius_mutator"] = init: ->
   @contextMenu = false
   return
 
+Blockly.Blocks["width_mutator"] = init: ->
+  @setColour 210
+  @appendDummyInput().appendField "leveys"
+  @setPreviousStatement true
+  @setNextStatement true
+  @contextMenu = false
+  return
+
+Blockly.Blocks["height_mutator"] = init: ->
+  @setColour 210
+  @appendDummyInput().appendField "korkeus"
+  @setPreviousStatement true
+  @setNextStatement true
+  @contextMenu = false
+  return
+
 Blockly.Blocks["position_mutator"] = init: ->
   @setColour 210
   @appendDummyInput().appendField "sijainti"

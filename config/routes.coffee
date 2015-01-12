@@ -6,7 +6,8 @@ surveys = require("surveys")
 
 # Expose
 module.exports = (app, passport) ->
-  app.get "/", home.index
+  #app.get "/", home.index
+  app.redirect "/", "/harjoitukset";
 
   # exercises
   app.get "/harjoitukset", exercises.index

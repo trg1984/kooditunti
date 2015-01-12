@@ -19,10 +19,24 @@ Blockly.Trashcan.prototype.position_ = function() {
 };
 
 // Create a callback event for connecting blocks
+// Create a double click collapse event
 //
+/* PATCH START */
 Blockly.BlockSvg.afterConnectionMouseUp = function() { };
+Blockly.BlockSvg.doubleClickCallback = function() { };
+/* PATCH END */
 Blockly.BlockSvg.prototype.onMouseUp_ = function(e) {
   var this_ = this;
+  /* PATCH START */
+  if(!this.isInFlyout && !Blockly.isRightButton(e) && this.outputConnection == null){
+    if(window.blocklyBlockSecondClick){
+      this.setCollapsed(!this.collapsed_);
+      Blockly.BlockSvg.doubleClickCallback(this);
+    }
+    window.blocklyBlockSecondClick = true;
+    setTimeout(function(){ window.blocklyBlockSecondClick = false; },500);
+  }
+  /* PATCH END */
   Blockly.doCommand(function() {
     Blockly.terminateDrag_();
     if (Blockly.selected && Blockly.highlightedConnection_) {
@@ -63,4 +77,16 @@ Blockly.BlockSvg.prototype.onMouseUp_ = function(e) {
     }
     Blockly.Css.setCursor(Blockly.Css.Cursor.OPEN);
   });
+};
+//
+// Create callback event for mutator icon click
+//
+Blockly.Mutator.afterClick = function() { };
+Blockly.Mutator.prototype.iconClick_ = function(e) {
+  if (this.block_.isEditable()) {
+    Blockly.Icon.prototype.iconClick_.call(this, e);
+    // PATCH START
+    Blockly.Mutator.afterClick()
+    // PATCH END
+  }
 };

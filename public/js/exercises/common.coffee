@@ -102,6 +102,11 @@
     tbf.css("top",btb.height()).css("width",btb.width())
     $("#blockly").append(tbf)
 
+    Blockly.BlockSvg.doubleClickCallback = (block) ->
+      bcds = localStorage.getItem('block_collapse_disclaimer_shown')
+      JediMaster.blockCollapseDisclaimer(block) unless bcds?
+      localStorage.setItem('block_collapse_disclaimer_shown',true)
+
   preloadBlocks: ->
     $.get("/blockly/codeareas/"+@currentID+".xml", (response) ->
       xml = Blockly.Xml.textToDom(response);
@@ -210,12 +215,19 @@
 
   simplifyInterpreterObject: (obj) ->
     simple = {}
-    $.each obj.properties, ((k,v) -> simple[k] = v.data)
+    for k, v of obj.properties
+      if v.type is "object" # handles only arrays
+        value_array = []
+        for ok, ov of v.properties
+          value_array.push ov.data
+        simple[k] = value_array
+      else
+        simple[k] = v.data
     return simple
 
   commonErrors: (id,data) ->
     err = null
-    if id is "createBall_null"
+    if id is "createElement_null"
       for k, v of data.values
         err = "Kaikkia arvoja ei ole annettu" if v.data is null
     return err
@@ -237,21 +249,14 @@
     interpreter.setProperty scope, "createText", interpreter.createNativeFunction(wrapper)
 
     wrapper = (po) ->
-      Errors.collect('createBall_null', {values: po.properties, block: Exercises.activeBlock})
+      Errors.collect('createElement_null', {values: po.properties, block: Exercises.activeBlock})
       if Errors.collected.length is 0
-        Errors.collect('createBall_undefined', {values: po.properties, block: Exercises.activeBlock})
+        Errors.collect('createElement_undefined', {values: po.properties, block: Exercises.activeBlock})
         if Errors.collected.length is 0
           props = Exercises.simplifyInterpreterObject(po)
-          Api.createBall(props)
-
+          Api.createElement(props)
       Errors.report()
-      # we could check for errors here...
-      #else
-        #msg = 'En tiedä pallon halkaisijaa. Olethan asettanut sille jonkin arvon?'
-        #modalPos = JediMaster.calculatePositionByBlock(Exercises.activeBlock)
-        #JediMaster.pointModalWithGuidance(msg, modalPos)
-        #Exercises.endExecution("nodialog")
-    interpreter.setProperty scope, "createBall", interpreter.createNativeFunction(wrapper)
+    interpreter.setProperty scope, "createElement", interpreter.createNativeFunction(wrapper)
 
     wrapper = (elem,callback) ->
       Api.onClick(elem.data,callback,interpreter,scope)

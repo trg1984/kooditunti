@@ -15,7 +15,6 @@
       when 2
         Stage.setGravity('earth')
         Exercises.preloadBlocklyBlocks = true
-        console.log("level 2")
         @endOnLastSlide = ->
           $("#start-execution-btn").one "click", ->
             Foundation.libs.joyride.end()

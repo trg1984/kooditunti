@@ -13,17 +13,23 @@
           $(".joyride-modal-bg").show()
         else
           $(".joyride-modal-bg").hide()
-
         # keep previous button working even if we have a pause defined
         step.find('.joyride-prev-tip').click ->
           JediMaster.tourGoingBack = true
           setTimeout (-> JediMaster.tourGoingBack = false), 100
+        #unless JediMaster.tourGoingBack
+        setTimeout ->
+          if step.find('.before-step-method').length == 1
+            eval(step.find('.before-step-method').data('before-step'))
+        ,0
       post_step_callback: (i, step) ->
         $(".joyride-modal-bg").hide() if step.hasClass('hide-modal-next')
         unless JediMaster.tourGoingBack
           JediMaster.pauseTour() if step.hasClass('pause-after')
-          if step.find('.after-step-method').length == 1
-            eval(step.find('.after-step-method').data('after-step'))
+          setTimeout ->
+            if step.find('.after-step-method').length == 1
+              eval(step.find('.after-step-method').data('after-step'))
+          ,0
       post_ride_callback: ->
         $(".exercise-tip-placement").hide()
         JediMaster.onTour = false
@@ -46,11 +52,13 @@
       JediMaster.resumeTour()
 
   pauseTour: ->
+    JediMaster.onTour = false
     Foundation.libs.joyride.settings.paused = true
     $(".joyride-tip-guide:visible").removeClass("pause-after")
     $(".exercise-tip-placement").hide()
 
   resumeTour: (cb) ->
+    JediMaster.onTour = true
     $(".exercise-tip-placement").show()
     Foundation.libs.joyride.settings.paused = false
     Foundation.libs.joyride.go_next()
@@ -69,6 +77,19 @@
       if JediMaster.onTour
         e.preventDefault()
         $(".joyride-next-tip").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+
+  blockCollapseDisclaimer: (block) ->
+    pos = @calculatePositionByBlock(block)
+    #$(document).foundation('joyride', 'start');
+    jrtg = '<div id="guide-modal" class="joyride-tip-guide"'
+    jrtg+= 'data-index="0" style="visibility: visible; display: block;'
+    jrtg+= 'top: '+pos[1]+'px; left: '+pos[0]+'px;">'
+    jrtg+= '<span class="joyride-nub left"></span><div class="joyride-content-wrapper normal-padding">'
+    jrtg+= '<p>Tuplaklikkaa palikkaa näyttääksesi sen kokonaan</p>'
+    jrtg+= '<a href="javascript:void(0)" class="small button joyride-next-tip-custom close-btn">Sulje</a><a href="javascript:void(0)" class="joyride-close-tip close-btn">×</a></div></div>'
+    $('body').append(jrtg)
+    $("#guide-modal .close-btn").click ->
+      $("#guide-modal").remove()
 
   pointModalWithGuidance: (msg,pos) ->
     #$(document).foundation('joyride', 'start');

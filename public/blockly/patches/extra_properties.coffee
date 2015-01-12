@@ -40,7 +40,7 @@
     while clauseBlock
       shortType = clauseBlock.type.replace("_mutator","")
       switch shortType
-        when "color", "position", "radius"
+        when "color", "position", "radius", "height", "width"
           input = @extraPropertySetter shortType
           # reconnect children
           input.connection.connect clauseBlock.valueConnection_ if clauseBlock.valueConnection_

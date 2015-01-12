@@ -41,10 +41,30 @@ Blockly.JavaScript["text_element"] = (block) ->
   code = "createText("+value_text+",'"+properties+"');\n"
   code
 
+Blockly.Blocks["rectangle_element"] =
+  init: ->
+    @setColour 300
+    @appendValueInput("name").appendField "Luo nelikulmio"
+    @setPreviousStatement true
+    @setNextStatement true
+    @setTooltip ""
+    @setMutator(new Blockly.Mutator(['position_mutator','width_mutator','height_mutator'])); # ,'color_mutator' TODO
+    @extraProperties = []
+
+  mutationToDom: BlocklyExtraPropertiesPatch.mutationToDom
+  domToMutation: BlocklyExtraPropertiesPatch.domToMutation
+  decompose: BlocklyExtraPropertiesPatch.decompose
+  compose: BlocklyExtraPropertiesPatch.compose
+  extraPropertySetter: BlocklyExtraPropertiesPatch.extraPropertySetter
+  saveConnections: BlocklyExtraPropertiesPatch.saveConnections
+  doHideExtras: BlocklyExtraPropertiesPatch.doHideExtras
+  hideExtras: BlocklyExtraPropertiesPatch.hideExtras
+
+
 Blockly.Blocks["circle_element"] =
   init: ->
     @setColour 300
-    @appendValueInput("name").appendField "Luo pallo"
+    @appendValueInput("name").appendField "Luo ympyrä"
     @setPreviousStatement true
     @setNextStatement true
     @setTooltip ""
@@ -72,17 +92,21 @@ buildPropertiesObjectAsString = (pairs) ->
   eo+= "}"
   return eo
 
-Blockly.JavaScript["circle_element"] = (block) ->
+createElementJavascript = (block) ->
   inputs = {}
   $.each block.inputList, (i,v) ->
     inputs[v.name.replace("_mutator","")] = Blockly.JavaScript.valueToCode(block, v.name, Blockly.JavaScript.ORDER_ATOMIC)
-
+  # define type by block
+  inputs['type'] = "'rectangle'" if block.type is "rectangle_element"
+  inputs['type'] = "'circle'" if block.type is "circle_element"
+  # property object as string
   pos = buildPropertiesObjectAsString inputs
-
   if inputs.radius?
-    # collects an error if we have it defined (see for example Vars.errorCollector)
-    Errors.collect('createBall_variable', {values: {radius:inputs.radius}, block: block})
-
-  code = "createBall("+pos+");\n"
-
+    # collects an error only if we have it defined (see for example Vars.errorCollector)
+    # otherwise passes without errors
+    Errors.collect('createElement_variable', {values: {radius:inputs.radius}, block: block})
+  code = "createElement("+pos+");\n"
   code
+
+Blockly.JavaScript["rectangle_element"] = createElementJavascript
+Blockly.JavaScript["circle_element"] = createElementJavascript

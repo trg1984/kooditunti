@@ -23,24 +23,32 @@
 </div>
 <div id="tip-set-var" class="exercise-tip-placement" style="top:10px;left:0px;width:150px;"></div>
 <div id="tip-get-var" class="exercise-tip-placement" style="top:70px;left:0px;width:150px;"></div>
+<div id="tip-code" class="exercise-tip-placement" style="top:240px;left:300px"></div>
 <ol class="joyride-list" data-joyride>
   <li data-button="Seuraava" class="wide hide-modal-next" data-options="prev_button: false">
     <h2>Muuttujat</h2>
-    <p>Muuttujiin varastoidaan arvoja. Varastoituja arvoja voidaan kutsua ohjelmassa viittaamalla muuttujaan.</p>
-    <p>Muuttujan nimen voi määrittää vapaasti, ja siihen tallennettu arvo on käytettävissä
-    niin kauan kuin se on tallessa. Muuttujan arvo voi myös muuttua matkan varrella.</p>
+    <p>Muuttuja on yksi tärkeimpiä ohjelmoinnin peruskäsitteitä.</p>
+    <p>Muuttujia käytetään arvojen varastoimiseen. Muuttujaan varastoitua arvoa voidaan kutsua myöhemmin ohjelmaa suoritettaessa.</p>
+    <p>Muuttuja on siis kuin housujesi tasku, jonne laitat jotain jota koet myöhemmin tarvitsevasi.</p>
   </li>
-  <li class="wide hide-modal-next" data-button="Seuraava" data-options="prev_button: true">
-    <p>Tässä tehtävässä osa ohjelmakoodista on jo valmiina, mutta se ei kuitenkaan vielä toimi, koska muuttujaa nimeltään
-    <i>pallon_halkaisija</i> ei ole määritelty.</p>
-    <p>Tehtävänäsi on määritellä tämä puuttuva muuttuja ja antaa sille jokin arvo.</p>
-  </li>
-  <li data-id="tip-set-var" data-button="Seuraava" data-options="tip_location: left; prev_button: true">
-    <p>Tällä palikalla pystyt luomaan uusia muuttujia. Pudotusvalikosta pystyt määrittämään muuttujan nimen,
+  <li data-id="tip-set-var" class="wide" data-button="Seuraava" data-options="tip_location: left; prev_button: true">
+    <p>Tällä palikalla pystyt luomaan uuden muuttujan. Pudotusvalikosta pystyt määrittämään muuttujan nimen,
     ja tyhjään kohtaan asetetaan muuttujan uusi arvo.</p>
+    <p>Muuttujan nimen voi määrittää vapaasti, mutta yleensä on tapana käyttää jotain kuvaavaa (esimerkiksi jos muuttujasi sisältää
+    käyttäjän hiiren klikkausten määrän, voisi sen nimi olla "klikkauksia")</p>
   </li>
-  <li data-id="tip-get-var" data-button="Sulje ohje" data-options="tip_location: left; prev_button: true">
+  <li data-id="tip-get-var" class="wide" data-button="Seuraava" data-options="tip_location: left; prev_button: true">
     <p>Tämä palikka palauttaa pudotusvalikosta valitun muuttujan arvon.</p>
+    <p>Muuttujaan tallennettu arvo on käytettävissä koko ohjelman suorituksen ajan, sen jälkeen kun muuttujan arvo on asetettu (ylempi palikka).</p>
+    <p>Muuttujan arvoa pystyy myös muuttamaan ohjelman suorituksen aikana yksinkertaisesti asettamalla sille uusi arvo.</p>
+  </li>
+  <li data-id="tip-code" class="wide hide-modal-next" data-button="Seuraava" data-options="prev_button: true; tip_location: top;">
+    <p>Tässä tehtävässä osa ohjelmakoodista on jo valmiina, mutta ohjelma ei kuitenkaan vielä toimi, koska muuttujaa nimeltään
+    <i>pallon_halkaisija</i> ei ole määritelty.</p>
+  </li>
+  <li data-button="Aloita">
+    <!--<p>Tehtävänäsi on määritellä tämä puuttuva muuttuja ja antaa sille jokin arvo.</p>-->
+    <p>Tehtävänäsi on määritellä muuttuja <i>pallon_halkaisija</i> ja antaa sille jokin arvo.</p>
   </li>
 </ol>
 {% endif %}
@@ -50,10 +58,10 @@
   <h2>Tehtävä</h2>
   <p>Testaa tekstin lisäämistä kentälle. Kokeile myös tekstin yhdistämistä ja käytä muuttujia tekstin lähteenä.</p>
 </div>
-<div id="tip1" class="exercise-tip-placement" style="top:120px;left:20px;"></div>
-<div id="tip1-5" class="exercise-tip-placement" style="top:180px;left:20px;"></div>
-<div id="tip2" class="exercise-tip-placement" style="top:245px;left:20px;"></div>
-<div id="tip3" class="exercise-tip-placement" style="top:5px;left:20px;"></div>
+<div id="tip1" class="exercise-tip-placement" style="top:120px;left:0px;width:150px;"></div>
+<div id="tip1-5" class="exercise-tip-placement" style="top:180px;left:0px;width:150px;"></div>
+<div id="tip2" class="exercise-tip-placement" style="top:245px;left:0px;width:150px;"></div>
+<div id="tip3" class="exercise-tip-placement" style="top:5px;left:0px;width:150px;"></div>
 <div id="tip4" class="exercise-tip-placement" style="top:124px;left:400px;"></div>
 <ol class="joyride-list" data-joyride>
   <li data-button="Seuraava" class="wide hide-modal-next" data-options="prev_button: false;">
@@ -91,7 +99,7 @@
   <p>Luo kentälle pallo ja teksti joka kertoo kuinka monta kertaa palloa on klikattu.</p>
   <p><strong>Vinkki:</strong> tallenna klikkausten määrä muuttujaan ja muuta muuttujan arvoa klikatessa</p>
 </div>
-<div id="tip-when" class="exercise-tip-placement" style="top:220px;left:170px;"></div>
+<div id="tip-when" class="exercise-tip-placement" style="top:190px;left:170px;"></div>
 <ol class="joyride-list" data-joyride>
   <li data-button="Seuraava" class="wide" data-options="prev_button: false;">
     <h2>Muuttuva muuttuja</h2>
@@ -104,6 +112,7 @@
   </li>
   <li data-button="Aloita" class="wide">
     <p>Pystytkö luomaan kentälle pallon, jota klikatessa kentälle ilmestyy teksti, joka kertoo kuinka monta kertaa palloa on klikattu?</p>
+    <p>Tehtävä on hieman edellisiä hankalampi, joten kannattaa aloittaa ihan vaikka sillä että saat jotain tapahtumaan kun palloa klikataan ja vasta sen jälkeen miettiä miten se voisi laskea käyttäjän klikkaukset.</p>
   </li>
 </ol>
 <div id="evaluation-selects">
@@ -113,26 +122,4 @@
 </div>
 {% endif %}
 
-{% endblock %}
-
-{% block texts %}
-<div class="level1_goal">
-  <p>Muuttujiin varastoidaan arvoja, joita voidaan ohjelmakoodissa myöhemmin kutsua viittaamalla muuttujaan.
-  Tässä harjoituksessa tehtävänä on saada luotua kentälle pallo.</p>
-
-  <p>Ohjelmakoodi ei kuitenkaan vielä toimi, koska muuttujaa nimeltään pallon_halkaisija ei ole määritelty.
-  Määrittele muuttuja ja anna sille jokin arvo.</p>
-
-  <p>Muuttujan nimen voi määrittää vapaasti, ja siihen tallennettu arvo on käytettävissä
-  niin usein kuin se on tallessa. Muuttujan arvo voi myös muuttua matkan varrella.</p>
-</div>
-
-<div class="level2_goal">
-  <p>Tutustutaan tekstin piirtämiseen ja yhdistelyyn</p>
-</div>
-
-<div class="level3_goal">
-  <p>Edellisillä tasoilla opit luomaan muuttujia ja tekstiä.</p>
-  <p>Otetaan opitut asiat käyttöön, ja luodaan kentälle teksti joka muuttuu samalla kun muuttujan arvo vaihtuu</p>
-</div>
 {% endblock %}

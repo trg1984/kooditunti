@@ -1,6 +1,11 @@
 <xml id="toolbox" style="display: none">
   <category name="Elementit">
     <block type="circle_element">
+      <value name="name">
+        <block type="text">
+          <field name="TEXT">Pallo</field>
+        </block>
+      </value>
     </block>
     <block type="text_element">
       <value name="text">

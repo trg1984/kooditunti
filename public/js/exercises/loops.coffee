@@ -140,6 +140,11 @@
         vy: 0 # velocity in y-direction
         width: Stage.blockWidth-1
         height: Stage.blockHeight-1
+        styles:
+          fillStyle: "#999999"
+          #strokeStyle: c[1]
+          #lineWidth: 1
+          #angleIndicator: c[1]
       when 'goal' then Physics.body "convex-polygon",
         x: (posX+Stage.blockWidth/2)+1 # x-coordinate
         y: (posY+Stage.blockHeight/2)+1 # y-coordinate
@@ -151,6 +156,10 @@
           { x: 8, y: 14 },
           { x: 16, y: 0 }
         ]
+        styles:
+          fillStyle: "#FF9900"
+          strokeStyle: "#CC6600"
+          lineWidth: 3
     elem.treatment = 'static'
     return elem
 

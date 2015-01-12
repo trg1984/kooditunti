@@ -1,21 +1,19 @@
 <xml id="toolbox" style="display: none">
   <block type="variables_get"></block>
+  <block type="math_number">
+    <field name="NUM">50</field>
+  </block>
   <block type="text_element">
-    <mutation properties="position"></mutation>
     <value name="text">
       <block type="text">
         <field name="TEXT">Teksti</field>
       </block>
     </value>
-    <value name="position_mutator">
-      <block type="coordinate_array_simple"></block>
-    </value>
   </block>
-  <block type="prompt"></block>
-  <block type="controls_if">
-    <mutation else="1"></mutation>
-    <value name="IF0">
-      <block type="logic_compare"></block>
-    </value>
-  </block>
+  <!--<block type="controls_if">-->
+    <!--<mutation else="1"></mutation>-->
+    <!--<value name="IF0">-->
+      <!--<block type="logic_compare"></block>-->
+    <!--</value>-->
+  <!--</block>-->
 </xml>

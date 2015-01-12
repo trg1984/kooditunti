@@ -22,12 +22,16 @@
       height: Stage.height-Stage.coordsTopSize
       meta: false # don't display meta data
       styles:
-        # set colors for the circle bodies
         line:
           strokeStyle: "#351024"
+        rectangle:
+          strokeStyle: "#351024"
+          lineWidth: 2
+          fillStyle: "#d33682"
+          #angleIndicator: "#351024"
         circle:
           strokeStyle: "#351024"
-          lineWidth: 1
+          lineWidth: 2
           fillStyle: "#d33682"
           angleIndicator: "#351024"
     )

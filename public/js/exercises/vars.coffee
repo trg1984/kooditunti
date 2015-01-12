@@ -40,19 +40,15 @@
       when 4 then
 
   errorCollector: (id, data) ->
-    err = Exercises.commonErrors(id,data)
-    if @level is 1 and Errors.collected.length is 0
-      if id is "createBall_variable"
+    if @level is 1
+      if id is "createElement_variable"
         isNumberAlready = not isNaN parseInt(data.values.radius)
-        err = "Halkaisija täytyy antaa muuttujana" if isNumberAlready
-      if id is "createBall_undefined"
+        err = "Koko täytyy antaa muuttujana" if isNumberAlready
+      if id is "createElement_undefined"
         radius = data.values.radius
         isUndefined = radius.type is 'undefined' or radius.data is 0
-        err = "En tiedä pallon halkaisijaa" if isUndefined
+        err = "En tiedä pallon kokoa" if isUndefined
     return err
-
-  createBall: (name,radius) ->
-    Stage.createElement(name,[7,7],{type: 'circle', radius: radius, settable: true})
 
   onClick: (elem, callback, intrp, scope) ->
     $('#viewport').on 'click', (event) ->
@@ -73,23 +69,9 @@
         radius: props.radius
 
   interpreterApi: (interpreter, scope) ->
-    #wrapper = (name,size) ->
-      #if typeof size.data isnt "undefined" and size.data isnt 0
-        #Vars.createBall(name.data,size.data)
-      #else
-        #msg = 'En tiedä pallon halkaisijaa. Olethan asettanut sille jonkin arvon?'
-        #modalPos = JediMaster.calculatePositionByBlock(Exercises.activeBlock)
-        #JediMaster.pointModalWithGuidance(msg, modalPos)
-        #Exercises.endExecution("nodialog")
-    #interpreter.setProperty scope, "createBall", interpreter.createNativeFunction(wrapper)
-
     wrapper = (text) ->
       if typeof text.data isnt "undefined"
         Api.createText(text.data)
-      else
-        msg = 'En tiedä pallon halkaisijaa. Olethan asettanut sille jonkin arvon?'
-        modalPos = JediMaster.calculatePositionByBlock(Exercises.activeBlock)
-        JediMaster.pointModalWithGuidance(msg, modalPos)
     interpreter.setProperty scope, "createText", interpreter.createNativeFunction(wrapper)
 
     wrapper = (elem,callback) ->
