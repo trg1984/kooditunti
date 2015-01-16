@@ -12,18 +12,44 @@
     Stage.textElements.push newTextElem unless textEdited
 
   createElement: (props) ->
-    # validate or set defaults here
-    radius =  if props.radius? then Helpers.epValidate('radius', props.radius) else 50
-    width =  if props.width? then Helpers.epValidate('width', props.width) else 100
-    height =  if props.height? then Helpers.epValidate('height', props.height) else 100
-    position = if props.position? then Helpers.epValidate('position', props.position) else [1,1]
-    type = if props.type? and props.type in ['circle','rectangle'] then props.type else 'circle'
-    # REFACTOR: toooo much repetition...
-    Stage.createElement(props.name,position,{type:type,height:height,width:width,radius:radius,settable:true})
+    props = ApiHelpers.validateElementProperties(props)
+    # set required
+    props.position = ApiHelpers.defaultPropertyValues.position unless props.position
+    props.width = ApiHelpers.defaultPropertyValues.width unless props.width
+    props.height = ApiHelpers.defaultPropertyValues.height unless props.height
+    if props.type is "circle"
+      props.radius = ApiHelpers.defaultPropertyValues.radius unless props.radius
+    $.merge props, {settable: true}
+    # REFACTOR: name and position as seperate argument bad
+    Stage.createElement(props.name,props.position,props)
+
+  editElement: (elementName,props) ->
+    props = ApiHelpers.validateElementProperties(props)
+    Stage.editElement(elementName,props)
+
+  getElementProperty: (elementName,property) ->
+    Stage.getElementProperty(elementName,property)
 
   onClick: (elem, callback, intrp, scope) ->
     $('#viewport').on 'click', (event) ->
       body = Stage.findClickTarget(@,event,elem)
       if body
-        intrp.stateStack.unshift({node: callback.node.body, scope: scope})
+        intrp.stateStack.unshift({node: callback.node.body, scope: scope, thisExpression: scope})
         intrp.run()
+
+  onKeypress: (key, callback, intrp, scope) ->
+    Mousetrap.bind key, ->
+      intrp.stateStack.unshift({node: callback.node.body, scope: scope, thisExpression: scope})
+      intrp.run()
+
+  execQueue: []
+  execWaitTime: 0
+  addToExecQueue: (funct, seconds) ->
+    time = seconds * 1000
+    execWaitTime += time
+    setTimeout (->
+      funct()
+      execWaitTime -= time
+      return
+    ), execWaitTime
+    return

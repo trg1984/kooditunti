@@ -1,0 +1,125 @@
+{% extends "../../layouts/exercises.html" %}
+
+{% block js %}
+{% parent %}
+<script src="/js/exercises/vars.js"></script>
+<script>Exercises.currentExercise = Vars;</script>
+<script>Exercises.init();</script>
+{% endblock %}
+
+{% block steps %}
+<ul>
+  <li id="vars_level1_link"{% if level == 1 %} class="active"{% endif %}><a href="/harjoitukset/vars/1">1</a></li>
+  <li id="vars_level2_link"{% if level == 2 %} class="active"{% endif %}><a href="/harjoitukset/vars/2">2</a></li>
+  <li id="vars_level3_link"{% if level == 3 %} class="active"{% endif %}><a href="/harjoitukset/vars/3">3</a></li>
+</ul>
+{% endblock %}
+
+{% block exercise_tips %}
+{% if level == 1 %}
+<div class="task-overview">
+  <h2>Tehtävä</h2>
+  <p>Tehtävänäsi on määritellä muuttuja <i>pallon_halkaisija</i> ja antaa sille jokin arvo.</p>
+</div>
+<div id="tip-set-var" class="exercise-tip-placement" style="top:10px;left:0px;width:150px;"></div>
+<div id="tip-get-var" class="exercise-tip-placement" style="top:70px;left:0px;width:150px;"></div>
+<div id="tip-code" class="exercise-tip-placement" style="top:240px;left:300px"></div>
+<ol class="joyride-list" data-joyride>
+  <li data-button="Seuraava" class="wide hide-modal-next" data-options="prev_button: false">
+    <h2>Muuttujat</h2>
+    <p>Muuttuja on yksi tärkeimpiä ohjelmoinnin peruskäsitteitä.</p>
+    <p>Muuttujia käytetään arvojen varastoimiseen. Muuttujaan varastoitua arvoa voidaan kutsua myöhemmin ohjelmaa suoritettaessa.</p>
+    <p>Muuttuja on siis kuin housujesi tasku, jonne laitat jotain jota koet myöhemmin tarvitsevasi.</p>
+  </li>
+  <li data-id="tip-set-var" class="wide" data-button="Seuraava" data-options="tip_location: left; prev_button: true">
+    <p>Tällä palikalla pystyt luomaan uuden muuttujan. Pudotusvalikosta pystyt määrittämään muuttujan nimen,
+    ja tyhjään kohtaan asetetaan muuttujan uusi arvo.</p>
+    <p>Muuttujan nimen voi määrittää vapaasti, mutta yleensä on tapana käyttää jotain kuvaavaa (esimerkiksi jos muuttujasi sisältää
+    käyttäjän hiiren klikkausten määrän, voisi sen nimi olla "klikkauksia")</p>
+  </li>
+  <li data-id="tip-get-var" class="wide" data-button="Seuraava" data-options="tip_location: left; prev_button: true">
+    <p>Tämä palikka palauttaa pudotusvalikosta valitun muuttujan arvon.</p>
+    <p>Muuttujaan tallennettu arvo on käytettävissä koko ohjelman suorituksen ajan, sen jälkeen kun muuttujan arvo on asetettu (ylempi palikka).</p>
+    <p>Muuttujan arvoa pystyy myös muuttamaan ohjelman suorituksen aikana yksinkertaisesti asettamalla sille uusi arvo.</p>
+  </li>
+  <li data-id="tip-code" class="wide hide-modal-next" data-button="Seuraava" data-options="prev_button: true; tip_location: top;">
+    <p>Tässä tehtävässä osa ohjelmakoodista on jo valmiina, mutta ohjelma ei kuitenkaan vielä toimi, koska muuttujaa nimeltään
+    <i>pallon_halkaisija</i> ei ole määritelty.</p>
+  </li>
+  <li data-button="Aloita">
+    <!--<p>Tehtävänäsi on määritellä tämä puuttuva muuttuja ja antaa sille jokin arvo.</p>-->
+    <p>Tehtävänäsi on määritellä muuttuja <i>pallon_halkaisija</i> ja antaa sille jokin arvo.</p>
+  </li>
+</ol>
+{% endif %}
+
+{% if level == 2 %}
+<div class="task-overview">
+  <h2>Tehtävä</h2>
+  <p>Testaa tekstin lisäämistä kentälle. Kokeile myös tekstin yhdistämistä ja käytä muuttujia tekstin lähteenä.</p>
+</div>
+<div id="tip1" class="exercise-tip-placement" style="top:120px;left:0px;width:150px;"></div>
+<div id="tip1-5" class="exercise-tip-placement" style="top:180px;left:0px;width:150px;"></div>
+<div id="tip2" class="exercise-tip-placement" style="top:245px;left:0px;width:150px;"></div>
+<div id="tip3" class="exercise-tip-placement" style="top:5px;left:0px;width:150px;"></div>
+<div id="tip4" class="exercise-tip-placement" style="top:124px;left:400px;"></div>
+<ol class="joyride-list" data-joyride>
+  <li data-button="Seuraava" class="wide hide-modal-next" data-options="prev_button: false;">
+    <h2>Tekstiä kentälle</h2>
+    <p>Tässä tehtävässä tutustutaan tekstin piirtämiseen kentälle.</p>
+    <!--<p>Pystyt myös luomaan useampia tekstinpätkiä jotka näytetään peräkkäin.</p>-->
+    <!--  Voit vapaasti käyttää esiteltyjä palikoita tekstin piirtämiseen kentälle. -->
+  </li>
+  <li data-id="tip1" data-button="Seuraava" data-options="tip_location: right; prev_button: true;">
+    <p>Tällä palikalla pystyt luomaan uutta tekstiä.</p>
+  </li>
+  <li data-id="tip1-5" data-button="Seuraava" data-options="tip_location: left; prev_button: true">
+    <p>Kun yhdistät tähän palikkaan kaksi muuta palikkaa, niiden teksti yhdistetään toisiinsa. Voit käyttää myös muuttujia tekstin lähteenä.</p>
+  </li>
+  <li data-id="tip2" data-button="Seuraava" data-options="tip_location: right; prev_button: true;">
+    <p>Tarvitset tätä palikkaa siihen että teksti piirtyy kentälle.</p>
+  </li>
+  <li data-id="tip3" data-button="Seuraava" data-options="tip_location: right; prev_button: true;">
+    <p>Pystyt myös käyttämään edellisellä tasolla opittuja muuttujia tekstin kanssa.</p>
+  </li>
+  <li data-id="tip4" data-button="Sulje ohje" data-options="tip_location: right; prev_button: true;">
+    <p>Tämä on vain esimerkki. Käytä vapaasti mielikuvitustasi ja kirjoita jotain omaa!</p>
+  </li>
+</ol>
+<div id="evaluation-selects">
+  <div>Sain kentälle piirrettyä omaa tekstiäni</div>
+  <div>Testasin useamman tekstinpätkän lisäämistä peräkkäin</div>
+  <div>Onnistuin käyttämään muuttujia tekstin säilömiseen</div>
+</div>
+{% endif %}
+
+{% if level == 3 %}
+<div class="task-overview">
+  <h2>Tehtävä</h2>
+  <p>Luo kentälle pallo ja teksti joka kertoo kuinka monta kertaa palloa on klikattu.</p>
+  <p><strong>Vinkki:</strong> tallenna klikkausten määrä muuttujaan ja muuta muuttujan arvoa klikatessa</p>
+</div>
+<div id="tip-when" class="exercise-tip-placement" style="top:190px;left:170px;"></div>
+<ol class="joyride-list" data-joyride>
+  <li data-button="Seuraava" class="wide" data-options="prev_button: false;">
+    <h2>Muuttuva muuttuja</h2>
+    <p>Edellisillä tasoilla opit luomaan muuttujia ja tekstiä. Otetaan siis opitut asiat käyttöön ja luodaan kentälle muuttuvaa tekstiä!</p>
+    <div class="after-step-method" style="display:none" data-after-step="Exercises.openFirstCategory()"></div>
+  </li>
+  <li data-id="tip-when" data-button="Seuraava" class="wide" data-options="prev_button: true;">
+    <p><strong>Uusi palikka:</strong> tämän palikan sisään pystyt lisäämään toisia palikoita, jotka suoritetaan kun pudotusvalikosta valittua elementtiä klikataan.</p>
+    <p>Huomaa että elementin täytyy olla koodialueella jotta se näkyy pudotusvalikossa.</p>
+  </li>
+  <li data-button="Aloita" class="wide">
+    <p>Pystytkö luomaan kentälle pallon, jota klikatessa kentälle ilmestyy teksti, joka kertoo kuinka monta kertaa palloa on klikattu?</p>
+    <p>Tehtävä on hieman edellisiä hankalampi, joten kannattaa aloittaa ihan vaikka sillä että saat jotain tapahtumaan kun palloa klikataan ja vasta sen jälkeen miettiä miten se voisi laskea käyttäjän klikkaukset.</p>
+  </li>
+</ol>
+<div id="evaluation-selects">
+  <div>Sain kentälle luotua pallon</div>
+  <div>Sain piirrettyä kentälle tekstiä</div>
+  <div>Kun pallosta klikataan, tekstin arvo muuttuu.</div>
+</div>
+{% endif %}
+
+{% endblock %}

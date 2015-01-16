@@ -10,26 +10,15 @@
     return data unless key
     return data[key]
 
-  # extra properties validator
-  # for absolutely confirming that user does not set values that won't work
-  epValidate: (key,value) ->
-    return null if value is ""
-    rv = switch key
-      when 'width', 'height'
-        nv = value
-        nv = 550 if value > 550
-        nv = 1 if value < 0 or isNaN parseInt(value)
-        nv
-      when 'radius'
-        nv = value
-        nv = 250 if value > 250
-        nv = 1 if value < 0 or isNaN parseInt(value)
-        nv
-      when 'position'
-       if typeof value isnt 'object' and value.length isnt 2
-       then @epDefaults.position
-       else value
-    return rv
+  closest: (num, arr) ->
+    curr = arr[0]
+    diff = Math.abs(num - curr)
+    val = 0
 
-  epDefaults:
-    position: [1,1]
+    while val < arr.length
+      newdiff = Math.abs(num - arr[val])
+      if newdiff < diff
+        diff = newdiff
+        curr = arr[val]
+      val++
+    curr

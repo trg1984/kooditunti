@@ -1,0 +1,10 @@
+{% extends "../layouts/exercises.html" %}
+
+{% block js %}
+{% parent %}
+<script src="/js/playground.js"></script>
+<script>Exercises.currentExercise = Playground;</script>
+<script>Exercises.init();</script>
+{% endblock %}
+
+{% block steps %}<br />{% endblock %}

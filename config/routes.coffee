@@ -2,6 +2,7 @@
 mongoose = require("mongoose")
 home = require("home")
 exercises = require("exercises")
+playground = require("playground")
 surveys = require("surveys")
 
 # Expose
@@ -23,6 +24,9 @@ module.exports = (app, passport) ->
 
   app.get "/harjoitukset/ifs/:level", exercises.ifs
   app.redirect "/harjoitukset/ifs", "/harjoitukset/ifs/1";
+
+  # playground
+  app.get "/vapaa-kentta", playground.index
 
   # surveys
   app.get "/alkukysely", surveys.beginning

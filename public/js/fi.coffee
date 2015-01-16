@@ -6,3 +6,4 @@
       width: 'leveys'
       height: 'korkeus'
       color: 'väri'
+      velocity: 'kiihtyvyys'

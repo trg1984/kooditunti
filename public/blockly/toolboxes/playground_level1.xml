@@ -1,85 +1,20 @@
 <xml id="toolbox" style="display: none">
   <category name="Pelikenttä">
     <category name="Elementit">
-      <category name="Luo uusi">
-        <block type="rectangle_element">
-          <value name="name">
-            <block type="text">
-              <field name="TEXT">[anna nimi]</field>
-            </block>
-          </value>
-          <value name="width">
-            <block type="math_number">
-              <field name="NUM">100</field>
-            </block>
-          </value>
-          <value name="height">
-            <block type="math_number">
-              <field name="NUM">100</field>
-            </block>
-          </value>
-          <value name="position">
-            <block type="coordinate_array">
-              <value name="xcoord">
-                <block type="math_number">
-                  <field name="NUM">100</field>
-                </block>
-              </value>
-              <value name="ycoord">
-                <block type="math_number">
-                  <field name="NUM">10</field>
-                </block>
-              </value>
-            </block>
-          </value>
-          <value name="velocity">
-            <block type="coordinate_array">
-              <value name="xcoord">
-                <block type="math_number">
-                  <field name="NUM">0.1</field>
-                </block>
-              </value>
-              <value name="ycoord">
-                <block type="math_number">
-                  <field name="NUM">0</field>
-                </block>
-              </value>
-            </block>
-          </value>
-          <value name="colour">
-            <block type="colour_select">
-              <field name="colour">#ffffff</field>
-            </block>
-          </value>
-        </block>
-      </category>
-      <category name="Muokkaa">
-        <block type="set_element_properties">
-          <value name="statement">
-          <block type="set_property"></block>
-          </value>
-        </block>
-      </category>
+      <block type="text_element"></block>
+      <block type="rectangle_element"></block>
+      <block type="circle_element"></block>
+      <block type="edit_element"></block>
+      <block type="get_element_property"></block>
     </category>
     <category name="Ominaisuudet">
       <block type="gravity_switch"></block>
+      <block type="coordinate_array_simple"></block>
+      <block type="coordinate_array"></block>
     </category>
     <category name="Tapahtumat">
-      <block type="when">
-        <value name="event">
-          <block type="event_click"></block>
-        </value>
-      </block>
-      <block type="when">
-        <value name="event">
-          <block type="event_keydown"></block>
-        </value>
-      </block>
-      <block type="when">
-        <value name="event">
-          <block type="event_hitarea"></block>
-        </value>
-      </block>
+      <block type="when_clicked"></block>
+      <block type="when_pressed"></block>
     </category>
   </category>
   <category name="Muuttujat" custom="VARIABLE"></category>

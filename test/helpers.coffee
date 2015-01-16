@@ -1,5 +1,15 @@
 exports.pageArray = [
-  '/'
   '/harjoitukset'
-  '/harjoitukset/maze'
+  '/harjoitukset/basics/1'
+  '/harjoitukset/basics/2'
+  '/harjoitukset/basics/3'
+  '/harjoitukset/loops/1'
+  '/harjoitukset/loops/2'
+  '/harjoitukset/loops/3'
+  '/harjoitukset/ifs/1'
+  '/harjoitukset/ifs/2'
+  '/harjoitukset/ifs/3'
+  '/harjoitukset/vars/1'
+  '/harjoitukset/vars/2'
+  '/harjoitukset/vars/3'
 ]

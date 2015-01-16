@@ -40,7 +40,7 @@
     while clauseBlock
       shortType = clauseBlock.type.replace("_mutator","")
       switch shortType
-        when "color", "position", "radius", "height", "width"
+        when "color", "position", "radius", "height", "width", "velocity"
           input = @extraPropertySetter shortType
           # reconnect children
           input.connection.connect clauseBlock.valueConnection_ if clauseBlock.valueConnection_
@@ -89,3 +89,14 @@
       v.dispose()
 
     pb.mutator.workspace_.flyout_.show(extrasToShow)
+
+  _i: ->
+    mutationToDom: @mutationToDom
+    domToMutation: @domToMutation
+    decompose: @decompose
+    compose: @compose
+    extraPropertySetter: @extraPropertySetter
+    saveConnections: @saveConnections
+    doHideExtras: @doHideExtras
+    hideExtras: @hideExtras
+

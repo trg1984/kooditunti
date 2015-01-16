@@ -37,6 +37,14 @@ Blockly.Blocks["position_mutator"] = init: ->
   @contextMenu = false
   return
 
+Blockly.Blocks["velocity_mutator"] = init: ->
+  @setColour 210
+  @appendDummyInput().appendField "kiihtyvyys"
+  @setPreviousStatement true
+  @setNextStatement true
+  @contextMenu = false
+  return
+
 Blockly.Blocks["color_mutator"] = init: ->
   @setColour 210
   @appendDummyInput().appendField "väri"

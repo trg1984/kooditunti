@@ -5,6 +5,34 @@
   -ms-transform: translateY(-50%);
   transform: translateY(-50%); }
 
+#topnavi ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+#topnavi li {
+  float: left;
+  margin-left: 10px;
+  margin-top: 20px; }
+#topnavi a {
+  display: block;
+  padding: 5px 14px 3px 14px; }
+#topnavi a {
+  background-color: #f2f2f2;
+  color: #777; }
+#topnavi a {
+  font-size: 14px;
+  /*font-family: $font;*/ }
+#topnavi a {
+  -webkit-border-top-left-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  -moz-border-radius-topright: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px; }
+#topnavi a.active, #topnavi a:hover {
+  color: #f2f2f2;
+  background-color: #777; }
+
 #exercise-links-page {
   margin: 0px auto;
   max-width: 600px; }

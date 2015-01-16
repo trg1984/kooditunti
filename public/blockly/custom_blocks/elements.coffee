@@ -16,6 +16,38 @@ Blockly.JavaScript["coordinate_array_simple"] = (block) ->
   ypos = if ypos is "Y" then 1 else ypos
   return ["["+xpos+","+ypos+"]",Blockly.JavaScript.ORDER_ATOMIC]
 
+Blockly.Blocks["coordinate_array"] = init: ->
+  @setColour 230
+  @appendValueInput("xcoord").setCheck("Number").appendField "X"
+  @appendValueInput("ycoord").setCheck("Number").appendField "Y"
+  @setOutput true, "Array"
+  @setInputsInline true
+  @setTooltip ""
+  return
+
+Blockly.JavaScript["coordinate_array"] = (block) ->
+  value_xcoord = Blockly.JavaScript.valueToCode(block, "xcoord", Blockly.JavaScript.ORDER_ATOMIC)
+  value_ycoord = Blockly.JavaScript.valueToCode(block, "ycoord", Blockly.JavaScript.ORDER_ATOMIC)
+  code = "[" + value_xcoord + "," + value_ycoord + "]"
+  [code,Blockly.JavaScript.ORDER_ATOMIC]
+
+Blockly.Blocks["get_element_property"] = init: ->
+  @setColour(230);
+  elements = Stage.settableElementsDropdownValues()
+  properties = [["X-koordinaatti","xcoord"],["Y-koordinaatti","ycoord"]]
+  @appendDummyInput("position").setAlign(Blockly.ALIGN_RIGHT).appendField "palauta"
+    .appendField new Blockly.FieldDropdown($.merge([["[elementin]","0"]],elements)), "element"
+    .appendField new Blockly.FieldDropdown($.merge([["[ominaisuus]","0"]],properties)), "property"
+  @setOutput(true, "Array");
+  @setInputsInline(true);
+
+Blockly.JavaScript["get_element_property"] = (block) ->
+  element = block.getFieldValue("element")
+  element = if element is "0" then null else element
+  property = block.getFieldValue("property")
+  property = if property is "0" then null else property
+  return ["getElementProperty('"+element+"','"+property+"')",Blockly.JavaScript.ORDER_ATOMIC]
+
 Blockly.Blocks["text_element"] =
   init: ->
     @setColour 300
@@ -24,15 +56,7 @@ Blockly.Blocks["text_element"] =
     @setNextStatement true
     @setMutator(new Blockly.Mutator(['position_mutator'])); # ,'color_mutator' TODO
     @extraProperties = []
-
-  mutationToDom: BlocklyExtraPropertiesPatch.mutationToDom
-  domToMutation: BlocklyExtraPropertiesPatch.domToMutation
-  decompose: BlocklyExtraPropertiesPatch.decompose
-  compose: BlocklyExtraPropertiesPatch.compose
-  extraPropertySetter: BlocklyExtraPropertiesPatch.extraPropertySetter
-  saveConnections: BlocklyExtraPropertiesPatch.saveConnections
-  doHideExtras: BlocklyExtraPropertiesPatch.doHideExtras
-  hideExtras: BlocklyExtraPropertiesPatch.hideExtras
+Blockly.Blocks["text_element"] = $.extend Blockly.Blocks["text_element"], BlocklyExtraPropertiesPatch._i()
 
 Blockly.JavaScript["text_element"] = (block) ->
   value_text = Blockly.JavaScript.valueToCode(block, "text", Blockly.JavaScript.ORDER_ATOMIC)
@@ -44,41 +68,42 @@ Blockly.JavaScript["text_element"] = (block) ->
 Blockly.Blocks["rectangle_element"] =
   init: ->
     @setColour 300
-    @appendValueInput("name").appendField "Luo nelikulmio"
+    #@appendValueInput("name").appendField "Luo nelikulmio"
+    @appendDummyInput()
+      .appendField "Luo nelikulmio"
+      .appendField(new Blockly.FieldTextInput("[nimeltään]"), "name")
     @setPreviousStatement true
     @setNextStatement true
     @setTooltip ""
     @setMutator(new Blockly.Mutator(['position_mutator','width_mutator','height_mutator'])); # ,'color_mutator' TODO
     @extraProperties = []
-
-  mutationToDom: BlocklyExtraPropertiesPatch.mutationToDom
-  domToMutation: BlocklyExtraPropertiesPatch.domToMutation
-  decompose: BlocklyExtraPropertiesPatch.decompose
-  compose: BlocklyExtraPropertiesPatch.compose
-  extraPropertySetter: BlocklyExtraPropertiesPatch.extraPropertySetter
-  saveConnections: BlocklyExtraPropertiesPatch.saveConnections
-  doHideExtras: BlocklyExtraPropertiesPatch.doHideExtras
-  hideExtras: BlocklyExtraPropertiesPatch.hideExtras
-
+Blockly.Blocks["rectangle_element"] = $.extend Blockly.Blocks["rectangle_element"], BlocklyExtraPropertiesPatch._i()
 
 Blockly.Blocks["circle_element"] =
   init: ->
     @setColour 300
-    @appendValueInput("name").appendField "Luo ympyrä"
+    @appendDummyInput()
+      .appendField "Luo ympyrä"
+      .appendField(new Blockly.FieldTextInput("[nimeltään]"), "name")
     @setPreviousStatement true
     @setNextStatement true
     @setTooltip ""
     @setMutator(new Blockly.Mutator(['position_mutator','radius_mutator'])); # ,'color_mutator' TODO
     @extraProperties = []
+Blockly.Blocks["circle_element"] = $.extend Blockly.Blocks["circle_element"], BlocklyExtraPropertiesPatch._i()
 
-  mutationToDom: BlocklyExtraPropertiesPatch.mutationToDom
-  domToMutation: BlocklyExtraPropertiesPatch.domToMutation
-  decompose: BlocklyExtraPropertiesPatch.decompose
-  compose: BlocklyExtraPropertiesPatch.compose
-  extraPropertySetter: BlocklyExtraPropertiesPatch.extraPropertySetter
-  saveConnections: BlocklyExtraPropertiesPatch.saveConnections
-  doHideExtras: BlocklyExtraPropertiesPatch.doHideExtras
-  hideExtras: BlocklyExtraPropertiesPatch.hideExtras
+Blockly.Blocks["edit_element"] =
+  init: ->
+    @setColour 300
+    @appendDummyInput("name")
+      .appendField "Muokkaa elementtiä"
+      .appendField new Blockly.FieldDropdown(Stage.settableElementsDropdownValues), "element"
+    @setPreviousStatement true
+    @setNextStatement true
+    @setTooltip ""
+    @setMutator(new Blockly.Mutator(['position_mutator','width_mutator','height_mutator','radius_mutator', 'velocity_mutator'])); # ,'color_mutator' TODO
+    @extraProperties = []
+Blockly.Blocks["edit_element"] = $.extend Blockly.Blocks["edit_element"], BlocklyExtraPropertiesPatch._i()
 
 buildPropertiesObjectAsString = (pairs) ->
   eo = "{"
@@ -92,21 +117,31 @@ buildPropertiesObjectAsString = (pairs) ->
   eo+= "}"
   return eo
 
-createElementJavascript = (block) ->
+elementBlocksJavascript = (block) ->
   inputs = {}
-  $.each block.inputList, (i,v) ->
-    inputs[v.name.replace("_mutator","")] = Blockly.JavaScript.valueToCode(block, v.name, Blockly.JavaScript.ORDER_ATOMIC)
+  for i, v of block.inputList
+    name = v.name.replace("_mutator","")
+    switch name
+      when "position","width","height","radius","color","velocity" # REFACTOR: These into a global list of allowed properties
+        inputs[name] = Blockly.JavaScript.valueToCode(block, v.name, Blockly.JavaScript.ORDER_ATOMIC)
+  # get name from text field
+  inputs['name'] = "'"+block.getFieldValue("name")+"'" if block.type isnt "edit_element"
   # define type by block
   inputs['type'] = "'rectangle'" if block.type is "rectangle_element"
   inputs['type'] = "'circle'" if block.type is "circle_element"
+  # edit field has element dropdown
+  element = block.getFieldValue("element")
   # property object as string
   pos = buildPropertiesObjectAsString inputs
   if inputs.radius?
     # collects an error only if we have it defined (see for example Vars.errorCollector)
     # otherwise passes without errors
     Errors.collect('createElement_variable', {values: {radius:inputs.radius}, block: block})
-  code = "createElement("+pos+");\n"
+  if block.type is 'edit_element'
+  then code = "editElement('"+element+"',"+pos+");\n";
+  else code = "createElement("+pos+");\n"
   code
 
-Blockly.JavaScript["rectangle_element"] = createElementJavascript
-Blockly.JavaScript["circle_element"] = createElementJavascript
+Blockly.JavaScript["rectangle_element"] = elementBlocksJavascript
+Blockly.JavaScript["circle_element"] = elementBlocksJavascript
+Blockly.JavaScript["edit_element"] = elementBlocksJavascript

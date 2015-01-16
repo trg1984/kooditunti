@@ -34,7 +34,7 @@ Blockly.BlockSvg.prototype.onMouseUp_ = function(e) {
       Blockly.BlockSvg.doubleClickCallback(this);
     }
     window.blocklyBlockSecondClick = true;
-    setTimeout(function(){ window.blocklyBlockSecondClick = false; },500);
+    setTimeout(function(){ window.blocklyBlockSecondClick = false; },300);
   }
   /* PATCH END */
   Blockly.doCommand(function() {
@@ -78,7 +78,31 @@ Blockly.BlockSvg.prototype.onMouseUp_ = function(e) {
     Blockly.Css.setCursor(Blockly.Css.Cursor.OPEN);
   });
 };
-//
+
+// Invalidate waiting for second click on input click
+// Related to previous
+Blockly.Field.prototype.onMouseUp_ = function(e) {
+  // PATCH START
+  setTimeout(function(){ window.blocklyBlockSecondClick = false; },0);
+  // PATCH END
+  if ((goog.userAgent.IPHONE || goog.userAgent.IPAD) &&
+      e.layerX !== 0 && e.layerY !== 0) {
+    // iOS spawns a bogus event on the next touch after a 'prompt()' edit.
+    // Unlike the real events, these have a layerX and layerY set.
+    return;
+  } else if (Blockly.isRightButton(e)) {
+    // Right-click.
+    return;
+  } else if (Blockly.dragMode_ == 2) {
+    // Drag operation is concluding.  Don't open the editor.
+    return;
+  } else if (this.sourceBlock_.isEditable()) {
+    // Non-abstract sub-classes must define a showEditor_ method.
+    this.showEditor_();
+  }
+};
+
+
 // Create callback event for mutator icon click
 //
 Blockly.Mutator.afterClick = function() { };

@@ -18,9 +18,64 @@ Blockly.Blocks["when_clicked"] = init: ->
   return
 
 Blockly.JavaScript["when_clicked"] = (block) ->
-  #value_event = Blockly.JavaScript.valueToCode(block, "event", Blockly.JavaScript.ORDER_ATOMIC)
   element = block.getFieldValue("element")
   statements_when = Blockly.JavaScript.statementToCode(block, "when")
   code = "onClick('"+element+"', function(){\n//[STATEMENT] });\n"
   code = code.replace("//[STATEMENT]", statements_when)
+  code
+
+Blockly.Blocks["when_pressed"] = init: ->
+  @setColour 180
+  @appendDummyInput("event")
+    .appendField "kun painetaan näppäintä"
+    .appendField new Blockly.FieldDropdown([["nuoli oikealle","right"],["nuoli vasemmalle","left"],["nuoli ylös","up"],["nuoli alas","down"],["X-kirjain","x"]]), "key"
+  @appendStatementInput("when").appendField "tee"
+  @setPreviousStatement true
+  @setNextStatement true
+  return
+
+Blockly.JavaScript["when_pressed"] = (block) ->
+  key = block.getFieldValue("key")
+  statements_when = Blockly.JavaScript.statementToCode(block, "when")
+  code = "onKeypress('"+key+"', function(){\n//[STATEMENT] });\n"
+  code = code.replace("//[STATEMENT]", statements_when)
+  code
+
+Blockly.Blocks["gravity_switch"] = init: ->
+  @setColour 260
+  @appendDummyInput().appendField("aseta painovoimaksi")
+    .appendField new Blockly.FieldDropdown([ ["avaruus","space"],["maa","earth"],["kuu","moon"] ]), "gravity"
+  @setPreviousStatement true
+  @setNextStatement true
+  @setTooltip ""
+  return
+
+Blockly.JavaScript["gravity_switch"] = (block) ->
+  dropdown_gravity = block.getFieldValue("gravity")
+  switch dropdown_gravity
+    when "earth"
+      gravity_value = 0.0006
+    when "moon"
+      gravity_value = 0.00015
+    when "space"
+      gravity_value = 0
+  code = "setGravity(0,"+gravity_value+");\n"
+  code
+
+Blockly.Blocks["wait_for"] = init: ->
+  @setColour 160
+  @appendDummyInput().appendField "odota"
+  @appendValueInput("seconds").setCheck "Number"
+  @appendDummyInput().appendField "sekunti(a)"
+  @appendStatementInput "statements"
+  @setInputsInline true
+  @setPreviousStatement true
+  @setNextStatement true
+  @setTooltip ""
+  return
+
+Blockly.JavaScript["wait_for"] = (block) ->
+  value_seconds = Blockly.JavaScript.valueToCode(block, "seconds", Blockly.JavaScript.ORDER_ATOMIC)
+  statements = Blockly.JavaScript.statementToCode(block, "statements")
+  code = "addToExecQueue(function(){\n" + statements + "}," + value_seconds + ")"
   code

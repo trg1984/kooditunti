@@ -113,6 +113,16 @@
       Blockly.Xml.domToWorkspace(Blockly.getMainWorkspace(), xml);
     , "text")
 
+  hideAllBlocks: ->
+    for block in Blockly.mainWorkspace.getAllBlocks()
+      if block.outputConnection == null
+        block.setCollapsed true
+
+  showAllBlocks: ->
+    for block in Blockly.mainWorkspace.getAllBlocks()
+      if block.outputConnection == null
+        block.setCollapsed false
+
   resizeCodeArea: ->
     windowWidth = $(window).width()
     newWidth = switch
@@ -127,6 +137,7 @@
     Exercises.isExecuting = false
     Exercises.resizeCodeArea()
     Errors.collected = []
+    Blockly.JavaScript.STATEMENT_PREFIX = '';
     Exercises.interpreter.stateStack = [] if Exercises.interpreter?
     if method is "nodialog"
       Stage.reset()
@@ -144,6 +155,7 @@
     @executionCount++
     @resizeCodeArea()
     @readableCode = Blockly.JavaScript.workspaceToCode()
+    #console.log @readableCode
     if Errors.collected.length is 0
       Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
       Blockly.JavaScript.addReservedWords('highlightBlock');
@@ -153,6 +165,8 @@
       @interpreter = new Interpreter(@interpretableCode, @currentExercise.interpreterApi)
       @interpreter.initGlobalScope(@interpreter.getScope());
       #console.log @readableCode
+      #Exercises.interpreter.run()
+      #return
       nextStep = ->
         return unless Exercises.isExecuting
         #BlocklyInterface.highlight(action[1]);
@@ -165,7 +179,8 @@
           to = 0
           if nextNode && nextNode.name == "highlightBlock"
             isShort = true if Exercises.activeBlock && Exercises.activeBlock.type == "controls_repeat_ext"
-            to = if isShort then 50 else 300
+            #to = if isShort then 50 else 300
+            to = 0
           window.setTimeout nextStep, to
           issl = Exercises.interpreter.stateStack.length
         else
@@ -258,15 +273,40 @@
       Errors.report()
     interpreter.setProperty scope, "createElement", interpreter.createNativeFunction(wrapper)
 
+    wrapper = (element,po) ->
+      element = element.data
+      props = Exercises.simplifyInterpreterObject(po)
+      Api.editElement(element,props)
+    interpreter.setProperty scope, "editElement", interpreter.createNativeFunction(wrapper)
+
     wrapper = (elem,callback) ->
       Api.onClick(elem.data,callback,interpreter,scope)
     interpreter.setProperty scope, "onClick", interpreter.createNativeFunction(wrapper)
+
+    wrapper = (key,callback) ->
+      Api.onKeypress(key.data,callback,interpreter,scope)
+    interpreter.setProperty scope, "onKeypress", interpreter.createNativeFunction(wrapper)
 
     wrapper = (id) ->
       id = (if id then id.toString() else "")
       Exercises.activeBlock = Blockly.mainWorkspace.getBlockById(id)
       interpreter.createPrimitive Blockly.mainWorkspace.highlightBlock(id)
     interpreter.setProperty scope, "highlightBlock", interpreter.createNativeFunction(wrapper)
+
+    wrapper = (x,y) ->
+      Stage.setGravity(x.data, y.data);
+    interpreter.setProperty scope, "setGravity", interpreter.createNativeFunction(wrapper)
+
+    wrapper = (name,property) ->
+      prop = Api.getElementProperty(name.data, property.data);
+      interpreter.createPrimitive prop
+    interpreter.setProperty scope, "getElementProperty", interpreter.createNativeFunction(wrapper)
+
+    # without this, loops won't work with interpreter when
+    # state stack is manually filled (events do this).
+    # probably a bug in JS-Interpreter.
+    wrapper = (-> return)
+    interpreter.setProperty scope, "count", interpreter.createNativeFunction(wrapper)
 
 
   # taking stuff from jqdnr plugin

@@ -40,8 +40,9 @@
     worldInitiated = false
     Stage.initWorld()
 
-  setGravity: (type) ->
-    Stage.gravity.setAcceleration({ x: 0, y: 0.0006 })
+  setGravity: (xAcceleration, yAcceleration) ->
+    yAcceleration = 0.0006 unless yAcceleration?
+    Stage.gravity.setAcceleration({ x: 0, y: yAcceleration })
 
   initWorld: ->
     # add the renderer
@@ -135,21 +136,6 @@
     context.stroke()
     context.restore()
 
-  _createPreview: ->
-    # add a preview
-    preview = Physics.body('rectangle',
-      x: 150 # x-coordinate
-      y: 30 # y-coordinate
-      vx: 0 # velocity in x-direction
-      vy: 0 # velocity in y-direction
-      width: 30
-      height: 30
-    )
-    preview.restitution = 0
-    # add to world and elementlist
-    @world.add(preview);
-    Stage.elements['preview'] = preview
-
   createElement: (name,pos,props) ->
     type = if props and props['type'] then props['type'] else 'default'
     pixPos = @coordinatesToPixels(pos)
@@ -158,38 +144,100 @@
     elem.properties = props if props
     Stage.elements[name] = elem
     Stage.world.add(elem)
+    #console.log Stage.elements
+    #window.LASTE = elem
     return elem
 
   coordinatesToPixels: (coordPos) ->
-    return [0,0] if coordPos[0] is 0 or coordPos[1] is 0
+    xCoordinateCount = (Stage.width-Stage.coordsLeftSize)/Stage.blockWidth
+    yCoordinateCount = (Stage.height-Stage.coordsTopSize)/Stage.blockHeight
     maxWidth = Stage.width-Stage.coordsLeftSize-Stage.blockWidth
     maxHeight = Stage.height-Stage.coordsTopSize-Stage.blockHeight
-    xNum = yNum = 0;
-    for posX in [0..maxWidth] by Stage.blockWidth
-      xNum++
-      yNum = 0
-      for posY in [0..maxHeight] by Stage.blockWidth
-        yNum++
-        continue unless xNum is coordPos[0] and yNum is coordPos[1]
-        pixPos = [posX,posY]
+    xCoord = coordPos[0]
+    yCoord = coordPos[1]
+    xCoord = xCoordinateCount if coordPos[0] >= xCoordinateCount
+    yCoord = yCoordinateCount if coordPos[1] >= yCoordinateCount
+    xCoord = 1 if coordPos[0] <= 0
+    yCoord = 1 if coordPos[1] <= 0
+    xPix = yPix = []
+    for pixX in [0..maxWidth] by Stage.blockWidth
+      xPix.push pixX
+    for pixY in [0..maxHeight] by Stage.blockWidth
+      yPix.push pixY
+    pixPos = [xPix[xCoord-1],yPix[yCoord-1]]
+    return pixPos
+
+  pixelsToCoordinates: (pixPos) ->
+    maxWidth = Stage.width-Stage.coordsLeftSize-Stage.blockWidth
+    maxHeight = Stage.height-Stage.coordsTopSize-Stage.blockHeight
+    xPix = yPix = []
+    for pixX in [0..maxWidth] by Stage.blockWidth
+      xPix.push pixX
+    for pixY in [0..maxHeight] by Stage.blockWidth
+      yPix.push pixY
+
+    closestXPix = Helpers.closest(pixPos[0],xPix)
+    closestYPix = Helpers.closest(pixPos[1],yPix)
+    xCoord = xPix.indexOf(closestXPix)+1
+    yCoord = yPix.indexOf(closestYPix)+1
+    return [xCoord,yCoord]
 
     return pixPos
 
-  editElement: (name,prop) ->
-    if elem = Stage.elements[name]
-      elem.state.pos.set(41,41);
-      #elem.state.pos.x = 100
-      #elem.state.pos.y = 100
-      #
+  editElement: (elementName,props) ->
+    if Stage.elements[elementName]
+      body = Stage.elements[elementName]
+      for propertyName, propertyValue of props
+        switch propertyName
+          when "position"
+            body.treatment = "static"
+            pixPos = @coordinatesToPixels(propertyValue)
+            newX = (pixPos[0]+Stage.blockWidth/2)
+            newY = (pixPos[1]+Stage.blockWidth/2)
+            body.state.pos.set(newX, newY)
+            #body.state.pos.set propertyValue[0], propertyValue[1]
+            #setTimeout (-> body.treatment = "dynamic"), 100
+          when "velocity"
+            #currentYVel = body.state.vel.y # fetch this from the element
+            #console.log currentXVel
+            newXVel = parseFloat(propertyValue[0])
+            newYVel = parseFloat(propertyValue[1])
+            body.state.vel.set newXVel, newYVel
+          when "xvel"
+            currentYVel = body.state.vel.y # fetch this from the element
+            newXVel = parseFloat(propertyValue)
+            body.state.vel.set newXVel, currentYVel
+          when "height"
+            newHeight = parseFloat(propertyValue)
+            body.geometry.height = newHeight
+            body.view = renderer.createView(body.geometry)
+          when "width"
+            newWidth = parseFloat(propertyValue)
+            body.geometry.width = newWidth
+            body.view = renderer.createView(body.geometry)
+
+  getElementProperty: (elementName,propertyName) ->
+    if Stage.elements[elementName]
+      body = Stage.elements[elementName]
+      switch propertyName
+        when "xcoord"
+          xPixPos = Math.floor(body.state.pos.x)
+          return @pixelsToCoordinates([xPixPos,0])[0]
+        when "ycoord"
+          yPixPos = Math.floor(body.state.pos.y)
+          return @pixelsToCoordinates([0,yPixPos])[1]
+          #return body.state.pos.y
 
   settableElements: []
   getSettableElements: ->
     blocks = window.Blockly.mainWorkspace.getAllBlocks()
     Stage.settableElements = []
     $.each blocks, ->
-      if $.inArray(@type, ['circle_element']) != -1
-        nameBlock = @childBlocks_[0]
-        name = nameBlock.getFieldValue("TEXT")
+      if $.inArray(@type, ['circle_element','rectangle_element']) != -1
+        name = @getFieldValue("name")
+        return if name is "[nimeltään]"
+        #nameBlock = @childBlocks_[0]
+        #name = nameBlock.getFieldValue("name")
         Stage.settableElements.push name
 
   settableElementsDropdownValues: ->

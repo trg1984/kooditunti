@@ -2,6 +2,7 @@
 
 REPORTER = spec
 TESTS = test/**/*.coffee
+#TESTS = test/placeholder.coffee
 COMPILERS = coffee:coffee-script/register
 #test/*.js
 #test/**/**/*.js

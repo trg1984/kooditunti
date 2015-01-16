@@ -11,10 +11,6 @@
     </value>
   </block>
   <block type="circle_element">
-    <value name="name">
-      <block type="text">
-        <field name="TEXT">Pallo</field>
-      </block>
-    </value>
+    <field name="name">pallo</field>
   </block>
 </xml>
