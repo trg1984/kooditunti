@@ -4,41 +4,62 @@
 <link rel="stylesheet" type="text/css" href="/css/exercises/common.css" />
 {% endblock %}
 
+{% block js %}
+<script src="/js/app.js"></script>
+{% endblock %}
+
 {% block content %}
 <div id="topnavi">
   <ul>
-    <li><a href="/harjoitukset" class="active">Harjoitukset</a></li>
-    <li><a href="/vapaa-kentta">Vapaa-kenttä</a></li>
+    <li class="left">
+      <div class="wrapper">
+        <!-- href="/harjoitukset" -->
+        <a id="exercises-link" class="active">Harjoitukset</a>
+      </div>
+    </li>
+    <li class="left">
+      <div class="wrapper">
+        <a href="/vapaa-kentta">Vapaa-kenttä</a>
+      </div>
+    </li>
+    <li class="right">
+      <div class='wrapper'>
+        <a id="info-link" href="#">Info</a>
+      </div>
+    </li>
   </ul>
-</div>
-<hr>
-<div id="exercise-links">
-  <a href="/harjoitukset/basics" class="basics incomplete">
-    <div>Perusteet</div>
-  </a>
-  <a href="/harjoitukset/vars" class="vars">
-    <div>Muuttujat</div>
-  </a>
-  <a href="/harjoitukset/ifs" class="ifs incomplete">
-    <div>Ehtolauseet<!-- ja koordinaatisto --></div>
-  </a>
-  <a href="/harjoitukset/loops" class="loops">
-    <div>Toistolauseet</div>
-  </a>
-  <!--/harjoitukset/events-->
-  <a href="#" class="events incomplete">
-    <div>Tapahtumat</div>
-  </a>
-</div>
-<div class="large-12 columns">
   <hr>
-  <h3>Uutta</h3>
-  <ul>
-    <li>2014-01-05 - Ehtolauseet harjoitus valmis</a></li>
-    <li>2014-12-28 - Aloitussivu harjoitustyyppeillä (tämä sivu)</a></li>
-    <li>2014-12-15 - Kyselyille pohja: <a href="/alkukysely" target="_blank"><strong>alkukysely demo</strong></a></li>
-    <li style="font-size:11px;">2014-12-12 - Pohjaa tehtävätyypeille ja yksi osittain toimiva demo: <a href="/harjoitukset/maze" target="_blank"><strong>toistolauseet</strong></a></li>
-    <li style="font-size:10px;">2014-11-28 - Sivusto luotu. Lisätty lista harjoitteista selitteineen + esimerkkeineen ja osittain toimiva vapaa kenttä</li>
-  </ul>
+</div>
+<div id="page-wrapper">
+<div class="large-12 columns">
+  <div id="exercises-page" class="page curr">
+    <a href="/harjoitukset/basics" class="basics incomplete">
+      <div>Perusteet</div>
+    </a>
+    <a href="/harjoitukset/loops" class="loops">
+      <div>Toistolauseet</div>
+    </a>
+    <a href="/harjoitukset/vars" class="vars">
+      <div>Muuttujat</div>
+    </a>
+    <a href="/harjoitukset/ifs" class="ifs incomplete">
+      <div>Ehtolauseet<!-- ja koordinaatisto --></div>
+    </a>
+    <!--/harjoitukset/events-->
+    <a href="#" class="events incomplete">
+      <div>Tapahtumat</div>
+    </a>
+  </div>
+  <div id="info-page" class="page next">
+    <h3>Uutta</h3>
+    <ul>
+      <li>2014-01-05 - Ehtolauseet harjoitus valmis</a></li>
+      <li>2014-12-28 - Aloitussivu harjoitustyyppeillä (tämä sivu)</a></li>
+      <li>2014-12-15 - Kyselyille pohja: <a href="/alkukysely" target="_blank"><strong>alkukysely demo</strong></a></li>
+      <li style="font-size:11px;">2014-12-12 - Pohjaa tehtävätyypeille ja yksi osittain toimiva demo: <a href="/harjoitukset/maze" target="_blank"><strong>toistolauseet</strong></a></li>
+      <li style="font-size:10px;">2014-11-28 - Sivusto luotu. Lisätty lista harjoitteista selitteineen + esimerkkeineen ja osittain toimiva vapaa kenttä</li>
+    </ul>
+  </div>
+</div>
 </div>
 {% endblock %}

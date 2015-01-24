@@ -19,7 +19,9 @@ $font: 'Boogaloo';
 
 #topnavi {
   ul { list-style-type: none; margin: 0; padding: 0; }
-  li { float: left; margin-left: 10px; margin-top: 20px; }
+  li { float: left; margin: 20px 5px 0 5px; margin-top: 20px; }
+  li.right { float: right; margin-top: 23px; }
+  li.right a { font-size: 12px; }
   a { display: block; padding: 5px 14px 3px 14px; }
   a { background-color: #f2f2f2; color: #777; }
   a { font-size: 14px; /*font-family: $font;*/ }
@@ -34,9 +36,18 @@ $font: 'Boogaloo';
   a.active, a:hover { color: #f2f2f2; background-color: #777; }
 }
 
+#page-wrapper {
+  & { overflow: hidden; position: relative; height: 500px; }
+  .page { top: 0; position: absolute; transition: 0.5s; width: 100%; }
+  .page { padding: 0 10px; }
+  .page.prev { left: -100%; }
+  .page.next { left: 100%; }
+  .page.curr { left: 0px; }
+}
+
 #exercise-links-page { margin: 0px auto; max-width: 600px; }
-#exercise-links {
-  & { text-align: center; margin-top: 50px; width: 100%; }
+#exercises-page {
+  & { text-align: center; margin-top: 20px; width: 100%; }
   a { display: inline-block; width: 150px; height: 150px; vertical-align: middle; }
   a { margin: 10px; border-radius: 40%; text-align: center; color: #fff; }
   a { font-family: $font; font-size: 22px; line-height: 22px; }

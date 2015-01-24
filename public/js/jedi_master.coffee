@@ -41,6 +41,7 @@
 
   tourGoingBack: false
   startTour: ->
+    return if $(".joyride-list").length is 0
     @init() unless @initDone
     JediMaster.onTour = true
     JediMaster.disableLinks()
