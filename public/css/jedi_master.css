@@ -19,15 +19,19 @@
   width: 500px; }
 
 .joyride-tip-guide {
-  border-radius: 10px; }
-.joyride-tip-guide h1, .joyride-tip-guide h2, .joyride-tip-guide p {
-  font-family: 'Boogaloo';
-  margin-bottom: 0.6rem; }
-.joyride-tip-guide .button {
-  margin-top: 10px;
-  float: right; }
-.joyride-tip-guide.success-dialog .button {
-  float: none; }
+  /*strong { font-family: 'Short Stack'; }*/ }
+  .joyride-tip-guide {
+    border-radius: 10px; }
+  .joyride-tip-guide h1, .joyride-tip-guide h2, .joyride-tip-guide p, .joyride-tip-guide strong {
+    font-family: 'Boogaloo';
+    margin-bottom: 0.6rem; }
+  .joyride-tip-guide strong {
+    color: #ccc; }
+  .joyride-tip-guide .button {
+    margin-top: 10px;
+    float: right; }
+  .joyride-tip-guide.success-dialog .button {
+    float: none; }
 
 .joyride-content-wrapper {
   padding-bottom: 65px !important; }

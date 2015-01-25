@@ -26,7 +26,7 @@ module.exports = (app, passport) ->
   app.redirect "/harjoitukset/ifs", "/harjoitukset/ifs/1";
 
   # playground
-  app.get "/vapaa-kentta", playground.index
+  app.get "/koodikentta", playground.index
 
   # surveys
   app.get "/alkukysely", surveys.beginning

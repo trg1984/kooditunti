@@ -1,5 +1,7 @@
 @JediMaster =
   onTour: false
+  tourStarted: false
+  tourGoingBack: false
   initDone: false
   init: ->
     initDone = true
@@ -20,7 +22,8 @@
         #unless JediMaster.tourGoingBack
         setTimeout ->
           if step.find('.before-step-method').length == 1
-            eval(step.find('.before-step-method').data('before-step'))
+            console.log step.find('.before-step-method').data('exec')
+            eval(step.find('.before-step-method').data('exec'))
         ,0
       post_step_callback: (i, step) ->
         $(".joyride-modal-bg").hide() if step.hasClass('hide-modal-next')
@@ -28,22 +31,39 @@
           JediMaster.pauseTour() if step.hasClass('pause-after')
           setTimeout ->
             if step.find('.after-step-method').length == 1
-              eval(step.find('.after-step-method').data('after-step'))
+              eval(step.find('.after-step-method').data('exec'))
           ,0
-      post_ride_callback: ->
-        $(".exercise-tip-placement").hide()
-        JediMaster.onTour = false
-      close_callback: ->
-        $(".exercise-tip-placement").hide()
-        JediMaster.onTour = false
+      pre_ride_callback: ->
+        # save current blocks when on tour start
+        stashBlocks = ->
+          if Blockly.mainWorkspace.getAllBlocks().length isnt 0
+            xmlDom = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
+            xmlText = Blockly.Xml.domToText(xmlDom);
+            localStorage.setItem(Exercises.currentID+"_stashedCode",xmlText);
+            Exercises.resetCodeArea("noprompt")
+        setTimeout (-> stashBlocks() ), 100 if Exercises.preloadBlocklyBlocks
+      post_ride_callback: JediMaster.endTour
+      close_callback: JediMaster.endTour
+      #abort_on_close: false
       template:
         prev_button : '<a href="#" class="action joyride-prev-tip"></a>'
 
-  tourGoingBack: false
+
+  endTour: ->
+    # restore blocks when we end tour
+    if Exercises.preloadBlocklyBlocks and localStorage.getItem(Exercises.currentID+"_stashedCode")?
+      $.each Blockly.mainWorkspace.getAllBlocks(), (-> @dispose())
+      xml = Blockly.Xml.textToDom(localStorage.getItem(Exercises.currentID+"_stashedCode"));
+      Blockly.Xml.domToWorkspace(Blockly.getMainWorkspace(), xml);
+    #localStorage.setItem(Exercises.currentID+"_stashedCode",null);
+    $(".exercise-tip-placement").hide()
+    JediMaster.onTour = false
+
   startTour: ->
     return if $(".joyride-list").length is 0
     @init() unless @initDone
     JediMaster.onTour = true
+    JediMaster.tourStarted = true
     JediMaster.disableLinks()
     $(".exercise-tip-placement").show()
     unless Foundation.libs.joyride.settings.paused
@@ -53,13 +73,14 @@
       JediMaster.resumeTour()
 
   pauseTour: ->
-    JediMaster.onTour = false
+    @onTour = false
     Foundation.libs.joyride.settings.paused = true
     $(".joyride-tip-guide:visible").removeClass("pause-after")
     $(".exercise-tip-placement").hide()
 
   resumeTour: (cb) ->
-    JediMaster.onTour = true
+    return unless @tourStarted
+    @onTour = true
     $(".exercise-tip-placement").show()
     Foundation.libs.joyride.settings.paused = false
     Foundation.libs.joyride.go_next()
@@ -218,7 +239,7 @@
     jrtg+= '  <span class="joyride-nub top"></span>'
     jrtg+= '  <div class="joyride-content-wrapper normal-padding">'
     jrtg+= $(".task-overview").html()
-    jrtg+= '<a class="action restart-joyride right">näytä koko ohjeistus uudelleen</a>'
+    jrtg+= '<a class="action restart-joyride right">näytä koko ohjeistus uudelleen</a>' if Exercises.currentName isnt "playground"
     jrtg+= '<a class="action solution-viewer right">vilkaise ratkaisua</a>' if Exercises.hasSolution
     jrtg+= '  </div>'
     jrtg+= '</div>'

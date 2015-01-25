@@ -47,7 +47,7 @@
       if id is "createElement_undefined"
         radius = data.values.radius
         isUndefined = radius.type is 'undefined' or radius.data is 0
-        err = "En tiedä pallon kokoa" if isUndefined
+        err = "Muuttujaa ei ole asetettu" if isUndefined
     return err
 
   onClick: (elem, callback, intrp, scope) ->

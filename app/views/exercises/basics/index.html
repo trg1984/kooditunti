@@ -22,12 +22,19 @@
   <p>Toteuta ensimmäinen ohjelmasi piirtämällä tekstiä kentälle.</p>
 </div>
 <div id="tip-navi" class="exercise-tip-placement" style="top:20px;left:10px;"></div>
-<div id="tip-levels" class="exercise-tip-placement" style="top:70px;left:45%;"></div>
-<div id="tip-blocks" class="exercise-tip-placement" style="top:130px;left:0px;"></div>
+<div id="tip-levels" class="exercise-tip-placement" style="top:30px;left:45%;"></div>
+<div id="tip-blocks" class="exercise-tip-placement" style="top:90px;left:0px;"></div>
 <ol class="joyride-list" data-joyride>
   <li data-button="Aloita" class="wide hide-modal-next" data-options="prev_button: false">
     <h2>Kooditunti.fi perusteet</h2>
     <p>Tässä harjoituksessa tutustutaan siihen miten Kooditunti-sivusto toimii.</p>
+  </li>
+  <li data-button="Seuraava" class="wide" data-options="prev_button: true">
+    <p>Jokaisen tehtävän alussa näytetään tälläinen askel askeleelta etenevä
+    ohjeistus. Jos vasta aloittelet ohjelmoinnin opettelua, on suositeltavaa
+    käydä ohjeet läpi. Jos kuitenkin koet että osaat jo tarpeeksi hyvin, etkä
+    tarvitse ohjeita, voit klikata tämän ikkunan oikeassa yläkulmassa olevasta
+    rastista ohjeen pois ja siirtyä suoraan tehtävän ratkaisemiseen.</p>
   </li>
   <li data-id="tip-navi" class="wide" data-button="Seuraava" data-options="tip_location: top; prev_button: true">
     <p>Nuolesta pääset navigoimaan takaisin harjoitusvalikkoon.</p>
@@ -64,11 +71,11 @@
 {% if level == 2 %}
 <div class="task-overview">
   <h2>Tehtävä</h2>
-  <p>Käydään lyhyesti läpi sitä miten näiden palikoiden kanssa ohjelmointi toimii.</p>
+  <p>Askeleittain etenevässä ohjeistuksessa käydään läpi sitä miten näiden palikoiden kanssa ohjelmointi toimii. Klikkaa "Suorita koodi" -nappia siirtyäksesi seuraavalle tasolle.</p>
 </div>
-<div id="tip-code" class="exercise-tip-placement" style="top:223px;left:400px;"></div>
-<div id="tip-statement" class="exercise-tip-placement" style="top:263px;left:320px;"></div>
-<div id="tip-lonely-block" class="exercise-tip-placement" style="top:355px;left:400px;"></div>
+<div id="tip-code" class="exercise-tip-placement" style="top:200px;left:400px;"></div>
+<div id="tip-statement" class="exercise-tip-placement" style="top:230px;left:320px;"></div>
+<div id="tip-lonely-block" class="exercise-tip-placement" style="top:330px;left:400px;"></div>
 <ol class="joyride-list" data-joyride>
   <li data-button="Aloita" class="wide" data-options="prev_button: false">
     <h2>Ohjelmoinnin perusteita</h2>
@@ -90,7 +97,7 @@
     <p>Muista että voit ohjelmoidessasi missä tahansa vaiheessa testata ohjelmasi toimintaa.</p>
     <p>Vaikeammissa tehtävissä on siis helpompi yrittää pilkkoa ongelmia pienempiin osiin ja ratkaista
     ne yksi kerrallaan, sen sijaan että yrittäisi saada koko tehtävää ratkeamaan kerralla.</p>
-    <div class="after-step-method" style="display:none" data-after-step="Basics.endOnLastSlide()"></div>
+    <div class="after-step-method" style="display:none" data-exec="Basics.endOnLastSlide()"></div>
   </li>
   <li class="wide" data-button="OK!" data-options="tip_location: right; prev_button: true">
     <p>Klikkaa nyt vain "Suorita koodi" -nappia niin pääset seuraavalle tasolle.</p>
@@ -102,30 +109,32 @@
   <h2>Tehtävä</h2>
   <p>Yritä piirtää kentälle jonkin laskutoimituksen tulos (esim 1 + 1).</p>
 </div>
-<div id="tip-categories" class="exercise-tip-placement" style="top:130px;left:0px;width:165px;"></div>
-<div id="tip-categories-open" class="exercise-tip-placement" style="top:115px;left:55px;"></div>
-<div id="tip-arith" class="exercise-tip-placement" style="top:165px;left:55px;"></div>
-<div id="tip-text" class="exercise-tip-placement" style="top:115px;left:55px;"></div>
-<div id="tip-trash" class="exercise-tip-placement" style="top:605px;left:0px;width:110px;"></div>
-<div id="tip-reset" class="exercise-tip-placement" style="top:660px;left:0px;width:150px;"></div>
+<div id="tip-categories" class="exercise-tip-placement" style="top:80px;left:0px;width:165px;"></div>
+<div id="tip-categories-open" class="exercise-tip-placement" style="top:70px;left:0px;"></div>
+<div id="tip-arith" class="exercise-tip-placement" style="top:135px;left:45px;"></div>
+<div id="tip-text" class="exercise-tip-placement" style="top:80px;left:55px;"></div>
+<div id="tip-trash" class="exercise-tip-placement" style="top:575px;left:0px;width:110px;"></div>
+<div id="tip-reset" class="exercise-tip-placement" style="top:630px;left:0px;width:150px;"></div>
 <ol class="joyride-list" data-joyride>
   <li data-button="Seuraava" class="wide hide-modal-next" data-options="prev_button: false;">
     <h2>Lisävinkkejä</h2>
     <p>Nyt osaat perusteet. Käydään vielä pikaisesti läpi muutama juttu jotka helpottavat sinua matkan varrella.</p>
   </li>
   <li data-id="tip-categories" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true;">
-    <div class="after-step-method" style="display:none" data-after-step="Exercises.openLastCategory()"></div>
     <p>Joissain tehtävissä palikoita on sen verran paljon, että ne on jaettu kategorioihin. Kategorian nimeä klikkaamalla näet sen alla olevat palikat.</p>
   </li>
   <li data-id="tip-categories-open" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true;">
     <p><strong>Uusi palikka:</strong> tällä pystyy määrittelemään lukuja.</p>
+    <div class="before-step-method" style="display:none" data-exec="Exercises.openLastCategory()"></div>
   </li>
   <li data-id="tip-arith" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true;">
     <p><strong>Uusi palikka:</strong> tämä pystyy suorittamaan laskutoimituksia kun siihen yhdistää kaksi lukupalikkaa (yllä).</p>
-    <div class="after-step-method" style="display:none" data-after-step="Exercises.openFirstCategory()"></div>
+    <strong>Esimerkki:</strong> <img src="/img/exercises/basics/arithm_example.png" />
+    <div class="before-step-method" style="display:none" data-exec="Exercises.openLastCategory()"></div>
   </li>
   <li data-id="tip-text" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true;">
     <p>"Luo teksti" -palikkaa pystyy käyttämään myös lukujen tulostamiseen.</p>
+    <div class="before-step-method" style="display:none" data-exec="Exercises.openFirstCategory()"></div>
   </li>
   <li data-id="tip-trash" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true;">
     <p>Jos haluat joistain palikoista eroon, raahaa ne roskakoriin.</p>
@@ -136,7 +145,7 @@
   <li data-button="OK!" class="wide pause-after" data-options="tip_location: right; prev_button: true;">
     <p><strong>Tehtävä:</strong> Yritä piirtää kentälle jonkin laskutoimituksen tulos <br />(esim 1 + 1).</p>
   </li>
-  <li data-id="evaluate-btn" class="wide" data-options="tip_location: left; next_button: false; prev_button: true;">
+  <li data-id="evaluate-btn" class="wide" data-options="tip_location: top; next_button: false; prev_button: true;">
     <p>Joissain tehtävissä voi olla vaikea automaattisesti määritellä onko tehtävä suoritettu. Näissä tapauksissa pystyt itse arvoimaan suorituksen tästä klikkaamalla.</p>
   </li>
 </ol>

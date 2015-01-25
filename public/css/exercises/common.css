@@ -1,4 +1,4 @@
-#exercises-page a div {
+#exercises-page a.exercise-button div {
   position: relative;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -64,32 +64,52 @@
   text-align: center;
   margin-top: 20px;
   width: 100%; }
-#exercises-page a {
+#exercises-page a.exercise-button {
+  position: relative;
   display: inline-block;
   width: 150px;
   height: 150px;
-  vertical-align: middle; }
-#exercises-page a {
+  vertical-align: middle;
   margin: 10px;
   border-radius: 40%;
   text-align: center;
-  color: #fff; }
-#exercises-page a {
+  color: #fff;
   font-family: 'Boogaloo';
   font-size: 22px;
   line-height: 22px; }
-#exercises-page a div {
+#exercises-page a.exercise-button div {
   padding: 15px; }
-#exercises-page a.basics {
+#exercises-page a.exercise-button.basics {
   background-color: #9f005d; }
-#exercises-page a.vars {
+#exercises-page a.exercise-button.vars {
   background-color: #1c7563; }
-#exercises-page a.ifs {
+#exercises-page a.exercise-button.ifs {
   background-color: #c2272d; }
-#exercises-page a.loops {
+#exercises-page a.exercise-button.loops {
   background-color: #067195; }
-#exercises-page a.events {
+#exercises-page a.exercise-button.events {
   background-color: #f36c00; }
+#exercises-page a.exercise-button .stars {
+  width: 150px;
+  padding: 0; }
+#exercises-page a.exercise-button .stars {
+  position: absolute;
+  top: 10px;
+  left: 18px; }
+#exercises-page a.exercise-button .stars img {
+  width: 35px;
+  position: absolute;
+  opacity: 0.2; }
+#exercises-page a.exercise-button .stars img.first {
+  left: 0px;
+  top: 10px; }
+#exercises-page a.exercise-button .stars img.second {
+  left: 40px; }
+#exercises-page a.exercise-button .stars img.third {
+  left: 80px;
+  top: 10px; }
+#exercises-page .reset-button {
+  font-size: 11px; }
 
 #exercise-page {
   min-width: 870px; }
@@ -151,10 +171,23 @@
   background-color: #067195; }
 #exercise-page.exercise-events #steps li {
   background-color: #f36c00; }
+#exercise-page #code-display {
+  position: absolute;
+  margin-left: 225px;
+  margin-top: 20px;
+  z-index: 1; }
+#exercise-page #code-display {
+  font-family: 'Inconsolata', mono, sans-serif;
+  color: #ccc; }
 #exercise-page #exercise-area {
   position: relative;
   clear: both;
   height: 657px; }
+#exercise-page #exercise-area {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none; }
 #exercise-page #code-area, #exercise-page #output-stage, #exercise-page #mask-between, #exercise-page #blockly {
   position: absolute;
   width: 100%;
@@ -180,12 +213,17 @@
   #exercise-page #code-area #code-area-borders {
     border: 1px solid #ccc;
     height: 600px;
-    position: relative; }
+    position: relative;
+    min-width: 160px;
+    overflow: hidden; }
   #exercise-page #code-area #code-area-actions {
     position: absolute;
     z-index: 3;
     right: 10px;
     bottom: 10px; }
+  #exercise-page #code-area #blockly {
+    height: 598px;
+    min-width: 700px; }
   #exercise-page #code-area .blocklySvg {
     background-color: transparent;
     border: none; }
@@ -211,6 +249,14 @@
   padding: 40px 0px 0px 40px; }
 #exercise-page .task-overview {
   display: none; }
+#exercise-page .resize-handle {
+  width: 5px;
+  height: 20px;
+  position: absolute;
+  top: 280px;
+  right: 0;
+  cursor: e-resize;
+  background-color: #ddd; }
 
 .button {
   font-family: 'Boogaloo' !important;

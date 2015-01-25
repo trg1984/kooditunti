@@ -16,6 +16,7 @@ $loops-color:#067195;
 $events-color:#f36c00;
 
 $font: 'Boogaloo';
+$code-font: 'Inconsolata';
 
 #topnavi {
   ul { list-style-type: none; margin: 0; padding: 0; }
@@ -44,19 +45,31 @@ $font: 'Boogaloo';
   .page.next { left: 100%; }
   .page.curr { left: 0px; }
 }
-
 #exercise-links-page { margin: 0px auto; max-width: 600px; }
 #exercises-page {
+  $button-width: 150px;
   & { text-align: center; margin-top: 20px; width: 100%; }
-  a { display: inline-block; width: 150px; height: 150px; vertical-align: middle; }
-  a { margin: 10px; border-radius: 40%; text-align: center; color: #fff; }
-  a { font-family: $font; font-size: 22px; line-height: 22px; }
-  a div { @extend %vertical-align; padding: 15px; }
-  a.basics { background-color: $basics-color }
-  a.vars { background-color: $vars-color }
-  a.ifs { background-color: $ifs-color }
-  a.loops { background-color: $loops-color }
-  a.events { background-color: $events-color }
+  a.exercise-button {
+    & {
+      position: relative;
+      display: inline-block; width: $button-width; height: 150px; vertical-align: middle;
+      margin: 10px; border-radius: 40%; text-align: center; color: #fff;
+      font-family: $font; font-size: 22px; line-height: 22px;
+    }
+    div { @extend %vertical-align; padding: 15px; }
+    &.basics { background-color: $basics-color }
+    &.vars { background-color: $vars-color }
+    &.ifs { background-color: $ifs-color }
+    &.loops { background-color: $loops-color }
+    &.events { background-color: $events-color }
+    .stars { width: $button-width; padding: 0; }
+    .stars { position: absolute; top: 10px; left: 18px; }
+    .stars img { width: 35px; position: absolute; opacity: 0.2; }
+    .stars img.first { left: 0px; top: 10px; }
+    .stars img.second { left: 40px; }
+    .stars img.third { left: 80px; top: 10px }
+  }
+  .reset-button { font-size: 11px; }
 }
 
 #exercise-page {
@@ -83,15 +96,21 @@ $font: 'Boogaloo';
 
   $common-height: 600px;
   $code-area-height: $common-height+57;
+
+  #code-display { position: absolute; margin-left: 225px; margin-top: 20px; z-index: 1; }
+  #code-display { font-family: 'Inconsolata', mono, sans-serif; color: #ccc; }
+
   #exercise-area { position: relative; clear: both; height: $code-area-height; }
+  #exercise-area { -webkit-user-select: none; -moz-user-select: none; -khtml-user-select: none; -ms-user-select: none; }
   #code-area, #output-stage, #mask-between, #blockly
     { position: absolute; width: 100%; height: $common-height; top: 0; }
   #reset-code-btn { position: absolute; z-index: 3; left: 10px; bottom: 10px; font-size: 11px; }
   #start-execution-btn, #end-execution-btn { position: absolute; z-index: 3; right: 10px; bottom: 10px; }
   #code-area {
     & { background-color: transparent; z-index: 2; height: $code-area-height; }
-    #code-area-borders { border: 1px solid #ccc; height: $common-height; position: relative; }
+    #code-area-borders { border: 1px solid #ccc; height: $common-height; position: relative; min-width: 160px; overflow: hidden; }
     #code-area-actions { position: absolute; z-index: 3; right: 10px; bottom: 10px; }
+    #blockly { height: $common-height - 2; min-width: 700px; }
     .blocklySvg { background-color: transparent; border: none; }
     .blocklyToolboxDiv { min-width: 130px; height: $common-height - 150 !important; } /* make room for trashcan... */
     .blocklyScrollbarBackground, .blocklyScrollbarKnob { display: none; }
@@ -103,6 +122,16 @@ $font: 'Boogaloo';
     #stage-coordinates-offset { padding: 40px 0px 0px 40px; } // same as Stage.coords...Size
   }
   .task-overview { display: none; }
+
+  .resize-handle {
+    width: 5px;
+    height: 20px;
+    position: absolute;
+    top: 280px;
+    right: 0;
+    cursor: e-resize;
+    background-color: #ddd;
+  }
 }
 
 .button { font-family: $font !important; border-radius: 1000px !important; }

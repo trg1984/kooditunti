@@ -1,31 +1,22 @@
 <xml id="toolbox" style="display: none">
+  <category name="Elementit">
+    <block type="text_element"></block>
+    <block type="rectangle_element"></block>
+    <block type="circle_element"></block>
+    <block type="edit_element"></block>
+    <block type="get_element_property"></block>
+  </category>
   <category name="Pelikenttä">
-    <category name="Elementit">
-      <block type="text_element"></block>
-      <block type="rectangle_element"></block>
-      <block type="circle_element"></block>
-      <block type="edit_element"></block>
-      <block type="get_element_property"></block>
-    </category>
-    <category name="Ominaisuudet">
-      <block type="gravity_switch"></block>
-      <block type="coordinate_array_simple"></block>
-      <block type="coordinate_array"></block>
-    </category>
-    <category name="Tapahtumat">
-      <block type="when_clicked"></block>
-      <block type="when_pressed"></block>
-    </category>
+    <block type="gravity_switch"></block>
+    <block type="coordinate_array"></block>
+  </category>
+  <category name="Tapahtumat">
+    <block type="when_clicked"></block>
+    <block type="when_pressed"></block>
   </category>
   <category name="Muuttujat" custom="VARIABLE"></category>
   <category name="Ehtolauseet">
     <block type="controls_if"></block>
-    <block type="controls_if">
-      <mutation else="1"></mutation>
-    </block>
-    <block type="controls_if">
-      <mutation elseif="1" else="1"></mutation>
-    </block>
     <block type="logic_compare"></block>
     <block type="logic_operation"></block>
     <block type="logic_boolean"></block>
@@ -38,25 +29,6 @@
         </block>
       </value>
     </block>
-    <block type="controls_for">
-      <field name="VAR">i</field>
-      <value name="FROM">
-        <block type="math_number">
-          <field name="NUM">1</field>
-        </block>
-      </value>
-      <value name="TO">
-        <block type="math_number">
-          <field name="NUM">10</field>
-        </block>
-      </value>
-      <value name="BY">
-        <block type="math_number">
-          <field name="NUM">1</field>
-        </block>
-      </value>
-    </block>
-    <block type="controls_forEach"></block>
   </category>
   <category name="Teksti">
     <block type="text"></block>
@@ -89,7 +61,7 @@
         </block>
       </value>
     </block>
-    <block type="console_log"></block>
-    <block type="lists_create_with"></block>
+    <!--<block type="console_log"></block>-->
+    <!--<block type="lists_create_with"></block>-->
   </category>
 </xml>

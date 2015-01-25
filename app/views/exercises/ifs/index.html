@@ -20,7 +20,7 @@
 <div class="task-overview">
   <h2>Tehtävä</h2>
   <p>Ohjelma kysyy kysymyksen. Tehtäväsi on näyttää käyttäjälle teksti sen mukaan oliko vastaus oikein vai ei.</p>
-  <p><strong>Vinkki:</strong> jos <i>vastaus</i> <u>on yhtäkuin</u> <i>arvaus</i>...</p>
+  <p><strong>Vinkki:</strong> jos <i>vastaus</i> <u>on yhtä kuin</u> <i>arvaus</i>...</p>
 </div>
 <div id="tip-answer" class="exercise-tip-placement" style="top:31px;left:240px;"></div>
 <div id="tip-quess" class="exercise-tip-placement" style="top:71px;left:425px;"></div>
@@ -48,13 +48,15 @@
     <p>Esimerkki vertailijasta jonka arvo on tosi:<br /><img src="/img/exercises/ifs/compare_true.png" /></p>
   </li>
   <li data-id="tip-comparison" data-button="Seuraava" data-options="tip_location:top;prev_button: true">
-    <p>Ehdon vertailijaa pystyy vaihtamaan tarvittaessa tästä (käytössä on esimerksi <i>on yhtä kuin</i>, <i>ei ole yhtä kuin</i>, <i>on suurempi kuin</i> jne.)</p>
+    <p>Tämä on vertailija (valittuna <strong>on yhtä kuin</strong>)</p>
+    <!--<p>Ehdon vertailijaa pystyy vaihtamaan tarvittaessa tästä (näissä tehtävissä ei tarvitse vaihtaa)</p>-->
+     <!--(käytössä on esimerksi <strong>on yhtä kuin</strong>, <strong>ei ole yhtä kuin</strong>, <strong>on suurempi kuin</strong> jne.)-->
   </li>
   <li data-id="tip-true" data-button="Seuraava" data-options="tip_location:right;prev_button: true">
-    <p>Tämä osa suoritetaan jos yllä oleva ehto on tosi (esimerkiksi ehto <i>2 = 2</i> on tosi, koska kaksi on kaksi)</p>
+    <p>Tämä osa suoritetaan jos yllä oleva ehto on tosi (esimerkiksi ehto <strong>2 = 2</strong> on tosi, koska kaksi on kaksi)</p>
   </li>
   <li data-id="tip-false" data-button="Seuraava" data-options="tip_location:right;prev_button: true">
-    <p>Tämä osa suoritetaan jos yllä oleva ehto on epätosi (esimerkiksi ehto <i>1 = 2</i> on epätosi, koska yksi ei ole kaksi)</p>
+    <p>Tämä osa suoritetaan jos yllä oleva ehto on epätosi (esimerkiksi ehto <strong>1 = 2</strong> on epätosi, koska yksi ei ole kaksi)</p>
   </li>
   <li data-button="OK!" class="wide" data-options="tip_location:right;prev_button: true">
     <p><strong>Tehtävä:</strong> Täydennä ohjelmaa siten, että kentällä näytetään eri teksti riippuen siitä annettiinko kysyttäessä oikea vastaus.</p>
@@ -89,27 +91,27 @@
   <li data-id="tip-mod-star" class="wide" data-options="prev_button: true; next_button: false; tip_location: right;">
     <p>Joidenkin palikoiden kyljestä löytyy tälläinen tähti. Tähteä klikkaamalla pystyt tekemään muutoksia palikan toimintaan.</p>
     <p>Klikkaa tähteä.</p>
-    <div class="before-step-method" style="display:none" data-before-step="Ifs.bindNextTourToMutatorIconClick()"></div>
+    <div class="before-step-method" style="display:none" data-exec="Ifs.bindNextTourToMutatorIconClick()"></div>
   </li>
   <li data-id="tip-mod-if" data-button="Seuraava" class="wide" data-options="prev_button: true; tip_location: right;">
-    <p>Ehtolausetta pystyy muokkaamaan lisäämällä siihen joko "muuten jos"- tai "muuten"-haaran.</p>
+  <p>Ehtolausetta pystyy muokkaamaan lisäämällä siihen joko <strong>muuten jos</strong>- tai <strong>muuten</strong>-haaran.</p>
     <p><strong>"muuten jos"-haaralle</strong> pystytään määrittämään ehto, jonka toteutuessa edetään kyseiseen haaraan. Näytä pystyy palikkaan lisäämään useita.</p>
     <p><strong>"muuten"-haaraan</strong> edetään jos mihinkään aikaisemmista haaroista ei ole päästy etenemään. Näitä pystyy lisäämään palikkaan vain yhden.</p>
-    <div class="after-step-method" style="display:none" data-after-step="Ifs.bindNextTourToMutatorIconClick()"></div>
+    <div class="after-step-method" style="display:none" data-exec="Ifs.bindNextTourToMutatorIconClick()"></div>
   </li>
   <li data-id="tip-mod-if2" class="wide" data-options="prev_button: true; next_button: false; tip_location: right;">
     <p>Kokeile lisätä molemmat muutokset palikkaan raahamalla ne vasemmalta oikealle. Huomaat miten palikka alla muuttuu.</p>
     <p>Pystyt myös poistamaan muutoksia raahamalla ne takaisin vasemmalle.</p>
     <p>Klikkaa tähteä uudelleen kun olet tehnyt palikkaan muutokset.</p>
-    <div class="after-step-method" style="display:none" data-after-step="Ifs.hideBubbles()"></div>
+    <div class="after-step-method" style="display:none" data-exec="Ifs.hideBubbles()"></div>
   </li>
   <li data-id="tip-mod-circle" class="wide" data-options="prev_button: true; next_button: false; tip_location: right;">
     <p>Myös esimerkiksi "Luo ympyrä" -palikasta löytyy tähti. Klikkaa sitä seuraavaksi.</p>
-    <div class="before-step-method" style="display:none" data-before-step="Ifs.bindNextTourToMutatorIconClick()"></div>
+    <div class="before-step-method" style="display:none" data-exec="Ifs.bindNextTourToMutatorIconClick()"></div>
   </li>
   <li data-id="tip-mod-circle2" data-button="Seuraava" class="wide" data-options="prev_button: true; tip_location: right;">
     <p>Näiden avulla pystyt muokkaamaan palikan ominaisuuksia. Kokeile lisätä ympyrälle sijainti.</p>
-    <div class="after-step-method" style="display:none" data-after-step="Ifs.hideBubbles()"></div>
+    <div class="after-step-method" style="display:none" data-exec="Ifs.hideBubbles()"></div>
   </li>
   <li data-id="tip-coordinates" data-button="Seuraava" class="wide" data-options="prev_button: true; tip_location: right;">
     <p>Sijainnin pystyy määrittelemään tällä palikalla.</p>

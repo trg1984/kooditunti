@@ -7,7 +7,7 @@ Blockly.Blocks["move_left"] = init: ->
   return
 
 Blockly.JavaScript["move_left"] = (block) ->
-  code = "moveLeft();"
+  code = "moveLeft();\n"
   return code
 
 Blockly.Blocks["move_right"] = init: ->
@@ -19,7 +19,7 @@ Blockly.Blocks["move_right"] = init: ->
   return
 
 Blockly.JavaScript["move_right"] = (block) ->
-  code = "moveRight();"
+  code = "moveRight();\n"
   return code
 
 
@@ -32,7 +32,7 @@ Blockly.Blocks["move_up"] = init: ->
   return
 
 Blockly.JavaScript["move_up"] = (block) ->
-  code = "moveUp();"
+  code = "moveUp();\n"
   return code
 
 Blockly.Blocks["move_down"] = init: ->
@@ -44,5 +44,5 @@ Blockly.Blocks["move_down"] = init: ->
   return
 
 Blockly.JavaScript["move_down"] = (block) ->
-  code = "moveDown();"
+  code = "moveDown();\n"
   return code

@@ -57,8 +57,9 @@
       $(".overlay-resize").jqResize ".resize-handle"
       Exercises.setCompletedLevels()
 
-  resetCodeArea: ->
-    return unless confirm "Tämä poistaa nykyisen koodisi. Haluatko jatkaa?"
+  resetCodeArea: (ctrl) ->
+    if ctrl != "noprompt"
+      return unless confirm "Tämä poistaa nykyisen koodisi. Haluatko jatkaa?"
     url = window.location.href.split("#")[0]
     window.localStorage[url] = null
     $.each Blockly.mainWorkspace.getAllBlocks(), (-> @dispose())
@@ -82,8 +83,8 @@
       sounds: false
       trashcan: true
 
+    $("#blockly").width($("#blockly").width()-2)
     url = window.location.href.split("#")[0]
-    # needs logic for reseting the default blocks
     hasLocalStorage = "localStorage" of window
     if hasLocalStorage and window.localStorage[url]
       blocklyXML = window.localStorage[url]
@@ -97,10 +98,30 @@
       @preloadBlocks() if @preloadBlocklyBlocks
     BlocklyStorage.backupOnUnload()
 
+    # create filler for toolbox (with categories)
     btb = $(".blocklyToolboxDiv")
     tbf = $("<div id='toolbox-filler' />")
     tbf.css("top",btb.height()).css("width",btb.width())
     $("#blockly").append(tbf)
+
+    # push code-display according to toolbox (or flyout)
+    #blocklyFlyoutBackground
+    if Blockly.mainWorkspace.flyout_?
+      fow = Blockly.mainWorkspace.flyout_.width_
+      $("#code-display").css("margin-left",fow+30)
+    else
+      tboxw = $('.blocklyToolboxDiv').width()
+      $("#code-display").css("margin-left",tboxw+30)
+
+    updateCodeDisplay = ->
+      Blockly.JavaScript.STATEMENT_PREFIX = '';
+      Exercises.readableCode = Blockly.JavaScript.workspaceToCode()
+      $("#code-display").html(Exercises.readableCodeHTML())
+    #Blockly.BlockSvg.mouseUpCallback = () ->
+      #updateCodeDisplay()
+    $('body').on 'mouseup', ->
+      updateCodeDisplay()
+    setTimeout (-> updateCodeDisplay()), 200
 
     Blockly.BlockSvg.doubleClickCallback = (block) ->
       bcds = localStorage.getItem('block_collapse_disclaimer_shown')
@@ -129,7 +150,8 @@
       when Exercises.isExecuting or windowWidth > (750+650) then windowWidth-650
       else 750 if Exercises.resizeCodeAreaUp
     newWidth = 230 if newWidth < 230
-    $(".overlay-resize").animate(width: newWidth);
+    $(".overlay-resize").animate width: newWidth, ->
+      $(window).trigger('resize.fndtn.joyride')
 
   endExecution: (method) ->
     $("#end-execution-btn").hide()
@@ -155,6 +177,7 @@
     @executionCount++
     @resizeCodeArea()
     @readableCode = Blockly.JavaScript.workspaceToCode()
+    $("#code-display").html(@readableCodeHTML())
     #console.log @readableCode
     if Errors.collected.length is 0
       Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
@@ -179,8 +202,8 @@
           to = 0
           if nextNode && nextNode.name == "highlightBlock"
             isShort = true if Exercises.activeBlock && Exercises.activeBlock.type == "controls_repeat_ext"
-            #to = if isShort then 50 else 300
-            to = 0
+            to = if isShort then 50 else 300
+            #to = 0
           window.setTimeout nextStep, to
           issl = Exercises.interpreter.stateStack.length
         else
@@ -193,12 +216,17 @@
               Exercises.markCompleted()
             else
               if Exercises.automaticallyEndExecution
-                Exercises.endExecution()
+                if Exercises.manualEvaluation
+                then Exercises.endExecution("nodialog")
+                else Exercises.endExecution()
           , 1000
           # the execution state should be emphasized, since we won't
           # stop it automatically anymore
           #setTimeout (-> Exercises.endExecution()), 500
-      nextStep()
+      #
+      if Exercises.currentName is "playground"
+      then Exercises.interpreter.run()
+      else nextStep()
     else
       Errors.report()
       Exercises.endExecution("nodialog")
@@ -246,6 +274,14 @@
       for k, v of data.values
         err = "Kaikkia arvoja ei ole annettu" if v.data is null
     return err
+
+  readableCodeHTML: ->
+    o = @readableCode
+    o = o.replace(/(\n){3,}/gim,'<br /><br />')
+    o = o.replace(/(\n)/gm,'<br />')
+    o = o.replace(/(  )/gm,'&nbsp;&nbsp;')
+    o = o.replace(/(,'{}')/gm,'')
+    return o
 
   commonInterpreterApi: (interpreter, scope) ->
     wrapper = (id) ->

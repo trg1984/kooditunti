@@ -22,9 +22,12 @@
 </div>
 {% if level == 1 %}
 <ol class="joyride-list" data-joyride>
-  <li data-button="Aloita" class="wide hide-modal-next" data-options="prev_button: false; modal: true">
+  <li data-button="Seuraava" class="wide hide-modal-next" data-options="prev_button: false; modal: true">
     <h2>Yksinkertainen labyrintti</h2>
     <p>Tehtävänäsi on ohjata pallo maaliin ohjelmakoodiin syötettävien komentojen avulla.</p>
+  </li>
+  <li data-button="Aloita" class="wide" data-options="prev_button: true">
+    <p>Muista että komennot suoritetaan vuorotellen ylhäältä alas edeten.</p>
   </li>
 </ol>
 {% endif %}
@@ -33,6 +36,8 @@
   <li data-button="Aloita" class="wide hide-modal-next" data-options="prev_button: false; modal: true">
     <h2>Toistolauseet</h2>
     <p>Tehtävä on sama kuin viime tasolla, mutta nyt pystyt käyttämään toistolausetta jotta jokaista askelta ei tarvitse lisätä erikseen.</p>
+    <strong>Esimerkki:</strong><br />
+    <img src="/img/exercises/loops/example.png" />
   </li>
 </ol>
 {% endif %}

@@ -27,24 +27,13 @@
 <script>Exercises.currentLevel = {{ level }};</script>
 <script>Exercises.currentName = '{{ exerciseName }}';</script>
 <script>Exercises.currentID = '{{ exerciseName }}_level{{ level }}';</script>
-<style>
-.resize-handle {
-  width: 5px;
-  height: 20px;
-  position: absolute;
-  top: 280px;
-  right: 0;
-  cursor: e-resize;
-  background-color: #ddd;
-}
-</style>
 {% endblock %}
 
 {% block body %}
   {% block full_page_tips %}{% endblock %}
   {% block header %}
     <header class="header">
-      <div class="content row full-width">
+      <div class="content">
         <div id="back-btn">
           <a href="/harjoitukset">&lt;</a>
         </div>
@@ -67,6 +56,7 @@
         <div id="exercise-area">
           {% block exercise_tips %}{% endblock %}
           <!-- these floating on top of each other -->
+          <div id="code-display"></div>
           <div id="code-area" class="overlay-resize">
             <div id="code-area-borders">
               <div id="blockly" class="overlay-resize"></div>
@@ -95,9 +85,5 @@
       </div>
     </div>
   {% endblock %}
-
-  <footer class="content">
-    <hr class="small">
-  </footer>
 
 {% endblock %}

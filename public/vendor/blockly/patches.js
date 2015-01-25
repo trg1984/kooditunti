@@ -22,6 +22,7 @@ Blockly.Trashcan.prototype.position_ = function() {
 // Create a double click collapse event
 //
 /* PATCH START */
+Blockly.BlockSvg.mouseUpCallback = function() { };
 Blockly.BlockSvg.afterConnectionMouseUp = function() { };
 Blockly.BlockSvg.doubleClickCallback = function() { };
 /* PATCH END */
@@ -77,6 +78,9 @@ Blockly.BlockSvg.prototype.onMouseUp_ = function(e) {
     }
     Blockly.Css.setCursor(Blockly.Css.Cursor.OPEN);
   });
+  // PATCH START
+  Blockly.BlockSvg.mouseUpCallback();
+  // PATCH END
 };
 
 // Invalidate waiting for second click on input click
