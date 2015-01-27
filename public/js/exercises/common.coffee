@@ -154,22 +154,24 @@
       $(window).trigger('resize.fndtn.joyride')
 
   endExecution: (method) ->
+    return unless @isExecuting
     $("#end-execution-btn").hide()
     $("#start-execution-btn").show()
-    Exercises.isExecuting = false
-    Exercises.resizeCodeArea()
+    @isExecuting = false
+    @resizeCodeArea()
     Errors.collected = []
     Blockly.JavaScript.STATEMENT_PREFIX = '';
-    Exercises.interpreter.stateStack = [] if Exercises.interpreter?
+    @interpreter.stateStack = [] if @interpreter?
     if method is "nodialog"
       Stage.reset()
-      Exercises.currentExercise.levelSetup()
+      @currentExercise.levelSetup()
     else
       JediMaster.retryDialog ->
         Stage.reset()
         Exercises.currentExercise.levelSetup()
 
   runCode: ->
+    return if JediMaster.onTour
     @runBeforeExecution()
     $("#end-execution-btn").show()
     $("#start-execution-btn").hide()
@@ -208,7 +210,7 @@
           issl = Exercises.interpreter.stateStack.length
         else
           setTimeout ->
-            return if Exercises.completedLevel and not Exercises.automaticallyEndExecution
+            return if Exercises.completedLevel# and not Exercises.automaticallyEndExecution
             if Exercises.currentExercise.evaluate()
               JediMaster.successDialog()
               $(".joyride-close-tip").one 'click', ->
@@ -216,7 +218,7 @@
               Exercises.markCompleted()
             else
               if Exercises.automaticallyEndExecution
-                if Exercises.manualEvaluation
+                if Exercises.manualEvaluation# and not Exercises.completedLevel
                 then Exercises.endExecution("nodialog")
                 else Exercises.endExecution()
           , 1000
@@ -303,6 +305,7 @@
       Errors.collect('createElement_null', {values: po.properties, block: Exercises.activeBlock})
       if Errors.collected.length is 0
         Errors.collect('createElement_undefined', {values: po.properties, block: Exercises.activeBlock})
+        Errors.collect('createElement_type_error', {values: po.properties, block: Exercises.activeBlock})
         if Errors.collected.length is 0
           props = Exercises.simplifyInterpreterObject(po)
           Api.createElement(props)

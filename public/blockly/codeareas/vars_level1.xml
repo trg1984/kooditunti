@@ -1,11 +1,26 @@
+<?xml version="1.0"?>
 <xml>
-  <block type="circle_element" id="4" inline="false" x="168" y="258">
-    <mutation properties="radius"/>
-    <field name="name">pallo</field>
-    <value name="radius_mutator">
-      <block type="variables_get" id="6">
-        <field name="VAR">pallon_halkaisija</field>
-      </block>
-    </value>
-  </block>
+    <block type="variables_set" id="20" inline="true" x="84" y="47">
+        <field name="VAR">Lempiruokani</field>
+        <value name="VALUE">
+            <block type="text" id="21">
+                <field name="TEXT">Hampurilaiset</field>
+            </block>
+        </value>
+    </block>
+    <block type="variables_set" id="22" inline="true" x="85" y="126">
+        <field name="VAR">Lempiruokani</field>
+        <value name="VALUE">
+            <block type="text" id="23">
+                <field name="TEXT">Kalapy&#xF6;ryk&#xE4;t</field>
+            </block>
+        </value>
+    </block>
+    <block type="text_element" id="24" inline="false" x="87" y="210">
+        <value name="text">
+            <block type="variables_get" id="25">
+                <field name="VAR">Lempiruokani</field>
+            </block>
+        </value>
+    </block>
 </xml>

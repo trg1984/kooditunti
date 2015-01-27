@@ -1,15 +1,9 @@
 <xml id="toolbox" style="display: none">
-  <!--<block type="create_slider"></block>-->
   <block type="variables_set"></block>
   <block type="variables_get"></block>
-  <!--<block type="circle_element">-->
-    <!--<value name="name">-->
-      <!--<block type="text">-->
-        <!--<field name="TEXT">pallo</field>-->
-      <!--</block>-->
-    <!--</value>-->
-  <!--</block>-->
   <block type="math_number">
-    <field name="NUM">50</field>
+    <field name="NUM">30</field>
   </block>
+  <block type="text"></block>
+  <block type="text_element"></block>
 </xml>

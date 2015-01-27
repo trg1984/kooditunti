@@ -50,8 +50,8 @@ Blockly.JavaScript["get_element_property"] = (block) ->
 
 Blockly.Blocks["text_element"] =
   init: ->
-    @setColour 300
-    @appendValueInput("text").setAlign(Blockly.ALIGN_RIGHT).appendField "Luo teksti"
+    @setColour 120
+    @appendValueInput("text").setAlign(Blockly.ALIGN_RIGHT).appendField "Piirrä teksti"
     @setPreviousStatement true
     @setNextStatement true
     @setMutator(new Blockly.Mutator(['position_mutator'])); # ,'color_mutator' TODO
@@ -67,7 +67,7 @@ Blockly.JavaScript["text_element"] = (block) ->
 
 Blockly.Blocks["rectangle_element"] =
   init: ->
-    @setColour 300
+    @setColour 120
     #@appendValueInput("name").appendField "Luo nelikulmio"
     @appendDummyInput()
       .appendField "Luo nelikulmio"
@@ -81,7 +81,7 @@ Blockly.Blocks["rectangle_element"] = $.extend Blockly.Blocks["rectangle_element
 
 Blockly.Blocks["circle_element"] =
   init: ->
-    @setColour 300
+    @setColour 120
     @appendDummyInput()
       .appendField "Luo ympyrä"
       .appendField(new Blockly.FieldTextInput("[nimeltään]"), "name")

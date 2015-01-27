@@ -9,13 +9,19 @@
     switch @level
       when 1
         Exercises.automaticallyEndExecution = false
-        Exercises.hasSolution = true
+        Exercises.manualEvaluation = true
+        #Exercises.hasSolution = true
         Stage.setGravity('earth');
         Exercises.preloadBlocklyBlocks = true
+        @resumeTourAfterExecution = ->
+          JediMaster.onTour = false
+          $("#start-execution-btn").one "click", ->
+            JediMaster.resumeTour ->
+              $(".tooltip").addClass("disabled")
       when 2
-        Exercises.automaticallyEndExecution = false
+        Exercises.automaticallyEndExecution = true
+        Exercises.manualEvaluation = false
         Stage.setGravity('earth');
-        Exercises.manualEvaluation = true
         Exercises.preloadBlocklyBlocks = true
       when 3
         Exercises.automaticallyEndExecution = false
@@ -32,22 +38,26 @@
 
   evaluate: ->
     switch @level
-      when 1
-        stageHasBall = Stage.world.getBodies().length is 1
-        return true if stageHasBall
-      when 2 then
+      when 1 then
+      when 2
+        stageHasSomething = Stage.world.getBodies().length isnt 0
+        return true if stageHasSomething
       when 3 then
       when 4 then
 
   errorCollector: (id, data) ->
-    if @level is 1
+    if @level is 2
       if id is "createElement_variable"
         isNumberAlready = not isNaN parseInt(data.values.radius)
         err = "Koko täytyy antaa muuttujana" if isNumberAlready
       if id is "createElement_undefined"
         radius = data.values.radius
         isUndefined = radius.type is 'undefined' or radius.data is 0
-        err = "Muuttujaa ei ole asetettu" if isUndefined
+        err = "Muuttujaa ei ole asetettu tai sillä ei ole arvoa" if isUndefined
+      if id is "createElement_type_error"
+        radius = data.values.radius
+        isntNumber = radius.type is 'string'
+        err = "Muuttuja täytyy antaa numerona" if isntNumber
     return err
 
   onClick: (elem, callback, intrp, scope) ->

@@ -65,6 +65,7 @@
     JediMaster.onTour = true
     JediMaster.tourStarted = true
     JediMaster.disableLinks()
+    Exercises.endExecution("nodialog")
     $(".exercise-tip-placement").show()
     unless Foundation.libs.joyride.settings.paused
       $(document).foundation('joyride', 'start');
