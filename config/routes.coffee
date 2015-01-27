@@ -25,6 +25,9 @@ module.exports = (app, passport) ->
   app.get "/harjoitukset/ifs/:level", exercises.ifs
   app.redirect "/harjoitukset/ifs", "/harjoitukset/ifs/1";
 
+  app.get "/harjoitukset/events/:level", exercises.events
+  app.redirect "/harjoitukset/events", "/harjoitukset/events/1";
+
   # playground
   app.get "/koodikentta", playground.index
 

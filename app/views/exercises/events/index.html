@@ -1,0 +1,50 @@
+{% extends "../../layouts/exercises.html" %}
+
+{% block js %}
+{% parent %}
+<script src="/js/exercises/events.js"></script>
+<script>Exercises.currentExercise = Events;</script>
+<script>Exercises.init();</script>
+{% endblock %}
+
+{% block steps %}
+<ul>
+  <li id="events_level1_link"{% if level == 1 %} class="active"{% endif %}><a href="/harjoitukset/events/1">1</a></li>
+  <li id="events_level2_link"{% if level == 2 %} class="active"{% endif %}><a href="/harjoitukset/events/2">2</a></li>
+  <li id="events_level3_link"{% if level == 3 %} class="active"{% endif %}><a href="/harjoitukset/events/3">3</a></li>
+</ul>
+{% endblock %}
+
+{% block exercise_tips %}
+<div class="task-overview">
+  <h2></h2>
+  <p></p>
+</div>
+{% if level == 1 %}
+<ol class="joyride-list" data-joyride>
+  <li data-button="Seuraava" class="wide hide-modal-next" data-options="prev_button: false; modal: true">
+    <h2></h2>
+    <p></p>
+  </li>
+  <li data-button="Aloita" class="wide" data-options="prev_button: true">
+    <p></p>
+  </li>
+</ol>
+{% endif %}
+{% if level == 2 %}
+<ol class="joyride-list" data-joyride>
+  <li data-button="Aloita" class="wide hide-modal-next" data-options="prev_button: false; modal: true">
+    <h2></h2>
+    <p></p>
+  </li>
+</ol>
+{% endif %}
+{% if level == 3 %}
+<ol class="joyride-list" data-joyride>
+  <li data-button="Aloita" class="wide hide-modal-next" data-options="prev_button: false; modal: true">
+    <h2></h2>
+    <p></p>
+  </li>
+</ol>
+{% endif %}
+{% endblock %}

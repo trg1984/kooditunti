@@ -35,3 +35,11 @@ exports.ifs = (req, res) ->
     subsection: "exercise-ifs"
     exerciseName: "ifs"
     level: req.params.level
+
+exports.events = (req, res) ->
+  res.render "exercises/events/index",
+    title: "Tapahtumat"
+    section: "exercise-page"
+    subsection: "exercise-events"
+    exerciseName: "events"
+    level: req.params.level

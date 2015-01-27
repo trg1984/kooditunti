@@ -12,4 +12,7 @@ exports.pageArray = [
   '/harjoitukset/vars/1'
   '/harjoitukset/vars/2'
   '/harjoitukset/vars/3'
+  '/harjoitukset/events/1'
+  '/harjoitukset/events/2'
+  '/harjoitukset/events/3'
 ]
