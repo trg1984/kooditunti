@@ -67,17 +67,6 @@
         intrp.stateStack.unshift({node: callback.node.body, scope: scope})
         intrp.run()
 
-  stageElement: (type,posX,posY,props) ->
-    return switch type
-      when 'circle' then Physics.body 'circle',
-        x: (posX+Stage.blockWidth/2)+1 # x-coordinate
-        y: (posY+Stage.blockHeight/2)+1 # y-coordinate
-        vx: 0 # velocity in x-direction
-        vy: 0 # velocity in y-direction
-        #width: Stage.blockWidth-1
-        #height: Stage.blockHeight-1
-        radius: props.radius
-
   interpreterApi: (interpreter, scope) ->
     wrapper = (text) ->
       if typeof text.data isnt "undefined"

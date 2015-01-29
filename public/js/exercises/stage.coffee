@@ -113,14 +113,17 @@
     bw = Stage.width-40
     bh = Stage.height-40
     p = 40; x = 0; y = 0
-    context.font = "20px Boogaloo";
     context.fillStyle = '#ddd';
     coord = 1
     while x <= bw
       context.moveTo 0.5 + x + p, p
       context.lineTo 0.5 + x + p, bw + p
-      textPad = if coord < 10 then 17 else 10
-      context.fillText(coord,p+x+textPad,25);
+      numbPad = if coord < 10 then 17 else 10
+      textPad = if coord < 10 then 8 else 1
+      context.font = "12px Boogaloo";
+      context.fillText("X",p+x+textPad,25);
+      context.font = "20px Boogaloo";
+      context.fillText(coord,p+x+numbPad,25);
       coord++
       x+= 40
     coord = 1
@@ -128,8 +131,14 @@
     while y <= bh
       context.moveTo p, 0.5 + y + p
       context.lineTo bh + p, 0.5 + y + p
-      textPad = if coord < 10 then 17 else 10
-      context.fillText(coord,25,p+y+28);
+      leftPad = 28
+      topPad = 28
+      textOffset = -10
+      textOffset = if coord < 10 then -12 else -22
+      context.font = "12px Boogaloo";
+      context.fillText("Y",leftPad+textOffset,p+y+topPad);
+      context.font = "20px Boogaloo";
+      context.fillText(coord,leftPad,p+y+topPad);
       coord++
       y+= 40
     context.strokeStyle = "#ddd"
@@ -139,7 +148,7 @@
   createElement: (name,pos,props) ->
     type = if props and props['type'] then props['type'] else 'default'
     pixPos = @coordinatesToPixels(pos)
-    elem = Exercises.currentExercise.stageElement(type,pixPos[0],pixPos[1],props)
+    elem = Exercises.stageElement(type,pixPos[0],pixPos[1],props)
     elem.name = name
     elem.properties = props if props
     Stage.elements[name] = elem

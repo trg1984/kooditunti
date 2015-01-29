@@ -1,5 +1,12 @@
 @BlocklyExtraPropertiesPatch =
 
+  checks:
+    "radius": "Number"
+    "width": "Number"
+    "height": "Number"
+    "position": "Array"
+    "velocity": "Array"
+
   mutationToDom: ->
     return null if not @extraProperties? or @extraProperties.length is 0
     container = document.createElement("mutation")
@@ -56,7 +63,12 @@
 
   extraPropertySetter: (name) ->
     @extraProperties.push name
-    return @appendValueInput(name+"_mutator").setAlign(Blockly.ALIGN_RIGHT).appendField(L.mutators[name])
+    checkList =  BlocklyExtraPropertiesPatch.checks
+    check = if checkList[name]? then checkList[name] else null
+    return @appendValueInput(name+"_mutator")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField(L.mutators[name])
+      .setCheck(check)
 
   saveConnections: (containerBlock) ->
     clauseBlock = containerBlock.getInputTargetBlock("STACK")

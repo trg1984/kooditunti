@@ -22,7 +22,6 @@
         #unless JediMaster.tourGoingBack
         setTimeout ->
           if step.find('.before-step-method').length == 1
-            console.log step.find('.before-step-method').data('exec')
             eval(step.find('.before-step-method').data('exec'))
         ,0
       post_step_callback: (i, step) ->

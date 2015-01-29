@@ -1,10 +1,9 @@
 <xml id="toolbox" style="display: none">
   <category name="Elementit">
     <block type="text_element"></block>
-    <block type="circle_element_simple"></block>
-    <!--<block type="text">-->
-      <!--<field name="TEXT">Hei maailma!</field>-->
-    <!--</block>-->
+    <block type="circle_element">
+      <field name="name">pallo</field>
+    </block>
   </category>
   <category name="Luvut">
     <block type="math_number">

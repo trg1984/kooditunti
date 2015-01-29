@@ -47,11 +47,11 @@
     <p>Tässä on totuusarvoinen vertailija, jonka arvo (tosi tai epätosi) määrittää sen miten ehtolause toimii.</p>
     <p>Esimerkki vertailijasta jonka arvo on tosi:<br /><img src="/img/exercises/ifs/compare_true.png" /></p>
   </li>
-  <li data-id="tip-comparison" data-button="Seuraava" data-options="tip_location:top;prev_button: true">
-    <p>Tämä on vertailija (valittuna <strong>on yhtä kuin</strong>)</p>
+  <!--<li data-id="tip-comparison" data-button="Seuraava" data-options="tip_location:top;prev_button: true">-->
+    <!--<p>Tämä on vertailija (valittuna <strong>on yhtä kuin</strong>)</p>-->
     <!--<p>Ehdon vertailijaa pystyy vaihtamaan tarvittaessa tästä (näissä tehtävissä ei tarvitse vaihtaa)</p>-->
      <!--(käytössä on esimerksi <strong>on yhtä kuin</strong>, <strong>ei ole yhtä kuin</strong>, <strong>on suurempi kuin</strong> jne.)-->
-  </li>
+  <!--</li>-->
   <li data-id="tip-true" data-button="Seuraava" data-options="tip_location:right;prev_button: true">
     <p>Tämä osa suoritetaan jos yllä oleva ehto on tosi (esimerkiksi ehto <strong>2 = 2</strong> on tosi, koska kaksi on kaksi)</p>
   </li>
@@ -86,40 +86,43 @@
     <p>Kokeillaan vähän vaikeampaa ehtolausetehtävää ja tutustutaan siihen miten pystyt muokkaamaan palikoita.</p>
   </li>
   <li data-id="tip-start" data-button="Seuraava" class="wide" data-options="prev_button: true; tip_location: bottom;">
-    <p>Ohjelma on taas alustettu kysymään käyttäjältä kysymys suorituksen aikana.</p>
+    <p>Ohjelma kysyy käyttäjältä kysymyksen kun se suoritetaan ja tallentaa vastauksen muuttujaan nimeltään "muoto".</p>
   </li>
-  <li data-id="tip-mod-star" class="wide" data-options="prev_button: true; next_button: false; tip_location: right;">
-    <p>Joidenkin palikoiden kyljestä löytyy tälläinen tähti. Tähteä klikkaamalla pystyt tekemään muutoksia palikan toimintaan.</p>
-    <p>Klikkaa tähteä.</p>
-    <div class="before-step-method" style="display:none" data-exec="Ifs.bindNextTourToMutatorIconClick()"></div>
-  </li>
-  <li data-id="tip-mod-if" data-button="Seuraava" class="wide" data-options="prev_button: true; tip_location: right;">
-  <p>Ehtolausetta pystyy muokkaamaan lisäämällä siihen joko <strong>muuten jos</strong>- tai <strong>muuten</strong>-haaran.</p>
-    <p><strong>"muuten jos"-haaralle</strong> pystytään määrittämään ehto, jonka toteutuessa edetään kyseiseen haaraan. Näytä pystyy palikkaan lisäämään useita.</p>
-    <p><strong>"muuten"-haaraan</strong> edetään jos mihinkään aikaisemmista haaroista ei ole päästy etenemään. Näitä pystyy lisäämään palikkaan vain yhden.</p>
-    <div class="after-step-method" style="display:none" data-exec="Ifs.bindNextTourToMutatorIconClick()"></div>
-  </li>
-  <li data-id="tip-mod-if2" class="wide" data-options="prev_button: true; next_button: false; tip_location: right;">
-    <p>Kokeile lisätä molemmat muutokset palikkaan raahamalla ne vasemmalta oikealle. Huomaat miten palikka alla muuttuu.</p>
-    <p>Pystyt myös poistamaan muutoksia raahamalla ne takaisin vasemmalle.</p>
-    <p>Klikkaa tähteä uudelleen kun olet tehnyt palikkaan muutokset.</p>
-    <div class="after-step-method" style="display:none" data-exec="Ifs.hideBubbles()"></div>
-  </li>
-  <li data-id="tip-mod-circle" class="wide" data-options="prev_button: true; next_button: false; tip_location: right;">
-    <p>Myös esimerkiksi "Luo ympyrä" -palikasta löytyy tähti. Klikkaa sitä seuraavaksi.</p>
-    <div class="before-step-method" style="display:none" data-exec="Ifs.bindNextTourToMutatorIconClick()"></div>
-  </li>
-  <li data-id="tip-mod-circle2" data-button="Seuraava" class="wide" data-options="prev_button: true; tip_location: right;">
-    <p>Näiden avulla pystyt muokkaamaan palikan ominaisuuksia. Kokeile lisätä ympyrälle sijainti.</p>
-    <div class="after-step-method" style="display:none" data-exec="Ifs.hideBubbles()"></div>
-  </li>
-  <li data-id="tip-coordinates" data-button="Seuraava" class="wide" data-options="prev_button: true; tip_location: right;">
-    <p>Sijainnin pystyy määrittelemään tällä palikalla.</p>
-    <p>Pudotusvalikosta pystyt valitsemaan X- ja Y-koordinaatit. Kokeile eri arvoja niin näet miten se toimii.</p>
-  </li>
+  <!--<li data-id="tip-mod-star" class="wide" data-options="prev_button: true; next_button: false; tip_location: right;">-->
+    <!--<p>Joidenkin palikoiden kyljestä löytyy tälläinen tähti. Tähteä klikkaamalla pystyt tekemään muutoksia palikan toimintaan.</p>-->
+    <!--<p>Klikkaa tähteä.</p>-->
+    <!--<div class="before-step-method" style="display:none" data-exec="Ifs.bindNextTourToMutatorIconClick()"></div>-->
+  <!--</li>-->
+  <!--<li data-id="tip-mod-if" data-button="Seuraava" class="wide" data-options="prev_button: true; tip_location: right;">-->
+  <!--<p>Ehtolausetta pystyy muokkaamaan lisäämällä siihen joko <strong>muuten jos</strong>- tai <strong>muuten</strong>-haaran.</p>-->
+    <!--<p><strong>"muuten jos"-haaralle</strong> pystytään määrittämään ehto, jonka toteutuessa edetään kyseiseen haaraan. Näytä pystyy palikkaan lisäämään useita.</p>-->
+    <!--<p><strong>"muuten"-haaraan</strong> edetään jos mihinkään aikaisemmista haaroista ei ole päästy etenemään. Näitä pystyy lisäämään palikkaan vain yhden.</p>-->
+    <!--<div class="after-step-method" style="display:none" data-exec="Ifs.bindNextTourToMutatorIconClick()"></div>-->
+  <!--</li>-->
+  <!--<li data-id="tip-mod-if2" class="wide" data-options="prev_button: true; next_button: false; tip_location: right;">-->
+    <!--<p>Kokeile lisätä molemmat muutokset palikkaan raahamalla ne vasemmalta oikealle. Huomaat miten palikka alla muuttuu.</p>-->
+    <!--<p>Pystyt myös poistamaan muutoksia raahamalla ne takaisin vasemmalle.</p>-->
+    <!--<p>Klikkaa tähteä uudelleen kun olet tehnyt palikkaan muutokset.</p>-->
+    <!--<div class="after-step-method" style="display:none" data-exec="Ifs.hideBubbles()"></div>-->
+  <!--</li>-->
+  <!--<li data-id="tip-mod-circle" class="wide" data-options="prev_button: true; next_button: false; tip_location: right;">-->
+    <!--<p>Myös esimerkiksi "Luo ympyrä" -palikasta löytyy tähti. Klikkaa sitä seuraavaksi.</p>-->
+    <!--<div class="before-step-method" style="display:none" data-exec="Ifs.bindNextTourToMutatorIconClick()"></div>-->
+  <!--</li>-->
+  <!--<li data-id="tip-mod-circle2" data-button="Seuraava" class="wide" data-options="prev_button: true; tip_location: right;">-->
+    <!--<p>Näiden avulla pystyt muokkaamaan palikan ominaisuuksia. Kokeile lisätä ympyrälle sijainti.</p>-->
+    <!--<div class="after-step-method" style="display:none" data-exec="Exercises.hideBubbles()"></div>-->
+  <!--</li>-->
+  <!--<li data-id="tip-coordinates" data-button="Seuraava" class="wide" data-options="prev_button: true; tip_location: right;">-->
+    <!--<p>Sijainnin pystyy määrittelemään tällä palikalla.</p>-->
+    <!--<p>Pudotusvalikosta pystyt valitsemaan X- ja Y-koordinaatit. Kokeile eri arvoja niin näet miten se toimii.</p>-->
+  <!--</li>-->
   <li data-button="OK" class="wide" data-options="prev_button: true">
     <h2>Tehtävä:</h2>
     <p>Täydennä ohjelma toimimaan sen mukaisesti mitä käyttäjä vastaa kysymykseen (jos käyttäjä vastaa "neliö", piirretään neliö ja jos vastataan "ympyrä", piirretään ympyrä).</p>
+  </li>
+  <li data-button="OK" class="wide" data-options="prev_button: true">
+    <p><strong>Bonus:</strong> tämän tehtävän voi tehdä käyttäen useampaa ehtolauseita, mutta jos haluaa haastetta, voi myös kokeilla miten ehtolausetta pystyy muokkaamaan (sen kyljessä olevaa tähteä klikkaamalla)</p>
   </li>
 </ol>
 <div id="evaluation-selects">
@@ -137,7 +140,7 @@
 <ol class="joyride-list" data-joyride>
   <li data-button="Seuraava" class="wide" data-options="prev_button: false">
     <h2>Lisää ehtolauseita</h2>
-    <p>Muistatko muuttujia opeteltaessa rakennetun klikkauslaskurin? Nyt pääset laajentamaan ohjelmaa hieman ehtolauseita käyttämällä.</p>
+    <p>Tämä ohjelma laskee kuinka monta kertaa palloa on klikattu.</p>
   </li>
   <li data-button="Aloita" class="wide" data-options="prev_button: true">
     <p>Tehtävänäsi on lisätä ohjelmaan tekstiä kun tietty määrä klikkauksia on saavutettu.</p>

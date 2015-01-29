@@ -7,14 +7,27 @@
 
   levelSetup: ->
     switch @level
-      when 1 then
-      when 2 then
-      when 3 then
+      when 1
+        Exercises.automaticallyEndExecution = false
+        Exercises.manualEvaluation = true
+      when 2
+        Exercises.automaticallyEndExecution = false
+        Exercises.manualEvaluation = true
+      when 3
+        Exercises.automaticallyEndExecution = false
+        Exercises.manualEvaluation = true
+        Exercises.preloadBlocklyBlocks = true
+        @bindNextTourToMutatorIconClick = ->
+          Blockly.Mutator.afterClick = ->
+            Foundation.libs.joyride.go_next()
+            Blockly.Mutator.afterClick = (-> return)
+        @unbindMutatorIconClick = ->
+          Blockly.Mutator.afterClick = (-> return)
 
   evaluate: ->
     switch @level
       when 1, 2, 3
-        return true
+        return false
 
   interpreterApi: (interpreter, scope) ->
     Exercises.commonInterpreterApi(interpreter,scope)

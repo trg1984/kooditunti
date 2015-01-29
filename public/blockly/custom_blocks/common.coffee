@@ -28,7 +28,7 @@ Blockly.Blocks["when_pressed"] = init: ->
   @setColour 180
   @appendDummyInput("event")
     .appendField "kun painetaan näppäintä"
-    .appendField new Blockly.FieldDropdown([["nuoli oikealle","right"],["nuoli vasemmalle","left"],["nuoli ylös","up"],["nuoli alas","down"],["X-kirjain","x"]]), "key"
+    .appendField new Blockly.FieldDropdown([['[valitse]',''],["nuoli oikealle","right"],["nuoli vasemmalle","left"],["nuoli ylös","up"],["nuoli alas","down"],["X-kirjain","x"]]), "key"
   @appendStatementInput("when").appendField "tee"
   @setPreviousStatement true
   @setNextStatement true
@@ -44,7 +44,7 @@ Blockly.JavaScript["when_pressed"] = (block) ->
 Blockly.Blocks["gravity_switch"] = init: ->
   @setColour 260
   @appendDummyInput().appendField("aseta painovoimaksi")
-    .appendField new Blockly.FieldDropdown([ ["avaruus","space"],["maa","earth"],["kuu","moon"] ]), "gravity"
+    .appendField new Blockly.FieldDropdown([ ["maa","earth"],["kuu","moon"],["avaruus","space"] ]), "gravity"
   @setPreviousStatement true
   @setNextStatement true
   @setTooltip ""

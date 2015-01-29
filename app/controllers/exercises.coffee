@@ -38,7 +38,7 @@ exports.ifs = (req, res) ->
 
 exports.events = (req, res) ->
   res.render "exercises/events/index",
-    title: "Tapahtumat"
+    title: "Koordinaatisto ja tapahtumat"
     section: "exercise-page"
     subsection: "exercise-events"
     exerciseName: "events"

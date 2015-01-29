@@ -72,7 +72,6 @@
     # determine the evaluation basis
     switch @level
       when 1, 2, 3
-        console.log @walkerOnGoal
         return true if @walkerOnGoal
         # some complex logic on the grid to check whether or not we are
         # done

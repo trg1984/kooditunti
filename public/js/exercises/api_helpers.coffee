@@ -27,8 +27,14 @@
         nv
       when 'position', 'velocity'
        if typeof value isnt 'object' and value.length isnt 2
-       then @defaultPropertyValues[key]
-       else value
+         @defaultPropertyValues[key]
+       else
+         if key is 'velocity'
+           value[0] = value[0]/100
+           value[1] = value[1]/100
+           value
+         else
+           value
     return rv
 
   defaultPropertyValues:

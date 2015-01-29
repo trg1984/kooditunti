@@ -16,35 +16,156 @@
 {% endblock %}
 
 {% block exercise_tips %}
-<div class="task-overview">
-  <h2></h2>
-  <p></p>
-</div>
 {% if level == 1 %}
+<div class="task-overview">
+  <h2>Elementit ja koordinaatisto</h2>
+  <p>Tässä tehtävässä tutustutaan koordinaatistoon ja lisätään elementtejä kentälle eri kohtiin.</p>
+  <p>
+    <strong>Esimerkki:</strong>
+    <img src="/img/exercises/events/level1_example.png" />
+  </p>
+</div>
+<div id="tip-elements" class="exercise-tip-placement" style="top:80px;left:0px;width:250px"></div>
+<div id="tip-coord-array" class="exercise-tip-placement" style="top:220px;left:0px;width:190px"></div>
+<div id="tip-coord-x" class="exercise-tip-placement" style="top:10px;right:300px;width:40px;"></div>
+<div id="tip-coord-y" class="exercise-tip-placement" style="top:180px;right:550px;width:40px;"></div>
+<div id="tip-coord-example1" class="exercise-tip-placement" style="top:190px;right:290px;width:40px;"></div>
+<div id="tip-coord-example2" class="exercise-tip-placement" style="top:370px;right:415px;width:40px;"></div>
 <ol class="joyride-list" data-joyride>
   <li data-button="Seuraava" class="wide hide-modal-next" data-options="prev_button: false; modal: true">
-    <h2></h2>
-    <p></p>
+    <h2>Elementit ja koordinaatisto</h2>
+    <p>Tutustutaan siihen miten elementtejä saa lisättyä kentälle haluttuun kohtaan.</p>
   </li>
-  <li data-button="Aloita" class="wide" data-options="prev_button: true">
-    <p></p>
+  <li data-id="tip-elements" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true">
+    <p>Muistatko vielä mitä nämä palikat tekevät? Kertaa ensimmäinen harjoitus jos et muista.</p>
+    <p>Huomaa että nyt tekstille ja ympyrälle voi määrittää myös sijainnin.</p>
+  </li>
+  <li data-id="tip-coord-array" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true">
+    <p>Sijanti määritellään tällä palikalla. Tutustutaan seuraavaksi koordinaatistoon ja siihen mitä tähän palikkaan liitetyt kirjaimet ja numerot tarkoittavat.</p>
+  </li>
+  <li data-id="output-stage" data-button="Seuraava" class="wide" data-options="tip_location: left; prev_button: true">
+    <p>Kentän vasemmassa laidassa ja sen yläpuolella on numeroita jotka määrittelevät koordinaatiston.</p>
+    <!--<p>Tämä voi olla hankalaa jos et ole aikaisemmin koordinaatistosta kuullut, joten katsotaan seuraavaksi muutama esimerkki.</p>-->
+  </li>
+  <li data-id="tip-coord-x" data-button="Seuraava" data-options="tip_location: bottom; prev_button: true">
+    <p>Yläpuolen numerot kertovat X-koordinaatin, eli sijainnin vasemmalta oikealle.</p>
+  </li>
+  <li data-id="tip-coord-y" data-button="Seuraava" data-options="tip_location: right; prev_button: true">
+    <p>Vasemmalla puolella näkyvät numerot kertovat Y-koordinaatin, eli sijainnin ylhäältä alas.</p>
+  </li>
+  <li data-id="tip-coord-example1" data-button="Seuraava" data-options="tip_location: bottom; prev_button: true">
+    <img src="/img/exercises/events/coord_example1.png" />
+    <p>Näillä arvoilla sijanti olisi suurinpiirtein tässä (X = 7 ja Y = 5).</p>
+  </li>
+  <li data-id="tip-coord-example2" data-button="Seuraava" data-options="tip_location: top; prev_button: true">
+    <img src="/img/exercises/events/coord_example2.png" />
+    <p>Näillä arvoilla sijanti olisi suurinpiirtein tässä (X = 4 ja Y = 9).</p>
+  </li>
+  <li data-id="tip-coord-array" data-button="OK!" class="wide" data-options="tip_location: right; prev_button: true">
+    <p><strong>Tehtävä:</strong> testaa elementtien lisäämistä eri kohtiin kentälle.</p>
+    <p>
+    <strong>Esimerkiksi näin:</strong>
+    <img src="/img/exercises/events/level1_example.png" />
+    </p>
+    <p>Kokeile vapaasti eri lukuja X ja Y kohdissa jos et vielä täysin ymmärtänyt miten niiden avulla pystyy kertomaan sijainnin.</p>
+    <p>Voit lisätä niin monta elementtiä kuin haluat. Näillä palikoilla saat jo piirrettyä vaikka lumiukon!</p>
   </li>
 </ol>
+<div id="evaluation-selects">
+  <div>Ymmärrän miten koordinaatisto toimii.</div>
+  <div>Sain luotua elementtejä tai tekstiä eri puolille kenttää.</div>
+</div>
 {% endif %}
 {% if level == 2 %}
+<div class="task-overview">
+  <h2>Tapahtumat</h2>
+  <p>Testaa tapahtuma-elementin käyttämistä</p>
+  <p>
+    <strong>Esimerkkejä:</strong>
+    <ul>
+      <li>luo pallo jota klikkaamalla luodaan tekstiä</li>
+      <li>luo pallo jota klikkaamalla luodaan toinen pallo</li>
+      <li>luo pallo jota klikkaamalla luodaan muutetaan painovoimaa</li>
+      <li>muuta painovoimaa kun klikataan näppäimistöltä jotain näppäintä</li>
+    </ul>
+  </p>
+</div>
+<div id="tip-step1" class="exercise-tip-placement" style="top:5px;left:150px;width:250px"></div>
+<div id="tip-step2" class="exercise-tip-placement" style="top:165px;left:130px;width:250px"></div>
+<div id="tip-step3" class="exercise-tip-placement" style="top:195px;left:130px;width:250px"></div>
+<!--<div id="tip-step4" class="exercise-tip-placement" style="top:80px;left:0px;width:250px"></div>-->
 <ol class="joyride-list" data-joyride>
-  <li data-button="Aloita" class="wide hide-modal-next" data-options="prev_button: false; modal: true">
-    <h2></h2>
-    <p></p>
+  <li data-button="Seuraava" class="wide hide-modal-next" data-options="prev_button: false; modal: true">
+    <h2>Tapahtumat</h2>
+    <!--<p>Yleensä kaikki koodi suoritetaan ylhäältä alas kun ohjelma suoritetaan.</p>-->
+    <!--<p>Lisäämällä koodiisi tapahtumia, suoritetaan määritelty koodi silloin kun jotain tapahtuu.</p>-->
+    <p>Tapahtuma voi olla esimerkiksi se, että käyttäjä klikkaa jotain elementtiä kentällä tai painaa näppäintä näppäimistöllään.</p>
+  </li>
+  <li data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true">
+    <p>Toteutetaan yhdessä yksinkertainen ohjelma joka hyödyntää tapahtumia.</p>
+  </li>
+  <li data-id="tip-step1" data-button="Seuraava" data-options="tip_location: right; prev_button: true">
+    <p>Aloita raahaamalla tämä "Luo ympyrä" -palikka koodialueelle.</p>
+    <div class="before-step-method" style="display:none" data-exec="Exercises.openFirstCategory()"></div>
+  </li>
+  <li data-id="tip-step2" data-button="Seuraava" data-options="tip_location: bottom; prev_button: true">
+    <p>Raahaa nyt tämä tapahtuma-elementti koodialueelle <strong>edellisen palikan alapuolelle</strong></p>
+    <p>Huomaa että "pallo" on valittuna pudotusvalikosta. Tätä voi myös vaihtaa jos kentällä on useampia elementtejä.</p>
+    <div class="before-step-method" style="display:none" data-exec="Exercises.openFirstCategory()"></div>
+  </li>
+  <li data-id="tip-step3" data-button="Seuraava" data-options="tip_location: top; prev_button: true">
+    <p>Lisää viimeksi lisätyn <strong>tapahtuma-elementin sisään</strong> "Piirrä teksti" -palikka.</p>
+    <div class="before-step-method" style="display:none" data-exec="Exercises.openFirstCategory()"></div>
+  </li>
+  <li data-id="code-area" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true">
+    <p>Koodisi pitäisi näyttää nyt siis suurinpiirtein tältä:</p>
+    <img src="/img/exercises/events/level2_example.png" />
+    <div class="before-step-method" style="display:none" data-exec="Exercises.closeFirstCategory()"></div>
+  </li>
+  <li data-button="OK!" class="wide" data-options="tip_location: right; prev_button: true">
+    <p>Suorita koodi ja katso mitä tapahtuu. Muista klikata hiirellä kentälle piirtyvää palloa, niin näet miten tapahtuma toimii.</p>
+    <p>Suoritettuasi koodin, voit testata vapaasti muita tapoja käyttää tapahtumia. Testaa vaikka "Muut palikat" kategoriasta löytyviä palikoita.</p>
   </li>
 </ol>
+<div id="evaluation-selects">
+  <div>Sain tehtyä pallon, jota klikatessa kentälle ilmestyy teksti.</div>
+  <div>Testasin myös "Muut palikat" -kategorian palikoita</div>
+</div>
 {% endif %}
 {% if level == 3 %}
+<div class="task-overview">
+  <h2>Elementtien muokkaaminen</h2>
+  <p>Opitaan muokkaamaan elementin ominaisuuksia.</p>
+  <p><strong>Tehtävä:</strong> tee ohjelma, jossa elementin paikka vaihtuu kun elementtiä klikataan.</p>
+</div>
+<div id="tip-rect-block" class="exercise-tip-placement" style="top:70px;left:220px;width:250px"></div>
+<div id="tip-edit-block" class="exercise-tip-placement" style="top:165px;left:220px;width:250px"></div>
 <ol class="joyride-list" data-joyride>
   <li data-button="Aloita" class="wide hide-modal-next" data-options="prev_button: false; modal: true">
-    <h2></h2>
-    <p></p>
+    <h2>Elementtien muokkaaminen</h2>
+    <p>Pystyt myös muokkaamaan elementtien ominaisuuksia.</p>
+  </li>
+  <li data-id="tip-rect-block" data-button="Seuraava" class="wide" data-options="prev_button: true; tip_location: right;">
+    <p>Palikan kyljestä löytyvästä tähdestä klikkaamalla löydät kaikki muokkaukset mitä voit elementille tehdä.</p>
+    <div class="before-step-method" style="display:none" data-exec="Events.bindNextTourToMutatorIconClick()"></div>
+  </li>
+  <li data-id="tip-rect-block" data-button="Seuraava" class="wide" data-options="prev_button: true; tip_location: right;">
+    <p>Ominaisuuksia voi lisätä tai poistaa raahamalla niitä "ominaisuudet" -lohkoon tai pois sieltä.</p>
+    <p><img src="/img/exercises/events/modify_bubble_help.png" /></p>
+    <p>Muokkausikkuna sulkeutuu klikkaamalla tähdestä uudelleen.</p>
+    <div class="before-step-method" style="display:none" data-exec="Events.unbindMutatorIconClick()"></div>
+    <div class="after-step-method" style="display:none" data-exec="Exercises.hideBubbles()"></div>
+  </li>
+  <li data-id="tip-edit-block" data-button="Seuraava" class="wide" data-options="prev_button: true; tip_location: right;">
+    <p>Tällä palikalla pystyt muokkaamaan luotua elementtiä esimerkiksi vaihtamalla sen sijantia.</p>
+  </li>
+  <li data-button="Seuraava" class="wide" data-options="prev_button: true; tip_location: right;">
+    <p><strong>Tehtävä:</strong> tee ohjelma, jossa elementin paikka vaihtuu kun elementtiä klikataan.</p>
   </li>
 </ol>
+<div id="evaluation-selects">
+  <div>Onnistuin muokkaamaan uutta elementtiä (esimerkiksi asettamalla sille sijainnin).</div>
+  <div>Onnistuin luomaan elementin joka vaihtaa paikkaa kun sitä klikataan.</div>
+</div>
 {% endif %}
 {% endblock %}

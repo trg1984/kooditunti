@@ -7,7 +7,7 @@ Blockly.Blocks["extra_properties_container"] = init: ->
 
 Blockly.Blocks["radius_mutator"] = init: ->
   @setColour 210
-  @appendDummyInput().appendField "halkaisija"
+  @appendDummyInput().appendField("halkaisija")
   @setPreviousStatement true
   @setNextStatement true
   @contextMenu = false

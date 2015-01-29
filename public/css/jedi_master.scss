@@ -7,7 +7,7 @@ $font: 'Boogaloo';
 
 .joyride-tip-guide {
   & { border-radius: 10px; }
-  h1,h2,p,strong { font-family: $font; margin-bottom: 0.6rem;  }
+  h1,h2,p,strong,ul { font-family: $font; margin-bottom: 0.6rem;  }
   /*strong { font-family: 'Short Stack'; }*/
   strong { color: #ccc; }
   .button { margin-top: 10px; float: right; }

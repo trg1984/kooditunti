@@ -72,7 +72,7 @@
     <p>Tämän jälkeen asetetaan kuitenkin samannimisen muuttujan arvoksi "Kalapyörykät". Edellinen arvo siis korvataan tällä uudella.</p>
   </li>
   <li data-id="tip-get" data-button="Seuraava" class="wide hide-modal-next" data-options="tip_location: left; prev_button: true;">
-    <p>Viimeinen arvo minkä ohjelma tälle muuttujalle on antanut on siis "Kalapyörykät", eli se siis piirretään kentälle.</p>
+    <p>Viimeinen arvo minkä ohjelma tälle muuttujalle on antanut on "Kalapyörykät", eli se siis piirretään kentälle.</p>
   </li>
   <li data-button="OK!" class="wide hide-modal-next" data-options="tip_location: left; prev_button: true;">
     <p>Voit vielä jatkaa muuttujien kanssa testailua esimerkiksi luomalla nämä muuttujat:</p>
@@ -171,8 +171,13 @@
 {% if level == 3 %}
 <div class="task-overview">
   <h2>Tehtävä</h2>
-  <p>Luo kentälle pallo ja teksti joka kertoo kuinka monta kertaa palloa on klikattu.</p>
-  <p><strong>Vinkki:</strong> tallenna klikkausten määrä muuttujaan ja muuta muuttujan arvoa klikatessa</p>
+  <p>Luo kentälle teksti joka kertoo kuinka monta kertaa jotain näppäimistön näppäintä on painettu.</p>
+  <p><strong>Vinkit:</strong><br />
+  <ul>
+    <li>Aluksi näppäimistön painalluksia on nolla.</li>
+    <li>Kun näppäintä painetaan, haluat kasvattaa painallusten määrää yhdellä.</li>
+    <li>Käytä <img src="/img/exercises/vars/arith.png" /> -palikkaa arvon kasvattamiseen</li>
+  </p>
 </div>
 <div id="tip-when" class="exercise-tip-placement" style="top:190px;left:170px;"></div>
 <ol class="joyride-list" data-joyride>
@@ -182,12 +187,13 @@
     <div class="after-step-method" style="display:none" data-exec="Exercises.openFirstCategory()"></div>
   </li>
   <li data-id="tip-when" data-button="Seuraava" class="wide" data-options="prev_button: true;">
-    <p><strong>Uusi palikka:</strong> tämän palikan sisään pystyt lisäämään toisia palikoita, jotka suoritetaan kun pudotusvalikosta valittua elementtiä klikataan.</p>
-    <p>Huomaa että elementin täytyy olla koodialueella jotta se näkyy pudotusvalikossa.</p>
+    <p>Kertaa harjoitus "Koordinaatisto ja tapahtumat" jos et muista miten tapahtuma-elementti toimii.</p>
   </li>
   <li data-button="Aloita" class="wide">
-    <p>Pystytkö luomaan kentälle pallon, jota klikatessa kentälle ilmestyy teksti, joka kertoo kuinka monta kertaa palloa on klikattu?</p>
-    <p>Tehtävä on hieman edellisiä hankalampi, joten kannattaa aloittaa ihan vaikka sillä että saat jotain tapahtumaan kun palloa klikataan ja vasta sen jälkeen miettiä miten se voisi laskea käyttäjän klikkaukset.</p>
+    <p><strong>Tehtävä:</strong> luo kentälle teksti joka kertoo kuinka monta kertaa jotain näppäimistön näppäintä on painettu.</p>
+    <p>Tehtävä on hieman edellisiä hankalampi, joten kannattaa aloittaa ihan
+    vaikka sillä että saat jotain tapahtumaan kun näppäintä painetaan, ja vasta
+    sen jälkeen miettiä miten saisit laskettua painallusten määrän.</p>
   </li>
 </ol>
 <div id="evaluation-selects">

@@ -21,7 +21,7 @@ Blockly.Blocks["coordinate_array"] = init: ->
   @appendValueInput("xcoord").setCheck("Number").appendField "X"
   @appendValueInput("ycoord").setCheck("Number").appendField "Y"
   @setOutput true, "Array"
-  @setInputsInline true
+  #@setInputsInline true
   @setTooltip ""
   return
 
@@ -52,6 +52,7 @@ Blockly.Blocks["text_element"] =
   init: ->
     @setColour 120
     @appendValueInput("text").setAlign(Blockly.ALIGN_RIGHT).appendField "Piirrä teksti"
+      .setCheck(['String','Number'])
     @setPreviousStatement true
     @setNextStatement true
     @setMutator(new Blockly.Mutator(['position_mutator'])); # ,'color_mutator' TODO
@@ -94,7 +95,7 @@ Blockly.Blocks["circle_element"] = $.extend Blockly.Blocks["circle_element"], Bl
 
 Blockly.Blocks["edit_element"] =
   init: ->
-    @setColour 300
+    @setColour 120
     @appendDummyInput("name")
       .appendField "Muokkaa elementtiä"
       .appendField new Blockly.FieldDropdown(Stage.settableElementsDropdownValues), "element"

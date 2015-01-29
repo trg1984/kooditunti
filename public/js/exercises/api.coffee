@@ -38,9 +38,15 @@
         intrp.run()
 
   onKeypress: (key, callback, intrp, scope) ->
+    holdingKey = false
     Mousetrap.bind key, ->
+      return if holdingKey
+      holdingKey = true
       intrp.stateStack.unshift({node: callback.node.body, scope: scope, thisExpression: scope})
       intrp.run()
+    Mousetrap.bind key, ->
+      holdingKey = false
+    , 'keyup'
 
   execQueue: []
   execWaitTime: 0

@@ -255,6 +255,16 @@
     e = Blockly.mainWorkspace.toolbox_.tree_.firstChild_
     e.onMouseDown() unless e.isSelected()
 
+   closeFirstCategory: ->
+    e = Blockly.mainWorkspace.toolbox_.tree_.firstChild_
+    e.onMouseDown() if e.isSelected()
+
+  hideBubbles: ->
+    for block in Blockly.mainWorkspace.getAllBlocks()
+      hasMutator = block.mutator?
+      isOpen = if hasMutator then Blockly.Icon.prototype.isVisible.call(block.mutator) else false
+      block.mutator.iconClick_() if hasMutator && isOpen
+
   nextLevelPath: ->
     return "/harjoitukset/"+@currentName+"/"+(@currentLevel+1)
 
@@ -277,6 +287,29 @@
         err = "Kaikkia arvoja ei ole annettu" if v.data is null
     return err
 
+  stageElement: (type,posX,posY,props) ->
+    # these are mostly common, but can be overwritten by the exercise
+    if @currentExercise.stageElement?
+      return @currentExercise.stageElement(type,posX,posY,props)
+    else
+      return switch type
+        when 'circle' then Physics.body 'circle',
+          # make them scatter just a bit (makes sense when we create many)
+          x: (posX+Stage.blockWidth/2)+Math.random()
+          y: (posY+Stage.blockHeight/2)+1 # y-coordinate
+          vx: props.xy # velocity in x-direction
+          vy: props.vy # velocity in y-direction
+          radius: props.radius
+        when 'rectangle' then Physics.body 'rectangle',
+          # make them scatter just a bit (makes sense when we create many)
+          x: (posX+Stage.blockWidth/2)+Math.random()
+          y: (posY+Stage.blockHeight/2)+1 # y-coordinate
+          vx: props.xy # velocity in x-direction
+          vy: props.vy # velocity in y-direction
+          width: props.width
+          height: props.height
+          restitution: 0.1
+
   readableCodeHTML: ->
     o = @readableCode
     o = o.replace(/(\n){3,}/gim,'<br /><br />')
@@ -286,9 +319,9 @@
     return o
 
   commonInterpreterApi: (interpreter, scope) ->
-    wrapper = (id) ->
-      console.log(id)
-    interpreter.setProperty scope, "notify", interpreter.createNativeFunction(wrapper)
+    #wrapper = (id) ->
+      #console.log(id)
+    #interpreter.setProperty scope, "notify", interpreter.createNativeFunction(wrapper)
 
     wrapper = (textobject) ->
       text = if textobject? and textobject.data? then textobject.data else ""

@@ -1,5 +1,4 @@
 <xml id="toolbox" style="display: none">
-  <!--<block type="heading"></block>-->
   <block type="variables_get"></block>
   <block type="math_number">
     <field name="NUM">50</field>
