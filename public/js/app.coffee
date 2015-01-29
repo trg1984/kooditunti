@@ -39,7 +39,9 @@ if completedLevels?
         $("."+exercise+" .stars ."+level).css("opacity",1);
 
 resetProgress = ->
-  localStorage.clear()
+  # remove everything but the playground code
+  for key of localStorage
+    localStorage.removeItem key if key isnt "playground_level1_code"
   location.reload()
 
 $(".reset-button").click ->

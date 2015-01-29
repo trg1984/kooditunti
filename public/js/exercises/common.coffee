@@ -61,8 +61,7 @@
   resetCodeArea: (ctrl) ->
     if ctrl != "noprompt"
       return unless confirm "Tämä poistaa nykyisen koodisi. Haluatko jatkaa?"
-    url = window.location.href.split("#")[0]
-    window.localStorage[url] = null
+    window.localStorage[@currentID+"_code"] = null
     $.each Blockly.mainWorkspace.getAllBlocks(), (-> @dispose())
     @preloadBlocks() if @preloadBlocklyBlocks
 
@@ -85,10 +84,10 @@
       trashcan: true
 
     $("#blockly").width($("#blockly").width()-2)
-    url = window.location.href.split("#")[0]
+    codeStorageID = @currentID+"_code"
     hasLocalStorage = "localStorage" of window
-    if hasLocalStorage and window.localStorage[url]
-      blocklyXML = window.localStorage[url]
+    if hasLocalStorage and window.localStorage[codeStorageID]
+      blocklyXML = window.localStorage[codeStorageID]
       try savedBlocklyElementCount = $($.parseXML(blocklyXML)).children().children().length
       catch e then savedBlocklyElementCount = 0
       if savedBlocklyElementCount > 0
@@ -97,7 +96,7 @@
         @preloadBlocks() if @preloadBlocklyBlocks
     else
       @preloadBlocks() if @preloadBlocklyBlocks
-    BlocklyStorage.backupOnUnload()
+    BlocklyStorage.backupOnUnload(codeStorageID)
 
     # create filler for toolbox (with categories)
     btb = $(".blocklyToolboxDiv")

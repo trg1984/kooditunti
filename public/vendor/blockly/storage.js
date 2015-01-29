@@ -26,7 +26,7 @@
 
 // Create a namespace.
 var BlocklyStorage = {};
-
+BlocklyStorage.localStorageID = null
 /**
  * Backup code blocks to localStorage.
  * @private
@@ -35,15 +35,20 @@ BlocklyStorage.backupBlocks_ = function() {
   if ('localStorage' in window) {
     var xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
     // Gets the current URL, not including the hash.
-    var url = window.location.href.split('#')[0];
-    window.localStorage.setItem(url, Blockly.Xml.domToText(xml));
+    if(BlocklyStorage.localStorageID == null) {
+      var storageID = window.location.href.split('#')[0];
+    } else {
+      var storageID = BlocklyStorage.localStorageID;
+    }
+    window.localStorage.setItem(storageID, Blockly.Xml.domToText(xml));
   }
 };
 
 /**
  * Bind the localStorage backup function to the unload event.
  */
-BlocklyStorage.backupOnUnload = function() {
+BlocklyStorage.backupOnUnload = function(localStorageID) {
+  BlocklyStorage.localStorageID = localStorageID;
   window.addEventListener('unload', BlocklyStorage.backupBlocks_, false);
 };
 
@@ -51,9 +56,13 @@ BlocklyStorage.backupOnUnload = function() {
  * Restore code blocks from localStorage.
  */
 BlocklyStorage.restoreBlocks = function() {
-  var url = window.location.href.split('#')[0];
-  if ('localStorage' in window && window.localStorage[url]) {
-    var xml = Blockly.Xml.textToDom(window.localStorage[url]);
+  if(BlocklyStorage.localStorageID == null) {
+    var storageID = window.location.href.split('#')[0];
+  } else {
+    var storageID = BlocklyStorage.localStorageID;
+  }
+  if ('localStorage' in window && window.localStorage[storageID]) {
+    var xml = Blockly.Xml.textToDom(window.localStorage[storageID]);
     Blockly.Xml.domToWorkspace(Blockly.getMainWorkspace(), xml);
   }
 };
