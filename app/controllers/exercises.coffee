@@ -10,6 +10,7 @@ exports.basics = (req, res) ->
     section: "exercise-page"
     subsection: "exercise-basics"
     exerciseName: "basics"
+    exercisePathName: "perusteet"
     level: req.params.level
 
 exports.loops = (req, res) ->
@@ -18,6 +19,7 @@ exports.loops = (req, res) ->
     section: "exercise-page"
     subsection: "exercise-loops"
     exerciseName: "loops"
+    exercisePathName: "toistolauseet"
     level: req.params.level
 
 exports.vars = (req, res) ->
@@ -26,6 +28,7 @@ exports.vars = (req, res) ->
     section: "exercise-page"
     subsection: "exercise-vars"
     exerciseName: "vars"
+    exercisePathName: "muuttujat"
     level: req.params.level
 
 exports.ifs = (req, res) ->
@@ -34,6 +37,7 @@ exports.ifs = (req, res) ->
     section: "exercise-page"
     subsection: "exercise-ifs"
     exerciseName: "ifs"
+    exercisePathName: "ehtolauseet"
     level: req.params.level
 
 exports.events = (req, res) ->
@@ -42,4 +46,5 @@ exports.events = (req, res) ->
     section: "exercise-page"
     subsection: "exercise-events"
     exerciseName: "events"
+    exercisePathName: "koordinaatisto-ja-tapahtumat"
     level: req.params.level

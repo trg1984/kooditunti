@@ -26,6 +26,7 @@
 <script type="text/javascript" src="/blockly/custom_blocks/{{ exerciseName }}.js"></script>
 <script>Exercises.currentLevel = {{ level }};</script>
 <script>Exercises.currentName = '{{ exerciseName }}';</script>
+<script>Exercises.currentPathName = '{{ exercisePathName }}';</script>
 <script>Exercises.currentID = '{{ exerciseName }}_level{{ level }}';</script>
 {% endblock %}
 
@@ -35,7 +36,7 @@
     <header class="header">
       <div class="content">
         <div id="back-btn">
-          <a href="/harjoitukset">&lt;</a>
+          <a href="/">&lt;</a>
         </div>
         <div id="help-btn">
           <a href="#">?</a>

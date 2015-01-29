@@ -2,6 +2,7 @@
   currentExercise: null
   currentLevel: null
   currentName: null
+  currentPathName: null
   currentID: null
   hasSolution: false
   isLastLevel: false
@@ -266,7 +267,7 @@
       block.mutator.iconClick_() if hasMutator && isOpen
 
   nextLevelPath: ->
-    return "/harjoitukset/"+@currentName+"/"+(@currentLevel+1)
+    return "/harjoitukset/"+@currentPathName+"/"+(@currentLevel+1)
 
   simplifyInterpreterObject: (obj) ->
     simple = {}

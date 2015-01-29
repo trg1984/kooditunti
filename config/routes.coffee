@@ -8,25 +8,26 @@ surveys = require("surveys")
 # Expose
 module.exports = (app, passport) ->
   #app.get "/", home.index
-  app.redirect "/", "/harjoitukset";
+  #app.redirect "/", "/harjoitukset";
 
   # exercises
-  app.get "/harjoitukset", exercises.index
+  app.get "/", exercises.index
+  app.redirect "/harjoitukset", "/";
 
-  app.get "/harjoitukset/basics/:level", exercises.basics
-  app.redirect "/harjoitukset/basics", "/harjoitukset/basics/1";
+  app.get "/harjoitukset/perusteet/:level", exercises.basics
+  app.redirect "/harjoitukset/perusteet", "/harjoitukset/perusteet/1";
 
-  app.get "/harjoitukset/loops/:level", exercises.loops
-  app.redirect "/harjoitukset/loops", "/harjoitukset/loops/1";
+  app.get "/harjoitukset/toistolauseet/:level", exercises.loops
+  app.redirect "/harjoitukset/toistolauseet", "/harjoitukset/toistolauseet/1";
 
-  app.get "/harjoitukset/vars/:level", exercises.vars
-  app.redirect "/harjoitukset/vars", "/harjoitukset/vars/1";
+  app.get "/harjoitukset/muuttujat/:level", exercises.vars
+  app.redirect "/harjoitukset/muuttujat", "/harjoitukset/muuttujat/1";
 
-  app.get "/harjoitukset/ifs/:level", exercises.ifs
-  app.redirect "/harjoitukset/ifs", "/harjoitukset/ifs/1";
+  app.get "/harjoitukset/ehtolauseet/:level", exercises.ifs
+  app.redirect "/harjoitukset/ehtolauseet", "/harjoitukset/ehtolauseet/1";
 
-  app.get "/harjoitukset/events/:level", exercises.events
-  app.redirect "/harjoitukset/events", "/harjoitukset/events/1";
+  app.get "/harjoitukset/koordinaatisto-ja-tapahtumat/:level", exercises.events
+  app.redirect "/harjoitukset/koordinaatisto-ja-tapahtumat", "/harjoitukset/koordinaatisto-ja-tapahtumat/1";
 
   # playground
   app.get "/koodikentta", playground.index

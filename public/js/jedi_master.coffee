@@ -168,7 +168,7 @@
     jrtg+= '</div><p style="font-size:25px;">Hienoa, ratkaisit tehtävän!</p>'
     if Exercises.isLastLevel
       btnText = "Palaa harjoitusvalikkoon"
-      btnHref = "/harjoitukset"
+      btnHref = "/"
     else
       btnText = "Siirry seuraavaan tehtävään"
       btnHref = Exercises.nextLevelPath()
