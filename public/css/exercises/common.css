@@ -1,4 +1,4 @@
-#exercises-page a.exercise-button div {
+#exercises-page a.exercise-button div.text {
   position: relative;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -77,7 +77,7 @@
   font-family: 'Boogaloo';
   font-size: 22px;
   line-height: 22px; }
-#exercises-page a.exercise-button div {
+#exercises-page a.exercise-button div.text {
   padding: 15px; }
 #exercises-page a.exercise-button.basics {
   background-color: #9f005d; }
@@ -89,6 +89,8 @@
   background-color: #067195; }
 #exercises-page a.exercise-button.events {
   background-color: #f36c00; }
+#exercises-page a.exercise-button.events div.text {
+  padding: 20px 15px 10px 15px; }
 #exercises-page a.exercise-button .stars {
   width: 150px;
   padding: 0; }

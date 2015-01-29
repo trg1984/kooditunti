@@ -56,12 +56,13 @@ $code-font: 'Inconsolata';
       margin: 10px; border-radius: 40%; text-align: center; color: #fff;
       font-family: $font; font-size: 22px; line-height: 22px;
     }
-    div { @extend %vertical-align; padding: 15px; }
+    div.text { @extend %vertical-align; padding: 15px; }
     &.basics { background-color: $basics-color }
     &.vars { background-color: $vars-color }
     &.ifs { background-color: $ifs-color }
     &.loops { background-color: $loops-color }
     &.events { background-color: $events-color }
+    &.events div.text { padding: 20px 15px 10px 15px }
     .stars { width: $button-width; padding: 0; }
     .stars { position: absolute; top: 10px; left: 18px; }
     .stars img { width: 35px; position: absolute; opacity: 0.2; }

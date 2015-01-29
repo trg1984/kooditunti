@@ -18,6 +18,9 @@ $("#info-link").click ->
   $("#exercises-page").addClass("prev")
   $("#info-page").addClass("curr")
 
+if window.location.hash is "#info"
+  $("#info-link").click()
+
 resizePageWrapperToPageContentHeight = ->
   pageHeight = $('.page').outerHeight(true)
   $('#page-wrapper').height(pageHeight)

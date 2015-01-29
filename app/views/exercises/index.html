@@ -14,7 +14,7 @@
     <li class="left">
       <div class="wrapper">
         <!-- href="/harjoitukset" -->
-        <a id="exercises-link" class="active">Harjoitukset</a>
+        <a id="exercises-link" class="active" href="#">Harjoitukset</a>
       </div>
     </li>
     <li class="left">
@@ -24,7 +24,7 @@
     </li>
     <li class="right">
       <div class='wrapper'>
-        <a id="info-link" href="#">Info</a>
+        <a id="info-link" href="#info">Info</a>
       </div>
     </li>
   </ul>
@@ -35,36 +35,45 @@
   <div id="exercises-page" class="page curr">
     <a href="/harjoitukset/basics" class="exercise-button basics">
       {% block stars %}{% endblock %}
-      <div>Perusteet</div>
+      <div class="text">Perusteet</div>
     </a>
     <a href="/harjoitukset/loops" class="exercise-button loops">
       {% block stars %}{% endblock %}
-      <div>Toistolauseet</div>
+      <div class="text">Toistolauseet</div>
     </a>
     <a href="/harjoitukset/events" class="exercise-button events">
       {% block stars %}{% endblock %}
-      <div>Koordinaatisto ja tapahtumat</div>
+      <div class="text">Koordinaatisto ja tapahtumat</div>
     </a>
     <a href="/harjoitukset/vars" class="exercise-button vars">
       {% block stars %}{% endblock %}
-      <div>Muuttujat</div>
+      <div class="text">Muuttujat</div>
     </a>
     <a href="/harjoitukset/ifs" class="exercise-button ifs">
       {% block stars %}{% endblock %}
-      <div>Ehtolauseet<!-- ja koordinaatisto --></div>
+      <div class="text">Ehtolauseet<!-- ja koordinaatisto --></div>
     </a>
     <br /><br />
     <a href="#" class="reset-button">Aloita alusta</a>
   </div>
   <div id="info-page" class="page next">
+    <h3>Info</h3>
+    <p>Kooditunti.fi on sivusto jossa opit ohjelmonnin perusteet.</p>
+    <p>Sivustolta löytyy viisi harjoituskokonaisuutta, joissa kaikissa perehdytään eri
+    käsitteeseen yksinkertaisten tehtävien ja selkeiden esimerkkien avulla.</p>
+    <p>Koodikenttällä pääset käyttämään mielikuvitustasi ja koodaamaan
+    omia ohjelmia sivuston tarjoamien työkalujen avulla</p>
+    {#
     <h3>Uutta</h3>
     <ul>
-      <li>2014-01-05 - Ehtolauseet harjoitus valmis</a></li>
-      <li>2014-12-28 - Aloitussivu harjoitustyyppeillä (tämä sivu)</a></li>
-      <li>2014-12-15 - Kyselyille pohja: <a href="/alkukysely" target="_blank"><strong>alkukysely demo</strong></a></li>
-      <li style="font-size:11px;">2014-12-12 - Pohjaa tehtävätyypeille ja yksi osittain toimiva demo: <a href="/harjoitukset/maze" target="_blank"><strong>toistolauseet</strong></a></li>
-      <li style="font-size:10px;">2014-11-28 - Sivusto luotu. Lisätty lista harjoitteista selitteineen + esimerkkeineen ja osittain toimiva vapaa kenttä</li>
+      <li><strong>29.1.2015</strong> - Sivusto julkaistu</a></li>
+      <!--<li>2015-01-05 - Ehtolauseet harjoitus valmis</a></li>-->
+      <!--<li>2014-12-28 - Aloitussivu harjoitustyyppeillä (tämä sivu)</a></li>-->
+      <!--<li>2014-12-15 - Kyselyille pohja: <a href="/alkukysely" target="_blank"><strong>alkukysely demo</strong></a></li>-->
+      <!--<li style="font-size:11px;">2014-12-12 - Pohjaa tehtävätyypeille ja yksi osittain toimiva demo: <a href="/harjoitukset/maze" target="_blank"><strong>toistolauseet</strong></a></li>-->
+      <!--<li style="font-size:10px;">2014-11-28 - Sivusto luotu. Lisätty lista harjoitteista selitteineen + esimerkkeineen ja osittain toimiva vapaa kenttä</li>-->
     </ul>
+    #}
   </div>
 </div>
 </div>
