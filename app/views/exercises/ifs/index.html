@@ -3,6 +3,8 @@
 {% block js %}
 {% parent %}
 <script src="/js/exercises/ifs.js"></script>
+<script src="/js/exercises/maze.js"></script>
+<script src="/blockly/custom_blocks/maze.js"></script>
 <script>Exercises.currentExercise = Ifs;</script>
 <script>Exercises.init();</script>
 {% endblock %}
@@ -32,6 +34,11 @@
 <ol class="joyride-list" data-joyride>
   <li data-button="Seuraava" class="wide" data-options="prev_button: false">
     <h2>Ehtolauseet</h2>
+    <p>Ehtolauseella pystytään ohjaamaan ohjelman suoritusta niin, että lauseen sisällä oleva koodi suoritetaan vain jos määritelty ehto toteutuu.</p>
+    <p>Esimerkki ehtolauseesta:<br /><img src="/img/exercises/ifs/ifs_example.png" /></p>
+    <p>Tälläinen ohjelma tulostaisi tekstin <strong>vain</strong> jos kello on 12.05.</p>
+  </li>
+  <li data-button="Seuraava" data-options="prev_button: true">
     <p>Tässä tehtävässä on valmiina yksinkertainen ohjelma, joka asettaa kaksi muuttujaa ja määrittelee sen jälkeen ehtolauseen.</p>
   </li>
   <li data-id="tip-answer" data-button="Seuraava" data-options="tip_location:right;prev_button: true">
@@ -69,6 +76,55 @@
 </div>
 {% endif %}
 {% if level == 2 %}
+<div class="task-overview">
+  <h2>Tehtävä</h2>
+  <p>Käytä ehtolauseita piirtääksesi tekstiä kun klikkauksia on tietty määrä.</p>
+</div>
+<div id="tip1" class="exercise-tip-placement" style="top:223px;left:400px;"></div>
+<ol class="joyride-list" data-joyride>
+  <li data-button="Seuraava" class="wide" data-options="prev_button: false">
+    <h2>Lisää ehtolauseita</h2>
+    <p>Tämä ohjelma laskee kuinka monta kertaa palloa on klikattu.</p>
+  </li>
+  <li data-button="Aloita" class="wide" data-options="prev_button: true">
+    <p>Tehtävänäsi on lisätä ohjelmaan tekstiä kun tietty määrä klikkauksia on saavutettu.</p>
+    <p>Voit lisätä esimerkiksi kannustushuudahduksia kun on saavutettu mielestäsi paljon klikkauksia.</p>
+    <p>Kokeile ensin miten ohjelma toimii tällä hetkellä.</p>
+  </li>
+</ol>
+<div id="evaluation-selects">
+  <div>Sain piirrettyä kentälle tekstiä</div>
+  <div>Käytin tehtävässä ehtolauseita (yhtä tai useampaa)</div>
+</div>
+{% endif %}
+{% if level == 3 %}
+<div class="task-overview">
+  <h2>Tehtävä</h2>
+  <p>Selvitä tämä vaikea labyrintti käyttämällä apuna muuttujia ja ehtolauseita.</p>
+</div>
+<div id="tip-missing1" class="exercise-tip-placement" style="top:155px;left:250px;width:120px;"></div>
+<div id="tip-missing2" class="exercise-tip-placement" style="top:330px;left:250px;width:120px;"></div>
+<ol class="joyride-list" data-joyride>
+  <li data-button="Seuraava" class="wide" data-options="prev_button: false">
+    <h2>Haastava labyrintti</h2>
+    <p>Osa koodista on jo valmiina, mutta ohjema ei vielä toimi oikein.</p>
+  </li>
+  <li data-id="tip-missing1" data-button="Seuraava" data-options="tip_location:right; prev_button: true">
+    <p>Tästä puuttuu jotain...</p>
+  </li>
+  <li data-id="tip-missing2" data-button="Seuraava" data-options="tip_location:right; prev_button: true">
+    <p>...ja tästä myös.</p>
+  </li>
+  <li data-button="Aloita" class="wide" data-options="prev_button: true">
+    <p>Selvitä miten koodi toimii ja täytä puuttuvat palaset niin että pallo löytää maaliin.</p>
+    <p>Kokeile ensin miten ohjelma toimii tällä hetkellä.</p>
+  </li>
+</ol>
+{% endif %}
+{% endblock %}
+
+{#
+OLD LEVEL 2
 <div class="task-overview">
   <h2>Tehtävä</h2>
   <p>Ohjelma kysyy luodaanko pallo vai neliö. Täydennä ohjelma toimimaan käyttäjän vastauksen mukaisesti. Kokeile myös sijoittaa muoto johonkin toiseen paikkaan.</p>
@@ -130,27 +186,4 @@
   <div>Käytin ehtolauseessani "muuten jos"- ja "muuten"-haaroja.</div>
   <div>Onnistuin muokkaamaan ympyrän tai neliön sijaintia.</div>
 </div>
-{% endif %}
-{% if level == 3 %}
-<div class="task-overview">
-  <h2>Tehtävä</h2>
-  <p>Käytä ehtolauseita piirtääksesi tekstiä kun klikkauksia on tietty määrä.</p>
-</div>
-<div id="tip1" class="exercise-tip-placement" style="top:223px;left:400px;"></div>
-<ol class="joyride-list" data-joyride>
-  <li data-button="Seuraava" class="wide" data-options="prev_button: false">
-    <h2>Lisää ehtolauseita</h2>
-    <p>Tämä ohjelma laskee kuinka monta kertaa palloa on klikattu.</p>
-  </li>
-  <li data-button="Aloita" class="wide" data-options="prev_button: true">
-    <p>Tehtävänäsi on lisätä ohjelmaan tekstiä kun tietty määrä klikkauksia on saavutettu.</p>
-    <p>Voit lisätä esimerkiksi kannustushuudahduksia kun on saavutettu mielestäsi paljon klikkauksia.</p>
-    <p>Kokeile ensin miten ohjelma toimii tällä hetkellä.</p>
-  </li>
-</ol>
-<div id="evaluation-selects">
-  <div>Sain piirrettyä kentälle tekstiä</div>
-  <div>Käytin tehtävässä ehtolauseita (yhtä tai useampaa)</div>
-</div>
-{% endif %}
-{% endblock %}
+#}

@@ -11,6 +11,7 @@ exports.basics = (req, res) ->
     subsection: "exercise-basics"
     exerciseName: "basics"
     exercisePathName: "perusteet"
+    color: "#9f005d"
     level: req.params.level
 
 exports.loops = (req, res) ->
@@ -20,6 +21,7 @@ exports.loops = (req, res) ->
     subsection: "exercise-loops"
     exerciseName: "loops"
     exercisePathName: "toistolauseet"
+    color: "#067195"
     level: req.params.level
 
 exports.vars = (req, res) ->
@@ -29,6 +31,7 @@ exports.vars = (req, res) ->
     subsection: "exercise-vars"
     exerciseName: "vars"
     exercisePathName: "muuttujat"
+    color: "#1c7563"
     level: req.params.level
 
 exports.ifs = (req, res) ->
@@ -38,6 +41,7 @@ exports.ifs = (req, res) ->
     subsection: "exercise-ifs"
     exerciseName: "ifs"
     exercisePathName: "ehtolauseet"
+    color: "#c2272d"
     level: req.params.level
 
 exports.events = (req, res) ->
@@ -47,4 +51,5 @@ exports.events = (req, res) ->
     subsection: "exercise-events"
     exerciseName: "events"
     exercisePathName: "koordinaatisto-ja-tapahtumat"
+    color: "#f36c00"
     level: req.params.level

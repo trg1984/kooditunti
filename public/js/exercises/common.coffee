@@ -288,11 +288,12 @@
     return err
 
   stageElement: (type,posX,posY,props) ->
-    # these are mostly common, but can be overwritten by the exercise
     if @currentExercise.stageElement?
-      return @currentExercise.stageElement(type,posX,posY,props)
-    else
-      return switch type
+      element = @currentExercise.stageElement(type,posX,posY,props)
+
+    # these are the common ones we use if no override happened
+    unless element?
+      element = switch type
         when 'circle' then Physics.body 'circle',
           # make them scatter just a bit (makes sense when we create many)
           x: (posX+Stage.blockWidth/2)+Math.random()
@@ -309,6 +310,8 @@
           width: props.width
           height: props.height
           restitution: 0.1
+
+    element
 
   readableCodeHTML: ->
     o = @readableCode

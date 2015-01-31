@@ -16,6 +16,8 @@
     @horizontalBlocks = (Stage.width-Stage.coordsLeftSize)/Stage.blockWidth
     @verticalBlocks = (Stage.height-Stage.coordsTopSize)/Stage.blockHeight
     Stage.world = Physics()
+    elementFillColor = "#42A3A3"
+    elementFillColor = Exercises.currentColor if Exercises.currentColor? and Exercises.currentColor isnt ""
     Stage.renderer = Physics.renderer("canvas",
       el: "viewport"
       width: Stage.width-Stage.coordsLeftSize
@@ -27,13 +29,12 @@
         rectangle:
           strokeStyle: "#351024"
           lineWidth: 2
-          fillStyle: "#d33682"
-          #angleIndicator: "#351024"
+          fillStyle: elementFillColor
         circle:
           strokeStyle: "#351024"
           lineWidth: 2
-          fillStyle: "#d33682"
-          angleIndicator: "#351024"
+          fillStyle: elementFillColor
+          angleIndicator: elementFillColor
     )
     #Stage.gravity = Physics.behavior("constant-acceleration", { acc: { x: 0, y: 0.0006 } })
     Stage.gravity = Physics.behavior("constant-acceleration", { acc: { x: 0, y: 0 } })
