@@ -20,13 +20,13 @@
 {% block exercise_tips %}
 <div class="task-overview">
   <h2>Tehtävä</h2>
-  <p>Ohjaa pallo maaliin komentojen avulla.</p>
+  <p>Ohjaa pallo (<img src="/img/exercises/maze/walker.png" />) maaliin (<img src="/img/exercises/maze/goal.png" />) komentojen avulla. Pallo etenee kentällä yksi ruutu kerrallaan.</p>
 </div>
 {% if level == 1 %}
 <ol class="joyride-list" data-joyride>
   <li data-button="Seuraava" class="wide hide-modal-next" data-options="prev_button: false; modal: true">
     <h2>Yksinkertainen labyrintti</h2>
-    <p>Tehtävänäsi on ohjata pallo maaliin ohjelmakoodiin syötettävien komentojen avulla.</p>
+    <p>Tehtävänäsi on ohjata pallo (<img src="/img/exercises/maze/walker.png" />) maaliin (<img src="/img/exercises/maze/goal.png" />) koodialueelle lisättävien komentojen avulla. Pallo etenee kentällä yksi ruutu kerrallaan.</p>
   </li>
   <li data-button="Aloita" class="wide" data-options="prev_button: true">
     <p>Muista että komennot suoritetaan vuorotellen ylhäältä alas edeten.</p>
@@ -38,8 +38,10 @@
   <li data-button="Aloita" class="wide hide-modal-next" data-options="prev_button: false; modal: true">
     <h2>Toistolauseet</h2>
     <p>Tehtävä on sama kuin viime tasolla, mutta nyt pystyt käyttämään toistolausetta jotta jokaista askelta ei tarvitse lisätä erikseen.</p>
-    <strong>Esimerkki:</strong><br />
-    <img src="/img/exercises/loops/example.png" />
+    <p>
+      <strong>Esimerkki:</strong><br />
+      <img src="/img/exercises/loops/example.png" />
+    </p>
   </li>
 </ol>
 {% endif %}
@@ -47,7 +49,11 @@
 <ol class="joyride-list" data-joyride>
   <li data-button="Aloita" class="wide hide-modal-next" data-options="prev_button: false; modal: true">
     <h2>Vaikeampi labyrintti</h2>
-    <p>Huomaa että voit myös suorittaa sarjan komentoja toistolauseen sisällä.</p>
+    <p>Huomaa että voit suorittaa myös sarjan komentoja toistolauseen sisällä.</p>
+    <p>
+      <strong>Esimerkki:</strong><br />
+      <img src="/img/exercises/loops/comb-example.png" />
+    </p>
   </li>
 </ol>
 {% endif %}

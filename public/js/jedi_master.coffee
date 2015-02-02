@@ -195,7 +195,7 @@
     $('#evaluation-selects').find('div').each ->
       evlRow = $("<div class='evaluation-row' />").append $('<span />').text($(@).text())
       evlSel = $("<select />")
-      evlSel.append $('<option value="empty" />').text('')
+      evlSel.append $('<option value="empty" />').html(' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ------- klikkaa ja valitse -------')
       evlSel.append $('<option value="yes" />').text("Kyllä, mielestäni tämä pitää paikkansa.")
       evlSel.append $('<option value="no" />').text("Hups! Jatkan vielä tehtävän tekemistä.")
       evlRow.append evlSel

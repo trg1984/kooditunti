@@ -210,7 +210,7 @@
           issl = Exercises.interpreter.stateStack.length
         else
           setTimeout ->
-            return if Exercises.completedLevel# and not Exercises.automaticallyEndExecution
+            return if Exercises.completedLevel and not Exercises.automaticallyEndExecution
             if Exercises.currentExercise.evaluate()
               JediMaster.successDialog()
               $(".joyride-close-tip").one 'click', ->
@@ -218,7 +218,7 @@
               Exercises.markCompleted()
             else
               if Exercises.automaticallyEndExecution
-                if Exercises.manualEvaluation# and not Exercises.completedLevel
+                if Exercises.manualEvaluation and not Exercises.completedLevel
                 then Exercises.endExecution("nodialog")
                 else Exercises.endExecution()
           , 1000

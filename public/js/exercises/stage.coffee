@@ -42,8 +42,15 @@
     Stage.initWorld()
 
   setGravity: (xAcceleration, yAcceleration) ->
+    if xAcceleration == "space"
+      xAcceleration = 0
+      yAcceleration = 0
+    if xAcceleration == "earth"
+      xAcceleration = 0
+      yAcceleration = 0.0006
+    xAcceleration = 0.0000 unless xAcceleration?
     yAcceleration = 0.0006 unless yAcceleration?
-    Stage.gravity.setAcceleration({ x: 0, y: yAcceleration })
+    Stage.gravity.setAcceleration({ x: xAcceleration, y: yAcceleration })
 
   initWorld: ->
     # add the renderer
@@ -99,6 +106,8 @@
         Stage.world.removeBody d
     Stage.textElements = []
     $('#viewport').unbind('click')
+    # default
+    Stage.setGravity('space')
     # there is also a world.destroy in physicsjs
     # but there seems to be something wrong with it
     # (does not remove elements from canvas)

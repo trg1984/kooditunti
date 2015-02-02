@@ -68,14 +68,19 @@
     delay 200, -> mw.state.pos.set(np[0],np[1]) # nudge again
     delay 300, -> mw.state.pos.set(dx,dy) # return to default
 
-  moveAction: (x,y,direction) ->
+  setPositionProps: (x,y) ->
     @walkerOnGoal = false
     @walkerOnSpecial = false
+    elems = Stage.world.find($at: Physics.vector(x,y))
+    if elems
+      for elem in elems
+        @walkerOnGoal = true if elem.properties and elem.properties.type is 'goal'
+        @walkerOnSpecial = true if elem.properties and elem.properties.type is 'special'
+
+  moveAction: (x,y,direction) ->
     nextElem = Stage.world.findOne($at: Physics.vector(x,y))
     if nextElem
       doNudge = true if nextElem.properties and nextElem.properties.type is 'obstacle'
-      @walkerOnGoal = true if nextElem.properties and nextElem.properties.type is 'goal'
-      @walkerOnSpecial = true if nextElem.properties and nextElem.properties.type is 'special'
     if doNudge
     then Maze.nudgeAction(direction)
     else Maze.walker.state.pos.set(x,y)
@@ -83,25 +88,29 @@
   moveLeft: ->
     return unless Maze.walker
     mw = Maze.walker
-    @moveAction(mw.state.pos.x-Stage.blockWidth, mw.state.pos.y, 'left');
+    @moveAction(mw.state.pos.x-Stage.blockWidth, mw.state.pos.y, 'left')
+    @setPositionProps(mw.state.pos.x,mw.state.pos.y)
     mw.state.angular.pos = 3.12
 
   moveRight: ->
     return unless Maze.walker
     mw = Maze.walker
     @moveAction(mw.state.pos.x+Stage.blockWidth,mw.state.pos.y, 'right')
+    @setPositionProps(mw.state.pos.x,mw.state.pos.y)
     mw.state.angular.pos = 0
 
   moveUp: ->
     return unless Maze.walker
     mw = Maze.walker
     @moveAction(mw.state.pos.x,mw.state.pos.y-Stage.blockHeight,'up')
+    @setPositionProps(mw.state.pos.x,mw.state.pos.y)
     mw.state.angular.pos = -1.56
 
   moveDown: ->
     return unless Maze.walker
     mw = Maze.walker
     @moveAction(mw.state.pos.x,mw.state.pos.y+Stage.blockHeight,'down')
+    @setPositionProps(mw.state.pos.x,mw.state.pos.y)
     mw.state.angular.pos = 1.56
 
   interpreterApi: (interpreter, scope) ->

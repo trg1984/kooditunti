@@ -22,12 +22,14 @@
         Exercises.automaticallyEndExecution = false
         Exercises.manualEvaluation = true
         $("#start-execution-btn").click ->
-          JediMaster.resumeTour ->
-            $(".tooltip").addClass("disabled")
-            $("#evaluate-btn").one "click", ->
-              Foundation.libs.joyride.end()
-              $(".tooltip").removeClass("disabled").hide()
-              $(@).trigger('click')
+          setTimeout ->
+            JediMaster.resumeTour ->
+              $(".tooltip").addClass("disabled")
+              $("#evaluate-btn").one "click", ->
+                Foundation.libs.joyride.end()
+                $(".tooltip").removeClass("disabled").hide()
+                $(@).trigger('click')
+          , 2000
 
   evaluate: ->
     switch @level
