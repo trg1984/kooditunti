@@ -352,13 +352,13 @@ Blockly.Msg.TEXT_TRIM_TOOLTIP = "Palauttaa kopion tekstistä siten, että välil
 Blockly.Msg.VARIABLES_DEFAULT_NAME = "muuttuja";
 Blockly.Msg.VARIABLES_GET_CREATE_SET = "Luo 'aseta %1'";
 Blockly.Msg.VARIABLES_GET_HELPURL = "https://github.com/google/blockly/wiki/Variables#get";  // untranslated
-Blockly.Msg.VARIABLES_GET_TAIL = "";  // untranslated
+Blockly.Msg.VARIABLES_GET_TAIL = "arvo";
 Blockly.Msg.VARIABLES_GET_TITLE = "";  // untranslated
 Blockly.Msg.VARIABLES_GET_TOOLTIP = "Palauttaa muuttujan arvon.";
 Blockly.Msg.VARIABLES_SET_CREATE_GET = "Luo 'hae %1'";
 Blockly.Msg.VARIABLES_SET_HELPURL = "https://github.com/google/blockly/wiki/Variables#set";  // untranslated
-Blockly.Msg.VARIABLES_SET_TAIL = "="; // arvoksi
-Blockly.Msg.VARIABLES_SET_TITLE = ""; // aseta
+Blockly.Msg.VARIABLES_SET_TAIL = "arvoksi"; // arvoksi
+Blockly.Msg.VARIABLES_SET_TITLE = "aseta"; // aseta
 Blockly.Msg.VARIABLES_SET_TOOLTIP = "Asettaa muutujan arvoksi annetun syötteen.";
 Blockly.Msg.PROCEDURES_DEFRETURN_TITLE = Blockly.Msg.PROCEDURES_DEFNORETURN_TITLE;
 Blockly.Msg.LISTS_GET_SUBLIST_INPUT_IN_LIST = Blockly.Msg.LISTS_INLIST;
