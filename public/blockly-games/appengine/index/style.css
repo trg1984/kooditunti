@@ -208,3 +208,7 @@ a:hover > text {
   stroke-width: 8;
   fill: none;
 }
+
+
+/* remove stuff */
+#subtitle { display: none; }

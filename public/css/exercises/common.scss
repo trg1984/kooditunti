@@ -9,6 +9,7 @@
   transform: translateY(-50%);
 }
 
+$warmup-color:#ccc;
 $basics-color:#9f005d;
 $vars-color:#1c7563;
 $ifs-color:#c2272d;
@@ -57,6 +58,7 @@ $code-font: 'Inconsolata';
       font-family: $font; font-size: 22px; line-height: 22px;
     }
     div.text { @extend %vertical-align; padding: 15px; }
+    &.warmup { background-color: $warmup-color }
     &.basics { background-color: $basics-color }
     &.vars { background-color: $vars-color }
     &.ifs { background-color: $ifs-color }

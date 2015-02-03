@@ -79,6 +79,8 @@
   line-height: 22px; }
 #exercises-page a.exercise-button div.text {
   padding: 15px; }
+#exercises-page a.exercise-button.warmup {
+  background-color: #ccc; }
 #exercises-page a.exercise-button.basics {
   background-color: #9f005d; }
 #exercises-page a.exercise-button.vars {

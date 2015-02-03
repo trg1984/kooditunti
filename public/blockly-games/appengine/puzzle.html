@@ -11,4 +11,27 @@
 </head>
 <body>
 </body>
+<script src="/vendor/jquery-2.1.1/jquery.min.js"></script>
+<script>
+var replaceReturn = function(){
+  $("#title a")
+    .html("&#8592; takaisin")
+    .attr("href","/");
+
+  $("#answers .secondary").on("click mousedown",function(e){
+    if($("#graphValue").width() == 100){
+      window.location = "/";
+      e.preventDefault();
+      return false;
+    }
+  });
+}
+$(function(){
+  if(window.location.hash == "#warmup"){
+    setTimeout(function(){
+      replaceReturn();
+    },200);
+  }
+});
+</script>
 </html>
