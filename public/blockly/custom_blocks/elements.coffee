@@ -61,6 +61,7 @@ Blockly.Blocks["text_element"] = $.extend Blockly.Blocks["text_element"], Blockl
 
 Blockly.JavaScript["text_element"] = (block) ->
   value_text = Blockly.JavaScript.valueToCode(block, "text", Blockly.JavaScript.ORDER_ATOMIC)
+  value_text = "''" if value_text == ""
   properties = JSON.stringify
     position: eval Blockly.JavaScript.valueToCode(block, "position_mutator", Blockly.JavaScript.ORDER_ATOMIC)
   code = "createText("+value_text+",'"+properties+"');\n"

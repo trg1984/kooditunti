@@ -34,7 +34,9 @@
   evaluate: ->
     switch @level
       when 1
-        return true
+        console.log Stage.textElements
+        stageHasText = Stage.textElements[0].text isnt ""
+        return true if stageHasText
       when 2
         return true
       when 3
