@@ -86,3 +86,8 @@
   color: #fff; }
 .evaluation-dialog .evaluation-row.active select {
   display: block; }
+
+iframe#exercise-evaluation {
+  border: none;
+  height: 90px;
+  overflow: hidden; }

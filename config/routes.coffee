@@ -36,6 +36,9 @@ module.exports = (app, passport) ->
   app.get "/alkukysely", surveys.beginning
   app.get "/loppukysely", surveys.ending
 
+  # exercise ratings
+  app.post "/rate-exercise", exercises.saveRating
+
   # Error handling
   app.use (err, req, res, next) ->
 

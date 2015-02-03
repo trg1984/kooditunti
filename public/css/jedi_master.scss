@@ -59,3 +59,5 @@ $font: 'Boogaloo';
   .evaluation-row.active span { color: #fff; }
   .evaluation-row.active select { display: block; }
 }
+
+iframe#exercise-evaluation { border: none; height: 90px; overflow: hidden; }

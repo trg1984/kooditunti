@@ -7,7 +7,6 @@ cookieParser = require("cookie-parser")
 cookieSession = require("cookie-session")
 bodyParser = require("body-parser")
 methodOverride = require("method-override")
-csrf = require("csurf")
 swig = require("swig")
 mongoStore = require("connect-mongo")(session)
 flash = require("connect-flash")
@@ -90,15 +89,5 @@ module.exports = (app, passport) ->
 
   # should be declared after session and flash
   app.use helpers(pkg.name)
-
-  # adds CSRF support
-  if process.env.NODE_ENV isnt "test"
-    app.use csrf()
-
-    # This could be moved to view-helpers :-)
-    app.use (req, res, next) ->
-      res.locals.csrf_token = req.csrfToken()
-      next()
-      return
 
   return

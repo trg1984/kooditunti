@@ -172,6 +172,9 @@
     else
       btnText = "Siirry seuraavaan tehtävään"
       btnHref = Exercises.nextLevelPath()
+    window.getEvaluationID = (-> return Exercises.currentID)
+    es = "<iframe src='/exercise-evaluation.html#white' id='exercise-evaluation'></iframe>"
+    jrtg+= es
     jrtg+= '<a href="'+btnHref+'" class="small button joyride-next-tip-custom close-btn">'+btnText+'</a>'
     jrtg+= '<a href="#close" class="joyride-close-tip close-btn">×</a></div></div>'
     jrtg+= '<div class="joyride-modal-bg" style="display: block;"></div>'

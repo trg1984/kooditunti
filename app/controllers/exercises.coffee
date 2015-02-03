@@ -1,3 +1,5 @@
+mongoose = require("mongoose")
+
 exports.index = (req, res) ->
   res.render "exercises/index",
     title: "Harjoitukset",
@@ -53,3 +55,18 @@ exports.events = (req, res) ->
     exercisePathName: "koordinaatisto-ja-tapahtumat"
     color: "#f36c00"
     level: req.params.level
+
+exports.saveRating = (req, res) ->
+  # quick and dirty...
+  # (this is not controller stuff)
+  console.log "save to mongo"
+  er = mongoose.model('ExerciseRating')
+  new er(
+    eid: req.body.eid
+    rating: req.body.rating
+  ).save (err, comment, count) ->
+    console.log "done"
+    return
+
+  res.send ""
+
