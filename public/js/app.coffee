@@ -41,7 +41,7 @@ if completedLevels?
 resetProgress = ->
   # remove everything but the playground code
   for key of localStorage
-    localStorage.removeItem key if key isnt "playground_level1_code"
+    localStorage.removeItem key if key isnt "playground_level1_code" and key isnt "firstVisit"
   location.reload()
 
 $(".reset-button").click ->

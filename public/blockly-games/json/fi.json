@@ -69,7 +69,7 @@
 	"Puzzle.error2": "%1 lohkoa ovat virheellisiä.",
 	"Puzzle.tryAgain": "Korostettu lohko ei ole oikein.\nYritä uudelleen.",
 	"Puzzle.checkAnswers": "Tarkista vastaukset",
-	"Puzzle.helpText": "Kullekin eläimelle (vihreä), liitä oikea kuva, valitse jalkojen lukumäärä ja tee pino piirteistä.",
+	"Puzzle.helpText": "Liitä eläinpalikoihin (vihreä) oikea kuva, valitse jalkojen lukumäärä ja kerää eläimen piirteet yhteen kuten kuvassa.",
 	"Maze.moveForward": "liiku eteenpäin",
 	"Maze.turnLeft": "käänny vasemmalle",
 	"Maze.turnRight": "käänny oikealle",
