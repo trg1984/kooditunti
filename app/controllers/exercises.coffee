@@ -59,13 +59,11 @@ exports.events = (req, res) ->
 exports.saveRating = (req, res) ->
   # quick and dirty...
   # (this is not controller stuff)
-  console.log "save to mongo"
   er = mongoose.model('ExerciseRating')
   new er(
     eid: req.body.eid
     rating: req.body.rating
   ).save (err, comment, count) ->
-    console.log "done"
     return
 
   res.send ""

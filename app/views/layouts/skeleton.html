@@ -42,7 +42,7 @@
     .full-width{ width: 100%; max-width: 100%; }
   </style>
   {% else %}
-  {# minified version (one js and one css) would be loaded here}
+  {# minified version (one js and one css) would be loaded here) #}
   {% endif %}
 </head>
 <body id="{{ section }}" class="{{ subsection }}">
@@ -61,4 +61,9 @@
 
 </script>
 {% endif %}
+<script>
+if(localStorage.getItem('firstVisit') == null){
+  if(Math.random() >= 0.5) window.location = "/blockly-games/appengine/index.html?lang=fi"
+}
+</script>
 </html>
