@@ -28,9 +28,13 @@ var replaceReturn = function(){
 }
 $(function(){
   if(window.location.hash == "#warmup"){
-    setTimeout(function(){
-      replaceReturn();
-    },200);
+    var loadCheckIntv = setInterval(function(){
+      loadedTitles = $("#title").length
+      if(loadedTitles != 0){
+        replaceReturn();
+        clearInterval(loadCheckIntv);
+      }
+    },10);
   }
 });
 </script>
