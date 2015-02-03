@@ -1,9 +1,6 @@
 .DS_Store
 *.pyc
 
-appengine/generated/
-appengine/*/generated/
-appengine/*/*/generated/
 appengine/js-read-only/
 json/keys.json
 closure-compiler-read-only/
