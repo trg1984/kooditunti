@@ -67,32 +67,33 @@ Blockly.JavaScript["text_element"] = (block) ->
   code = "createText("+value_text+",'"+properties+"');\n"
   code
 
-Blockly.Blocks["rectangle_element"] =
+elementBase = (text,mutators) ->
   init: ->
     @setColour 120
     #@appendValueInput("name").appendField "Luo nelikulmio"
     @appendDummyInput()
-      .appendField "Luo nelikulmio"
+      .appendField text
       .appendField(new Blockly.FieldTextInput("[nimeltään]"), "name")
     @setPreviousStatement true
     @setNextStatement true
     @setTooltip ""
-    @setMutator(new Blockly.Mutator(['position_mutator','width_mutator','height_mutator'])); # ,'color_mutator' TODO
+    @setMutator(new Blockly.Mutator(mutators)); # ,'color_mutator' TODO
     @extraProperties = []
+
+Blockly.Blocks["rectangle_element"] = elementBase('Luo nelikulmio',['position_mutator','width_mutator','height_mutator'])
 Blockly.Blocks["rectangle_element"] = $.extend Blockly.Blocks["rectangle_element"], BlocklyExtraPropertiesPatch._i()
 
-Blockly.Blocks["circle_element"] =
-  init: ->
-    @setColour 120
-    @appendDummyInput()
-      .appendField "Luo ympyrä"
-      .appendField(new Blockly.FieldTextInput("[nimeltään]"), "name")
-    @setPreviousStatement true
-    @setNextStatement true
-    @setTooltip ""
-    @setMutator(new Blockly.Mutator(['position_mutator','radius_mutator'])); # ,'color_mutator' TODO
-    @extraProperties = []
+Blockly.Blocks["circle_element"] = elementBase('Luo ympyrä',['position_mutator','radius_mutator'])
 Blockly.Blocks["circle_element"] = $.extend Blockly.Blocks["circle_element"], BlocklyExtraPropertiesPatch._i()
+
+Blockly.Blocks["small_circle_element"] = elementBase('Luo pieni ympyrä',['position_mutator','radius_mutator'])
+Blockly.Blocks["small_circle_element"] = $.extend Blockly.Blocks["small_circle_element"], BlocklyExtraPropertiesPatch._i()
+
+Blockly.Blocks["medium_circle_element"] = elementBase('Luo keskikokoinen ympyrä',['position_mutator','radius_mutator'])
+Blockly.Blocks["medium_circle_element"] = $.extend Blockly.Blocks["medium_circle_element"], BlocklyExtraPropertiesPatch._i()
+
+Blockly.Blocks["big_circle_element"] = elementBase('Luo iso ympyrä',['position_mutator','radius_mutator'])
+Blockly.Blocks["big_circle_element"] = $.extend Blockly.Blocks["big_circle_element"], BlocklyExtraPropertiesPatch._i()
 
 Blockly.Blocks["edit_element"] =
   init: ->
@@ -130,7 +131,13 @@ elementBlocksJavascript = (block) ->
   inputs['name'] = "'"+block.getFieldValue("name")+"'" if block.type isnt "edit_element"
   # define type by block
   inputs['type'] = "'rectangle'" if block.type is "rectangle_element"
-  inputs['type'] = "'circle'" if block.type is "circle_element"
+  inputs['type'] = "'circle'" if block.type.indexOf("circle_element") != -1
+  # set few exeptions
+  unless inputs['radius']
+    inputs['radius'] = 20 if block.type is "small_circle_element"
+    inputs['radius'] = 60 if block.type is "medium_circle_element"
+    inputs['radius'] = 100 if block.type is "big_circle_element"
+
   # edit field has element dropdown
   element = block.getFieldValue("element")
   # property object as string
@@ -146,4 +153,7 @@ elementBlocksJavascript = (block) ->
 
 Blockly.JavaScript["rectangle_element"] = elementBlocksJavascript
 Blockly.JavaScript["circle_element"] = elementBlocksJavascript
+Blockly.JavaScript["small_circle_element"] = elementBlocksJavascript
+Blockly.JavaScript["medium_circle_element"] = elementBlocksJavascript
+Blockly.JavaScript["big_circle_element"] = elementBlocksJavascript
 Blockly.JavaScript["edit_element"] = elementBlocksJavascript

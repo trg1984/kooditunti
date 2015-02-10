@@ -11,13 +11,13 @@
         Blockly.BlockSvg.afterConnectionMouseUp = (connection) ->
           JediMaster.resumeTour()
         $("#start-execution-btn").one "click", ->
-          Foundation.libs.joyride.end()
+          Foundation.libs.joyride.end() if JediMaster.onTour
       when 2
         Stage.setGravity('earth')
         Exercises.preloadBlocklyBlocks = true
         @endOnLastSlide = ->
           $("#start-execution-btn").one "click", ->
-            Foundation.libs.joyride.end()
+            Foundation.libs.joyride.end() if JediMaster.onTour
       when 3
         Exercises.automaticallyEndExecution = false
         Exercises.manualEvaluation = true
@@ -26,7 +26,7 @@
             JediMaster.resumeTour ->
               $(".tooltip").addClass("disabled")
               $("#evaluate-btn").one "click", ->
-                Foundation.libs.joyride.end()
+                Foundation.libs.joyride.end() if JediMaster.onTour
                 $(".tooltip").removeClass("disabled").hide()
                 $(@).trigger('click')
           , 2000
@@ -34,8 +34,7 @@
   evaluate: ->
     switch @level
       when 1
-        console.log Stage.textElements
-        stageHasText = Stage.textElements[0].text isnt ""
+        stageHasText = Stage.textElements[0] && Stage.textElements[0].text isnt ""
         return true if stageHasText
       when 2
         return true

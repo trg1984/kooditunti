@@ -99,10 +99,15 @@ setTimeout(function(){
   var es = "<iframe style='"+iframeStyle+"' src='/exercise-evaluation.html' id='exercise-evaluation'></iframe><br />"
   $("#dialogDoneText").after(es);
 },2000)
-//window.setInterval(function(){
-  //var hasDoneDialog = (document.getElementById("dialogDone").className == "") ? true : false;
-  //console.log(hasDoneDialog);
-  //if(hasDoneDialog){
-    //var es = "<iframe src='/exercise-evaluation.html#white' id='exercise-evaluation'></iframe>"
-  //}
-//},200);
+
+setTimeout(function(){
+  if(window.appName == 'index'){
+    var th = document.getElementsByTagName('body')[0];
+    var s = document.createElement('div');
+    s.style.position = "absolute";
+    s.style.bottom = 0;
+    s.style.marginLeft = "1em";
+    s.innerHTML = '<a href="/#info">Palaa takaisin etusivulle</a>';
+    th.appendChild(s);
+  }
+},200);

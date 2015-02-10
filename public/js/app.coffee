@@ -30,13 +30,35 @@ $(window).resize _.debounce(->
 , 500)
 resizePageWrapperToPageContentHeight()
 
+toggleExerciseButton = (link,enableOrDisable) ->
+  s = if enableOrDisable is 'enable' then true else false
+  return if s and !link.hasClass 'disabled'
+  href = link.attr('href')
+  if !s
+    link.attr('href','#')
+    link.addClass('disabled');
+    link.attr('data-orig-href',href)
+  if s
+    link.attr('href',link.attr('data-orig-href'))
+    link.removeClass('disabled');
+
+$(".exercise-button").each ->
+  isWarmup = $(@).hasClass('warmup')
+  isFirst = $(@).hasClass('basics')
+  toggleExerciseButton($(@), 'disable') unless isWarmup or isFirst
+
 # done exercises indicators
 completedLevels = JSON.parse localStorage.getItem('completedLevels')
 if completedLevels?
   for exercise in ["basics","loops","vars","ifs","events"]
+    levelsDone = 0
     for level, levelIndex in ["first","second","third"]
       if completedLevels[exercise+"_level"+(levelIndex+1)] is true
-        $("."+exercise+" .stars ."+level).css("opacity",1);
+        levelsDone++
+        button = $("."+exercise)
+        button.find(".stars ."+level).css("opacity",1)
+        toggleExerciseButton(button.next(), 'enable') if levelsDone is 3
+        toggleExerciseButton(button, 'enable')
 
 resetProgress = ->
   # remove everything but the playground code

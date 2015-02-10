@@ -19,14 +19,14 @@
 {% if level == 1 %}
 <div class="task-overview">
   <h2>Elementit ja koordinaatisto</h2>
-  <p>Tässä tehtävässä tutustutaan koordinaatistoon ja lisätään elementtejä kentälle eri kohtiin.</p>
+  <p>Piirrä kolmella erikokoisella pallolla kentälle lumiukon näköinen otus määrittämällä palloille oikea sijainti.</p>
   <p>
-    <strong>Esimerkki:</strong>
+    <strong>Esimerkki sijainnin kertomisesta:</strong><br />
     <img src="/img/exercises/events/level1_example.png" />
   </p>
 </div>
-<div id="tip-elements" class="exercise-tip-placement" style="top:80px;left:0px;width:250px"></div>
-<div id="tip-coord-array" class="exercise-tip-placement" style="top:220px;left:0px;width:190px"></div>
+<div id="tip-elements" class="exercise-tip-placement" style="top:80px;left:200px;width:250px"></div>
+<div id="tip-coord-array" class="exercise-tip-placement" style="top:320px;left:50px;width:190px"></div>
 <div id="tip-coord-x" class="exercise-tip-placement" style="top:10px;right:300px;width:40px;"></div>
 <div id="tip-coord-y" class="exercise-tip-placement" style="top:180px;right:550px;width:40px;"></div>
 <div id="tip-coord-example1" class="exercise-tip-placement" style="top:190px;right:290px;width:40px;"></div>
@@ -37,11 +37,15 @@
     <p>Tutustutaan siihen miten elementtejä saa lisättyä kentälle haluttuun kohtaan.</p>
   </li>
   <li data-id="tip-elements" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true">
-    <p>Muistatko vielä mitä nämä palikat tekevät? Kertaa ensimmäinen harjoitus jos et muista.</p>
-    <p>Huomaa että nyt tekstille ja ympyrälle voi määrittää myös sijainnin.</p>
+    <!--<p>Muistatko vielä mitä nämä palikat tekevät? Kertaa ensimmäinen harjoitus jos et muista.</p>-->
+    <!--<p>Huomaa että nyt tekstille ja ympyrälle voi määrittää myös sijainnin.</p>-->
+    <p>Tässä tehtävässä käytössäsi palikoita jotka kaikki piirtävät eri kokoisen pallon. Näille palloille voi kertoa myös sijainnin.</p>
+    <div class="before-step-method" style="display:none" data-exec="Exercises.openFirstCategory()"></div>
   </li>
   <li data-id="tip-coord-array" data-button="Seuraava" class="wide" data-options="tip_location: right; prev_button: true">
     <p>Sijanti määritellään tällä palikalla. Tutustutaan seuraavaksi koordinaatistoon ja siihen mitä tähän palikkaan liitetyt kirjaimet ja numerot tarkoittavat.</p>
+    <div class="before-step-method" style="display:none" data-exec="Exercises.openFirstCategory()"></div>
+  </li>
   </li>
   <li data-id="output-stage" data-button="Seuraava" class="wide" data-options="tip_location: left; prev_button: true">
     <p>Kentän vasemmassa laidassa ja sen yläpuolella on numeroita jotka määrittelevät koordinaatiston.</p>
@@ -61,19 +65,21 @@
     <img src="/img/exercises/events/coord_example2.png" />
     <p>Näillä arvoilla sijanti olisi suurinpiirtein tässä (X = 4 ja Y = 9).</p>
   </li>
-  <li data-id="tip-coord-array" data-button="OK!" class="wide" data-options="tip_location: right; prev_button: true">
-    <p><strong>Tehtävä:</strong> testaa elementtien lisäämistä eri kohtiin kentälle.</p>
+  <li data-button="OK!" class="wide" data-options="tip_location: right; prev_button: true">
+    <!--<p><strong>Tehtävä:</strong> testaa elementtien lisäämistä eri kohtiin kentälle.</p>-->
     <p>
-    <strong>Esimerkiksi näin:</strong>
-    <img src="/img/exercises/events/level1_example.png" />
+      <span>Sijainnin voi kertoa elementille yhdistämällä siihen sijaintipalikan</span><br />
+      <strong>esimerkiksi näin:</strong>
+      <img src="/img/exercises/events/level1_example.png" />
     </p>
     <p>Kokeile vapaasti eri lukuja X ja Y kohdissa jos et vielä täysin ymmärtänyt miten niiden avulla pystyy kertomaan sijainnin.</p>
-    <p>Voit lisätä niin monta elementtiä kuin haluat. Näillä palikoilla saat jo piirrettyä vaikka lumiukon!</p>
+    <!--<p>Voit lisätä niin monta elementtiä kuin haluat.</p>-->
+    <p><strong>Tehtävä:</strong> piirrä kolmella erikokoisella pallolla kentälle lumiukon näköinen otus määrittämällä palloille oikea sijainti.</p>
   </li>
 </ol>
 <div id="evaluation-selects">
   <div>Ymmärrän miten koordinaatisto toimii.</div>
-  <div>Sain luotua elementtejä tai tekstiä eri puolille kenttää.</div>
+  <div>Sain piirrettyä lumiukon näköisen otuksen palloilla.</div>
 </div>
 {% endif %}
 {% if level == 2 %}
@@ -170,7 +176,7 @@
   <li data-id="tip-edit-block" data-button="Seuraava" class="wide" data-options="prev_button: true; tip_location: right;">
     <p>Tällä palikalla pystyt muokkaamaan luotua elementtiä esimerkiksi vaihtamalla sen sijantia.</p>
   </li>
-  <li data-button="Seuraava" class="wide" data-options="prev_button: true; tip_location: right;">
+  <li data-button="Ok!" class="wide" data-options="prev_button: true; tip_location: right;">
     <p><strong>Tehtävä:</strong> tee ohjelma, jossa elementin paikka vaihtuu kun elementtiä klikataan.</p>
   </li>
 </ol>

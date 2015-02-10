@@ -52,6 +52,8 @@
         Exercises.runCode()
       $("#end-execution-btn a").click ->
         Exercises.endExecution("nodialog")
+      Blockly.BlockSvg.mouseUpCallback = () ->
+        Exercises.endExecution("nodialog")
       $(window).resize _.debounce(->
         Exercises.resizeCodeArea()
       , 500)
@@ -301,6 +303,7 @@
           vx: props.xy # velocity in x-direction
           vy: props.vy # velocity in y-direction
           radius: props.radius
+          radius: props.radius
         when 'rectangle' then Physics.body 'rectangle',
           # make them scatter just a bit (makes sense when we create many)
           x: (posX+Stage.blockWidth/2)+Math.random()
@@ -311,6 +314,7 @@
           height: props.height
           restitution: 0.1
 
+    #element.treatment = 'static' if element?
     element
 
   readableCodeHTML: ->
