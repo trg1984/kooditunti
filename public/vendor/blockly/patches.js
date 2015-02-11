@@ -118,3 +118,14 @@ Blockly.Mutator.prototype.iconClick_ = function(e) {
     // PATCH END
   }
 };
+
+// IE was breaking on the fact that xml parser returned
+// different last and first blocks (probably due to extra linebreaks).
+// a.firstChild !== a.lastChild removed from the validity check
+Blockly.Xml.textToDom = function(a) {
+    a = (new DOMParser).parseFromString(a, "text/xml");
+    console.log(a.firstChild)
+    console.log(a.lastChild)
+    if (!a || !a.firstChild || "xml" != a.firstChild.nodeName.toLowerCase()) throw "Blockly.Xml.textToDom did not obtain a valid XML tree.";
+    return a.firstChild
+};

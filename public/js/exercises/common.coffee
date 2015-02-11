@@ -16,14 +16,17 @@
   executionCount: 0
 
   init: ->
-    $.get "/blockly/toolboxes/" + Exercises.currentID + ".xml", (response) ->
-      blocklyToolboxElem = response.getElementById("toolbox")
+    $.get("/blockly/toolboxes/" + Exercises.currentID + ".xml", (response) ->
+      blocklyToolboxElem = response
       Stage.init()
       Exercises.currentExercise.init Exercises.currentLevel
       Exercises.afterInitialLevelSetup()
       Exercises.initBlockly(blocklyToolboxElem)
       Exercises.isLastLevel = true if Exercises.currentLevel is Exercises.currentExercise.levelCount
       setTimeout (-> Stage.drawCoordinateGrid() ), 100
+      # Blockly in IE does not seem to get along with preparsed xml,
+      # so toolbox xml is returned as text and parsed later in blockly
+    , "text")
     $ ->
       tourStartedData = Helpers.retrieveValues('tourStarted')
       unless tourStartedData[Exercises.currentID]
