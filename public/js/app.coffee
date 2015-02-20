@@ -8,6 +8,7 @@ $("#exercises-link").click ->
   #
   $("#info-page").addClass("next")
   $("#exercises-page").addClass("curr")
+  pageChange()
 
 $("#info-link").click ->
   $(@).parent().parent().parent().find('a').removeClass("active")
@@ -17,12 +18,13 @@ $("#info-link").click ->
   #
   $("#exercises-page").addClass("prev")
   $("#info-page").addClass("curr")
+  pageChange()
 
 if window.location.hash is "#info"
   $("#info-link").click()
 
 resizePageWrapperToPageContentHeight = ->
-  pageHeight = $('.page').outerHeight(true)
+  pageHeight = $('.page.curr').outerHeight(true)
   $('#page-wrapper').height(pageHeight)
 
 $(window).resize _.debounce(->
@@ -30,22 +32,27 @@ $(window).resize _.debounce(->
 , 500)
 resizePageWrapperToPageContentHeight()
 
-toggleExerciseButton = (link,enableOrDisable) ->
-  s = if enableOrDisable is 'enable' then true else false
-  return if s and !link.hasClass 'disabled'
-  href = link.attr('href')
-  if !s
-    link.attr('href','#')
-    link.addClass('disabled');
-    link.attr('data-orig-href',href)
-  if s
-    link.attr('href',link.attr('data-orig-href'))
-    link.removeClass('disabled');
+pageChange = ->
+  resizePageWrapperToPageContentHeight()
 
-$(".exercise-button").each ->
-  isWarmup = $(@).hasClass('warmup')
-  isFirst = $(@).hasClass('basics')
-  toggleExerciseButton($(@), 'disable') unless isWarmup or isFirst
+# uncomment to disable access to exercise
+# if previous ones have not been done yet
+#toggleExerciseButton = (link,enableOrDisable) ->
+  #s = if enableOrDisable is 'enable' then true else false
+  #return if s and !link.hasClass 'disabled'
+  #href = link.attr('href')
+  #if !s
+    #link.attr('href','#')
+    #link.addClass('disabled');
+    #link.attr('data-orig-href',href)
+  #if s
+    #link.attr('href',link.attr('data-orig-href'))
+    #link.removeClass('disabled');
+
+#$(".exercise-button").each ->
+  #isWarmup = $(@).hasClass('warmup')
+  #isFirst = $(@).hasClass('basics')
+  #toggleExerciseButton($(@), 'disable') unless isWarmup or isFirst
 
 # done exercises indicators
 completedLevels = JSON.parse localStorage.getItem('completedLevels')
@@ -57,8 +64,10 @@ if completedLevels?
         levelsDone++
         button = $("."+exercise)
         button.find(".stars ."+level).css("opacity",1)
-        toggleExerciseButton(button.next(), 'enable') if levelsDone is 3
-        toggleExerciseButton(button, 'enable')
+        # uncomment to disable access to exercise
+        # if previous ones have not been done yet
+        #toggleExerciseButton(button.next(), 'enable') if levelsDone is 3
+        #toggleExerciseButton(button, 'enable')
 
 resetProgress = ->
   # remove everything but the playground code

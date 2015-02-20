@@ -6,7 +6,7 @@
     <block type="edit_element"></block>
     <block type="get_element_property"></block>
   </category>
-  <category name="Pelikenttä">
+  <category name="Kenttä">
     <block type="gravity_switch"></block>
     <block type="coordinate_array"></block>
   </category>

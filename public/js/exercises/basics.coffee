@@ -28,7 +28,6 @@
               $("#evaluate-btn").one "click", ->
                 Foundation.libs.joyride.end() if JediMaster.onTour
                 $(".tooltip").removeClass("disabled").hide()
-                $(@).trigger('click')
           , 2000
 
   evaluate: ->

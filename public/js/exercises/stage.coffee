@@ -259,10 +259,11 @@
         #name = nameBlock.getFieldValue("name")
         Stage.settableElements.push name
 
-  settableElementsDropdownValues: ->
+  settableElementsDropdownValues: (emptyVal) ->
     Stage.getSettableElements()
     dropdownValues = $.map(Stage.settableElements, ((n) -> [[n, n]]) )
-    dropdownValues = [["[valitse]", "x"]] if dropdownValues.length is 0
+    emptyVal = "[valitse]" unless emptyVal?
+    dropdownValues = [[emptyVal, "x"]] if dropdownValues.length is 0
     dropdownValues
 
   findClickTarget: (canvas, event, name) ->

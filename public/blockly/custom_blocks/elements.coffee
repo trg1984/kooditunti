@@ -33,13 +33,13 @@ Blockly.JavaScript["coordinate_array"] = (block) ->
 
 Blockly.Blocks["get_element_property"] = init: ->
   @setColour(230);
-  elements = Stage.settableElementsDropdownValues()
   properties = [["X-koordinaatti","xcoord"],["Y-koordinaatti","ycoord"]]
-  @appendDummyInput("position").setAlign(Blockly.ALIGN_RIGHT).appendField "palauta"
-    .appendField new Blockly.FieldDropdown($.merge([["[elementin]","0"]],elements)), "element"
-    .appendField new Blockly.FieldDropdown($.merge([["[ominaisuus]","0"]],properties)), "property"
+  @appendDummyInput().setAlign(Blockly.ALIGN_LEFT).appendField "palauta elementin"
+    .appendField new Blockly.FieldDropdown(Stage.settableElementsDropdownValues()), "element"
+  @appendDummyInput().setAlign(Blockly.ALIGN_RIGHT).appendField "ominaisuus"
+    .appendField new Blockly.FieldDropdown($.merge([["[valitse]","0"]],properties)), "property"
   @setOutput(true, "Array");
-  @setInputsInline(true);
+  #@setInputsInline(false);
 
 Blockly.JavaScript["get_element_property"] = (block) ->
   element = block.getFieldValue("element")
