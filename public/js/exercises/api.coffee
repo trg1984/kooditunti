@@ -48,14 +48,14 @@
       holdingKey = false
     , 'keyup'
 
-  execQueue: []
   execWaitTime: 0
-  addToExecQueue: (funct, seconds) ->
+  addToExecQueue: (funct, seconds, intrp, scope) ->
     time = seconds * 1000
-    execWaitTime += time
+    Api.execWaitTime += time
     setTimeout (->
-      funct()
-      execWaitTime -= time
+      intrp.stateStack.unshift({node: funct.node.body, scope: scope, thisExpression: scope})
+      intrp.run()
+      Api.execWaitTime -= time
       return
-    ), execWaitTime
+    ), Api.execWaitTime
     return

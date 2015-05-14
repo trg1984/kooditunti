@@ -41,7 +41,7 @@
 #page-wrapper {
   overflow: hidden;
   position: relative;
-  height: 600px; }
+  height: 500px; }
 #page-wrapper .page {
   top: 0;
   position: absolute;

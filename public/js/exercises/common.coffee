@@ -185,7 +185,7 @@
     @resizeCodeArea()
     @readableCode = Blockly.JavaScript.workspaceToCode()
     $("#code-display").html(@readableCodeHTML())
-    #console.log @readableCode
+    console.log @readableCode
     if Errors.collected.length is 0
       Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
       Blockly.JavaScript.addReservedWords('highlightBlock');
@@ -383,6 +383,10 @@
       prop = Api.getElementProperty(name.data, property.data);
       interpreter.createPrimitive prop
     interpreter.setProperty scope, "getElementProperty", interpreter.createNativeFunction(wrapper)
+
+    wrapper = (funct,seconds) ->
+      Api.addToExecQueue(funct,seconds,interpreter,scope)
+    interpreter.setProperty scope, "addToExecQueue", interpreter.createNativeFunction(wrapper)
 
     # without this, loops won't work with interpreter when
     # state stack is manually filled (events do this).

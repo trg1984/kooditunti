@@ -35,7 +35,7 @@ Blockly.Blocks["get_element_property"] = init: ->
   @setColour(230);
   properties = [["X-koordinaatti","xcoord"],["Y-koordinaatti","ycoord"]]
   @appendDummyInput().setAlign(Blockly.ALIGN_LEFT).appendField "palauta elementin"
-    .appendField new Blockly.FieldDropdown(Stage.settableElementsDropdownValues()), "element"
+    .appendField new Blockly.FieldDropdown(CodeArea.settableElementsDropdownValues()), "element"
   @appendDummyInput().setAlign(Blockly.ALIGN_RIGHT).appendField "ominaisuus"
     .appendField new Blockly.FieldDropdown($.merge([["[valitse]","0"]],properties)), "property"
   @setOutput(true, "Array");
@@ -100,7 +100,7 @@ Blockly.Blocks["edit_element"] =
     @setColour 120
     @appendDummyInput("name")
       .appendField "Muokkaa elementtiä"
-      .appendField new Blockly.FieldDropdown(Stage.settableElementsDropdownValues), "element"
+      .appendField new Blockly.FieldDropdown(CodeArea.settableElementsDropdownValues), "element"
     @setPreviousStatement true
     @setNextStatement true
     @setTooltip ""

@@ -1,3 +1,22 @@
+@CodeArea =
+  settableElements: []
+  getSettableElements: ->
+    blocks = window.Blockly.mainWorkspace.getAllBlocks()
+    CodeArea.settableElements = []
+    $.each blocks, ->
+      if $.inArray(@type, ['circle_element','rectangle_element']) != -1
+        name = @getFieldValue("name")
+        return if name is "[nimeltään]"
+        CodeArea.settableElements.push name
+
+  settableElementsDropdownValues: (emptyVal) ->
+    CodeArea.getSettableElements()
+    dropdownValues = $.map(CodeArea.settableElements, ((n) -> [[n, n]]) )
+    emptyVal = "[valitse]" unless emptyVal?
+    dropdownValues = [[emptyVal, "x"]] if dropdownValues.length is 0
+    dropdownValues
+
+
 Blockly.Blocks["prompt"] = init: ->
   @setColour 280
   @appendValueInput("text").appendField "kysy"
@@ -11,7 +30,7 @@ Blockly.Blocks["when_clicked"] = init: ->
   @setColour 180
   @appendDummyInput("event")
     .appendField "kun klikataan elementtiä"
-    .appendField new Blockly.FieldDropdown(Stage.settableElementsDropdownValues), "element"
+    .appendField new Blockly.FieldDropdown(CodeArea.settableElementsDropdownValues), "element"
   @appendStatementInput("when").appendField "tee"
   @setPreviousStatement true
   @setNextStatement true
@@ -77,5 +96,5 @@ Blockly.Blocks["wait_for"] = init: ->
 Blockly.JavaScript["wait_for"] = (block) ->
   value_seconds = Blockly.JavaScript.valueToCode(block, "seconds", Blockly.JavaScript.ORDER_ATOMIC)
   statements = Blockly.JavaScript.statementToCode(block, "statements")
-  code = "addToExecQueue(function(){\n" + statements + "}," + value_seconds + ")"
+  code = "addToExecQueue(function(){\n" + statements + "}," + value_seconds + ");\n"
   code

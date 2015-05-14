@@ -77,11 +77,6 @@
     Stage.world.add Physics.behavior("body-collision-detection")
     Stage.world.add Physics.behavior("sweep-prune")
 
-    # This would make the elements drag & drop
-    # world.add(Physics.behavior('interactive', { el: renderer.el }))
-    # Dont do it, since it gives too much power to control the world
-    # without coding
-
     # subscribe to ticker to advance the simulation
     Physics.util.ticker.on (time, dt) ->
       Stage.world.step time
@@ -246,25 +241,6 @@
           yPixPos = Math.floor(body.state.pos.y)
           return @pixelsToCoordinates([0,yPixPos])[1]
           #return body.state.pos.y
-
-  settableElements: []
-  getSettableElements: ->
-    blocks = window.Blockly.mainWorkspace.getAllBlocks()
-    Stage.settableElements = []
-    $.each blocks, ->
-      if $.inArray(@type, ['circle_element','rectangle_element']) != -1
-        name = @getFieldValue("name")
-        return if name is "[nimeltään]"
-        #nameBlock = @childBlocks_[0]
-        #name = nameBlock.getFieldValue("name")
-        Stage.settableElements.push name
-
-  settableElementsDropdownValues: (emptyVal) ->
-    Stage.getSettableElements()
-    dropdownValues = $.map(Stage.settableElements, ((n) -> [[n, n]]) )
-    emptyVal = "[valitse]" unless emptyVal?
-    dropdownValues = [[emptyVal, "x"]] if dropdownValues.length is 0
-    dropdownValues
 
   findClickTarget: (canvas, event, name) ->
     # checking canvas coordinates for the mouse click
