@@ -1,6 +1,6 @@
 {
   "db": "mongodb://localhost/kooditunti_production",
-  "root": "/home/rolf/Ohjelmointi/git/kooditunti",
+  "root": "<your code folder here>",
   "locale": "en_US",
   "translations": {
 	"fi_FI": {
