@@ -1,6 +1,6 @@
 The Code Hour website
 =====================
-The website: (http://kooditunti.fi)[kooditunti.fi].
+The website: [kooditunti.fi](http://kooditunti.fi).
 
 The Mission
 -----------
