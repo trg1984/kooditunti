@@ -33,9 +33,14 @@
 <div id="page-wrapper">
 <div class="large-12 columns">
   <div id="exercises-page" class="page curr">
-    <a href="/blockly-games/appengine/puzzle.html?lang={{ blockly_lang }}#warmup" class="exercise-button warmup">
+    {% if ( blockly_lang == 'fi' ) %}
+	<a href="/blockly-games/appengine/puzzle.html?lang={{ blockly_lang }}#warmup" class="exercise-button warmup">
       <div class="text">0.<br />{{ warmup_title }}</div>
     </a>
+	{% else %}
+	
+	{% endif %}
+    
     <a href="/harjoitukset/perusteet" class="exercise-button basics">
       {% block stars %}{% endblock %}
       <div class="text">1.<br />{{ basics_title }}</div>
